@@ -61,9 +61,13 @@ const sendRequest = (messageData, sender, messageType) => {
 
 
 
-exports = sendTextMessage = async (sender, text) => {
+sendTextMessage = async (sender, text) => {
 	await sendRequest({
 		text: text,
 	}, sender, access_token);
 };
+
+module.exports = {
+    sendTextMessage
+}
 
