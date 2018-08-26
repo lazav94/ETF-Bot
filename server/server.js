@@ -28,7 +28,7 @@ const app = express();
 
 // Midlleware to print unlndled promise Rejcetion
 process.on('unhandledRejection', (reason, p) => {
-    log.info('🚧 UnhandledPromiseRejectionWarning: Unhandled promise rejection', p, ' reason: ', reason);
+    logger.info('🚧 UnhandledPromiseRejectionWarning: Unhandled promise rejection', p, ' reason: ', reason);
 });
 
 // view engine setup
