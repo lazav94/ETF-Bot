@@ -4,8 +4,8 @@ const router = require('express').Router();
 
 
 router
-    .get('/webhook', catchErrors(webhookController.verifyToken))
-    .post('/webhook',catchErrors(webhookController.startConversation))
+    .get('/', catchErrors(webhookController.verifyToken))
+    .post('/',catchErrors(webhookController.startConversation))
     ;
 
 module.exports = router;

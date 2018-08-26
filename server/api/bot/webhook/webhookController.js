@@ -3,6 +3,7 @@ const { conversation } = require('../conversation');
 
 const verifyToken = (req, res) => {
 	try {
+        console.log('webhook get');
 		if (req.query['hub.verify_token'] === process.env.VERIFY_TOKEN) {
 			res.send(req.query['hub.challenge']);
 		}
@@ -13,6 +14,7 @@ const verifyToken = (req, res) => {
 };
 
 const startConversation = async (req, res) => {
+    console.log("Start conversation");
 	try {
 		if (req.body.entry) {
 			let data;
