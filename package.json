@@ -1,0 +1,27 @@
+{
+  "name": "etf",
+  "version": "1.0.0",
+  "description": "Bot for master paper",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lazar Vasic",
+  "license": "ISC",
+  "dependencies": {
+    "apiai": "^4.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cron": "^1.4.0",
+    "dashbot": "^9.9.2",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "flash": "^1.1.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.2.9",
+    "path": "^0.12.7",
+    "request": "^2.88.0",
+    "winston": "^3.0.0"
+  }
+}
