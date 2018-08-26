@@ -6,8 +6,9 @@ const verifyToken = (req, res) => {
         console.log('webhook get');
 		if (req.query['hub.verify_token'] === process.env.VERIFY_TOKEN) {
 			res.send(req.query['hub.challenge']);
-		}
-		res.send('Error, wrong token');
+		} else {
+            res.send('Error, wrong token');
+        }
 	} catch (error) {
 		console.error('Webhook error', error);
 	}
