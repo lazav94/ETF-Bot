@@ -1,0 +1,22 @@
+extends layout
+block content
+
+  .container
+    .row
+      .col-md-4
+      .col-md-4
+        .paper-card.card.paper-card.paper-card-box
+          .row
+            .title Broadcast
+          .row.messageRow
+            .col-md-11
+              input.message(type="text")
+            .col-md-4
+          .row.lastRow
+            .col-md-6
+              label.switch
+                input(type="checkbox")
+                span.slider.round
+            .col-md-6
+              button.broadcast.btn.btn-dark Broadcast
+      .col-md-4

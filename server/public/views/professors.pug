@@ -1,0 +1,19 @@
+extends layout
+block content
+  table#studentTable.table.table-striped.table-dark.table-hover.table-sm.table-borderless
+    thead
+      tr
+        th(scope='col') #
+        th(scope='col') Profesor
+        th(scope='col') E-mail
+        th(scope='col') Phone
+        th(scope='col') Office
+    tbody
+      each professor in professors
+        tr
+          th.align-middle(scope='row')
+            img.avatar(src=`${professor.image}`, alt="")
+          th.align-middle(scope='row')= professor.firstName
+          th.align-middle(scope='row')= professor.email
+          th.align-middle(scope='row')= professor.phone
+          th.align-middle(scope='row')= professor.office

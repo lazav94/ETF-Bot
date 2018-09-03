@@ -1,0 +1,29 @@
+body {
+    background: rgb(245, 241, 241) !important;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+
+.title {
+    margin-left: 10%;
+    margin-top: 4%;
+}
+
+
+
+
+
+/* Tables */
+/* .dataTables_wrapper {
+    color: white!important;
+    background-color: #333!important;
+} */
+.even {
+    background-color: transparent!important;
+}

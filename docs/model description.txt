@@ -1,0 +1,7 @@
+Modeli
+----------
+Studenti
+Ispiti
+Predmeti
+Profesori
+Prijave

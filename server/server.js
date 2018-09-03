@@ -6,6 +6,7 @@ const moment = require('moment');
 // const flash = require('flash');
 require('dotenv').config();
 
+
 const winston =require('winston');
 const logger = winston.createLogger({
     level: 'info',
@@ -28,14 +29,15 @@ const app = express();
 
 // Midlleware to print unlndled promise Rejcetion
 process.on('unhandledRejection', (reason, p) => {
-    logger.info('🚧 UnhandledPromiseRejectionWarning: Unhandled promise rejection', p, ' reason: ', reason);
+    console.error('🚧 UnhandledPromiseRejectionWarning: Unhandled promise rejection', p, ' reason: ', reason);
 });
 
-// view engine setup
-// This is the folder where we keep pug files
-app.set('views', path.join(__dirname, 'views'));
+
 // We use the engine pug, mustache or EJS work great too
 app.set('view engine', 'pug');
+// view engine setup
+// This is the folder where we keep pug files
+app.set('views', path.join(__dirname, 'public/views'));
 
 // Serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 app.use(express.static(path.join(__dirname, 'public')));
@@ -52,19 +54,19 @@ app.use(bodyParser.urlencoded({
 app.set('port', process.env.PORT || 8081);
 
 
-
 // Connection to Mongo DB
-// mongoose.connect(process.env.MONGO_URI, {
-//     reconnectTries: Number.MAX_VALUE,
-//     reconnectInterval: 1000,
-//     autoReconnect: true
-// }, (error) => {
-//     log.info('Connected to Database!', process.env.MONGO_URI);
-//     if (error) {
-//         log.error('Mongo error', error);
-//     }
-// });
-// mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGO_URI, {
+    reconnectTries: Number.MAX_VALUE,
+    reconnectInterval: 1000,
+    autoReconnect: true,
+    useNewUrlParser: true
+}, (error) => {
+    logger.info('Connected to Database!');
+    if (error) {
+        logger.error('Mongo error', error);
+    }
+});
+mongoose.Promise = global.Promise;
 
 
 
@@ -73,11 +75,11 @@ app.set('port', process.env.PORT || 8081);
 require('./routes')(app);
 
 // If that above routes didnt work, we 404 them and forward to error handler
-app.use(errorHandlers.notFound);
+// app.use(errorHandlers.notFound);
 
 
-app.listen(app.get('port'), () => {
-    // log.info('ETF Bot Running on port:', app.get('port'));
+app.listen(app.get('port') || 8081, () => {
+    logger.info('ETF Bot Running on port:' +  app.get('port'));
     // log.info('Time:', moment());
 });
 

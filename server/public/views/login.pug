@@ -1,0 +1,75 @@
+doctype html
+html(lang='en')
+  head
+    title Login
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // ===============================================================================================
+    link(rel='icon', type='image/png', href='login/images/icons/favicon.ico')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/vendor/bootstrap/css/bootstrap.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/fonts/iconic/css/material-design-iconic-font.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/vendor/animate/animate.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/vendor/css-hamburgers/hamburgers.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/vendor/animsition/css/animsition.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/vendor/select2/select2.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/vendor/daterangepicker/daterangepicker.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='login/css/util.css')
+    link(rel='stylesheet', type='text/css', href='login/css/main.css')
+    // ===============================================================================================
+    body
+        .alert.alert-danger.collapse(role='alert', style="margin-bottom: 0%;")
+
+
+        .limiter
+          .container-login100
+            .wrap-login100
+              span.login100-form-title.p-b-26
+                span  ETF Bot
+              span.login100-form-title.p-b-48
+                //- i.zmdi.zmdi-font
+                img(src="/images/logo.png", alt="etf.logo", style="width:30%;")
+              .wrap-input100.validate-input(data-validate='Valid email is: a@b.c')
+                input#email.input100(type='text', name='email')
+                span.focus-input100(data-placeholder='Email')
+              .wrap-input100.validate-input(data-validate='Enter password')
+                span.btn-show-pass
+                  i.zmdi.zmdi-eye
+                input#password.input100(type='password', name='pass')
+                span.focus-input100(data-placeholder='Password')
+              .container-login100-form-btn
+                .wrap-login100-form-btn
+                  .login100-form-bgbtn
+                  button.login100-form-btn
+                    | Login
+              .text-center.p-t-115
+                span.txt1
+                  | If you have problem with login contact:&nbsp
+                a.txt2(href='#')
+                  | lazav94@gmail.com
+        #dropDownSelect1
+        //  ===============================================================================================
+        script(src='login/vendor/jquery/jquery-3.2.1.min.js')
+        //  ===============================================================================================
+        script(src='login/vendor/animsition/js/animsition.min.js')
+        //  ===============================================================================================
+        script(src='login/vendor/bootstrap/js/popper.js')
+        script(src='login/vendor/bootstrap/js/bootstrap.min.js')
+        //  ===============================================================================================
+        script(src='login/vendor/select2/select2.min.js')
+        //  ===============================================================================================
+        script(src='login/vendor/daterangepicker/moment.min.js')
+        script(src='login/vendor/daterangepicker/daterangepicker.js')
+        //  ===============================================================================================
+        script(src='login/vendor/countdowntime/countdowntime.js')
+        //  ===============================================================================================
+        script(src='login/js/main.js')
