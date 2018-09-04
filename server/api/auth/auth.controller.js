@@ -46,7 +46,7 @@ const verify = async (req, res) => {
 const verifyStudent = async sender => {
     const student = await getStudentById(sender);
     if(student){
-        if(student.verify){
+        if(student.verified){
             return false;
         } else {
             console.log('Student is verified');
