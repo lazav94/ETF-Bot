@@ -5,13 +5,15 @@ const getAllStudentsID = require('../student/student.controller').getAllStudents
 const Broadcast = require('./broadcast.model');
 
 const broadcast = async message => {
+    // 1. Get all students facebook IDs
     const studentIDs = await getAllStudentsID();
+    // 2. For each student send message
     studentIDs.map(id => {
         console.log('Sending message to ', id);
         sendTextMessage(id, message);
     });
 
-    // Save broadcast message
+    // 3. Save broadcast message
     await (new Broadcast({
         message,
         date: Date.now()
