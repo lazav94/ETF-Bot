@@ -4,7 +4,7 @@ const sendTextMessage = require('../bot/messanger').sendTextMessage;
 const getAllStudentsID = require('../student/student.controller').getAllStudentsID;
 const Broadcast = require('./broadcast.model');
 
-const broadcast = async message => {
+const broadcastMessage = async message => {
     // 1. Get all students facebook IDs
     const studentIDs = await getAllStudentsID();
     // 2. For each student send message
@@ -19,6 +19,7 @@ const broadcast = async message => {
         date: Date.now()
     })).save();
 }
+
 const createReminder = (message, date) => {
 
     console.log('Cron job created for', new moment(new Date(date)).toDate());
@@ -29,7 +30,7 @@ const createReminder = (message, date) => {
         console.log('CRON JOB TRIGERED', moment());
         console.log('Message', message);
 
-        broadcast(message);
+        broadcastMessage(message);
 
 
         job.stop();
@@ -57,7 +58,7 @@ const broadcast = async (req, res) => {
         createReminder(message, date)
     } else {
         console.log('Sending messages to all user');
-        broadcast(message);
+        broadcastMessage(message);
     }
     res.sendStatus(200);
 };
