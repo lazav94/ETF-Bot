@@ -59,14 +59,3 @@ exports = sendVerificationEmail = (sender, email) => {
     // 3. Get sender id and user
     // 4. save token to the user
 };
-
-const getStarted = async () => {
-
-};
-
-
-const broadcast = async () => {
-    // 1. Get all sender id
-    // 2. Goes through all users
-    // 3. Send the message to all users
-};
