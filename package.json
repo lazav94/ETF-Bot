@@ -17,7 +17,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
-    "cron": "^1.4.0",
+    "cron": "^1.4.1",
     "dashbot": "^9.9.2",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",

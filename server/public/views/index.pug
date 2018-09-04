@@ -1,22 +1,25 @@
 extends layout
 block content
 
-  .container
     .row
-      .col-md-4
-      .col-md-4
+      .col-sm-6
         .paper-card.card.paper-card.paper-card-box
           .row
-            .title Broadcast
+            .col-sm-12
+              .title Broadcast
           .row.messageRow
-            .col-md-11
-              input.message(type="text")
-            .col-md-4
+            .col-sm-12
+              textarea.message
           .row.lastRow
-            .col-md-6
+            .col-sm-12.col-md-3
               label.switch
                 input(type="checkbox")
                 span.slider.round
-            .col-md-6
-              button.broadcast.btn.btn-dark Broadcast
-      .col-md-4
+            .col-sm-12.col-md-6
+              .input-group.date#datetimepicker
+                input#date.form-control(type="text")
+                span.input-group-addon
+                  span.glyphicon.glyphicon-calendar
+            .col-sm-12.col-md-3
+              button.btn.btn-dark.broadcast Broadcast
+      .col-sm-6
