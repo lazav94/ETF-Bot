@@ -7,7 +7,7 @@ const createReminder = (message, date) => {
 
     console.log('Cron job created for', new Date(date));
 
-	let job = new CronJob(new Date(date), async () => {
+	let job = new CronJob(new moment(new Date(date)).toDate(), async () => {
 
         // TODO as same as regular broadcast
         console.log('CRON JOB TRIGERED', moment());
