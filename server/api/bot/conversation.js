@@ -25,12 +25,12 @@ module.exports = async (event) => {
         if(!student.verified && student.email === ''){
             console.log('Checking email...');
             if(validator.isEmail(text)){
-                await sendTextMessage(sender, 'Hvala vam, na Vasoj email adresi stici ce link za validaciju');
+                await sendTextMessage(sender, 'Hvala, na Vasoj email adresi stici ce link za validaciju ✓');
                 // TODO send link
                 student.email = text;
                 await student.save();
             } else {
-                await sendTextMessage(sender, 'Ovo ne izgleda kao Email, molimo Vas proverite format');
+                await sendTextMessage(sender, 'Ovo ne izgleda kao Email ⦸📧, molimo Vas proverite format i posaljite ponovo, hvala');
             }
             return;
         }

@@ -13,7 +13,7 @@ const studentSchema = mongoose.Schema({
     dateOfBirth: Date,
     addressOfBirth: String,
     jmbg: Number,
-    email: String,
+    email: { type: String default: '' },
     phone: Number,
     balance: Number,
     year: Number,
