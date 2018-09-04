@@ -1,0 +1,75 @@
+/********* GET STARTED *************/
+curl -X POST -H "Content-Type: application/json" -d '{
+  "get_started": {"payload": "Get Started"}
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAD0sF4gH8YBAAEj6Gg87FDFLZBJ2Ckutvs8k9hrFFb7imAdkFRkpHOWNmpStc2iyGksUjZBKsXldXt5f8KNkxd6ZCTkZBAM5B0FrvO7u5tapv7rF28onkaeCVD24srefRZB4ff1yBOh9zhdZBsI6cjB55ZCPUYrfPCtzL8WDdgCwZDZD"
+
+
+/********* GREETING *************/
+curl -X POST -H "Content-Type: application/json" -d '{
+  "greeting": [
+    {
+      "locale":"default",
+      "text":"Welcome to the ETF BOT @Lazar Vasic"
+    }
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAD0sF4gH8YBAAEj6Gg87FDFLZBJ2Ckutvs8k9hrFFb7imAdkFRkpHOWNmpStc2iyGksUjZBKsXldXt5f8KNkxd6ZCTkZBAM5B0FrvO7u5tapv7rF28onkaeCVD24srefRZB4ff1yBOh9zhdZBsI6cjB55ZCPUYrfPCtzL8WDdgCwZDZD"
+
+/********* PERSISTANT MENU *************/
+
+curl -X DELETE -H "Content-Type: application/json" -d '{
+"fields":[
+    "persistent_menu"
+]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAD0sF4gH8YBAAEj6Gg87FDFLZBJ2Ckutvs8k9hrFFb7imAdkFRkpHOWNmpStc2iyGksUjZBKsXldXt5f8KNkxd6ZCTkZBAM5B0FrvO7u5tapv7rF28onkaeCVD24srefRZB4ff1yBOh9zhdZBsI6cjB55ZCPUYrfPCtzL8WDdgCwZDZD"
+
+
+
+
+curl -X POST -H "Content-Type: application/json" -d '{
+"persistent_menu":[
+    {
+    "locale":"default",
+    "call_to_actions":[
+        {
+          "type":"web_url",
+          "url":"https://www.etf.bg.ac.rs/",
+          "title":"📧 Mail",
+          "webview_height_ratio":"tall"
+        },
+        {
+          "type":"web_url",
+          "url":"https://outlook.office365.com/owa/",
+          "title":"📧 Mail",
+          "webview_height_ratio":"tall"
+        },
+        {
+          "title":"☃ My Account",
+          "type":"nested",
+          "call_to_actions" :[
+            {
+              "title":"🙍 Talk to Agent",
+              "type":"postback",
+              "payload": "CONTACT"
+            },
+            {
+              "title":"🛍 My Account",
+              "type":"nested",
+              "call_to_actions" :[
+                {
+                  "title":"🎁 My Info",
+                  "type": "postback",
+                  "payload": "ORDERS"
+                },
+                {
+                    "title":"🛒 Subject",
+                    "type":"postback",
+                    "payload": "CHECKOUT"
+                }
+              ]
+            }
+        ]
+        }
+    ]
+    }
+]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAD0sF4gH8YBAAEj6Gg87FDFLZBJ2Ckutvs8k9hrFFb7imAdkFRkpHOWNmpStc2iyGksUjZBKsXldXt5f8KNkxd6ZCTkZBAM5B0FrvO7u5tapv7rF28onkaeCVD24srefRZB4ff1yBOh9zhdZBsI6cjB55ZCPUYrfPCtzL8WDdgCwZDZD"

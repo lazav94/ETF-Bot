@@ -57,7 +57,7 @@ const sendRequest = (messageData, sender, messageType) => {
     });
 };
 
-const url = `https://graph.facebook.com/v2.6/me/messenger_profile?access_token=${access_token}`
+const url = `https://graph.facebook.com/v3.1/me/messenger_profile?access_token=${access_token}`
 
 const addGetStarted = () => {
     const json = {
@@ -67,8 +67,11 @@ const addGetStarted = () => {
             }
         }
     }
+    console.log('added get started');
     request.post(url, json);
 }
+
+addGetStarted();
 
 
 const addGreetingMessage = () => {
@@ -112,6 +115,7 @@ const prestantMenu = () => {
 }
 
 const sendTextMessage = async (sender, text) => {
+    console.log(sender, text);
     await sendRequest({
         text: text,
     }, sender, access_token);
