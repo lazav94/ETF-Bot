@@ -34,7 +34,7 @@ const sendRequest = (messageData, sender, messageType) => {
 
     return new Promise((resolve, reject) => {
         const requestData = {
-            url,
+            url: `https://graph.facebook.com/v2.6/me/messages?access_token=${access_token}`,
             qs: {
                 access_token,
             },
