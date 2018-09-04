@@ -26,7 +26,7 @@ const createReminder = (message, date) => {
 		// job = null;
 	},
 	false,
-	null // timeZone
+	'Europe/Belgrade' // timeZone
     );
     job.start();
 };
