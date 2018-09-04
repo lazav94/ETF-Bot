@@ -50,6 +50,12 @@ const broadcast = async (req, res) => {
     } else {
         // send message now
         console.log('Sending messages to all user');
+        const studentIDs = await getAllStudentsID();
+        console.log(studentIDs);
+        studentIDs.map(id => {
+            console.log('Sending message to ', id);
+            sendTextMessage(id, text);
+        })
 
     }
 

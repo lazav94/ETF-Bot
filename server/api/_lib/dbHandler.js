@@ -182,7 +182,12 @@ const fillProfessorsCollection = async () => {
 }
 
 const fillStudentCollection = async () => {
-    const lazarVasic = new Student({});
+    const lazarVasic = new Student({
+        id: '1898032266921906',
+        firstName: 'Lazar',
+        lastName: 'Vasic',
+        index: '3011/2017',
+    });
     lazarVasic.save();
 
 }
