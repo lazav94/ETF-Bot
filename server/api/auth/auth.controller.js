@@ -1,3 +1,5 @@
+const getStudentById = require('../student/student.controller').getStudentById;
+
 const logger = require('winston');
 
 const login = async (req, res) => {
@@ -41,8 +43,24 @@ const verify = async (req, res) => {
 
 };
 
+const verifyStudent = async sender => {
+    const student = await getStudentById(sender);
+    if(student){
+        if(student.verify){
+            return false;
+        } else {
+            console.log('Student is verified');
+            return true;
+        }
+    } else {
+        console.error('Fatal error, check verifyStudent function');
+    }
+};
+
 
 module.exports = {
-    login
+    login,
+    verify,
+    verifyStudent
 }
 

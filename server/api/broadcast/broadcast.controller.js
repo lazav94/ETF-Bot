@@ -4,6 +4,9 @@ const sendTextMessage = require('../bot/messanger').sendTextMessage;
 const getAllStudentsID = require('../student/student.controller').getAllStudentsID;
 const Broadcast = require('./broadcast.model');
 
+
+const getAllMessages = async () => Broadcast.find();
+
 const broadcastMessage = async message => {
     // 1. Get all students facebook IDs
     const studentIDs = await getAllStudentsID();
@@ -67,5 +70,6 @@ const broadcast = async (req, res) => {
 
 
 module.exports = {
-    broadcast
+    broadcast,
+    getAllMessages
 }

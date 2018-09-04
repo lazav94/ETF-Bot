@@ -14,13 +14,14 @@ const {
 } = require('./api/_lib/dbHandler');
 const apiai = require('./api/_lib/apiaiHandler');
 
-const b = require('./api/broadcast/broadcast.controller');
+const broadcastController = require('./api/broadcast/broadcast.controller');
 
 module.exports = app => {
 
-    app.get('/', (req, res) => {
+    app.get('/', async (req, res) => {
         // res.render('login');
-        res.render('index', {title: "Title IDEMo"});
+        const messages = await broadcastController.getAllMessages();
+        res.render('index', {title: "Title | Braodcast", messages });
         // res.render('student', {title: "Students | Table"});
 
     });

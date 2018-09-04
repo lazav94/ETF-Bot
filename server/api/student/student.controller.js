@@ -1,3 +1,4 @@
+const getUser = require('../bot/messanger').getUser;
 const Student = require('./student.model');
 
 const getStudentById = async id => {
@@ -9,8 +10,11 @@ const getStudentById = async id => {
             if (student) {
                 resolve(student);
             } else {
+                const user = await getUser(id);
                 const newStudent = new Student({
-                    id
+                    id,
+                    firstName: user.first_name,
+			        lastName: user.last_name
                 });
                 resolve(newStudent);
             }

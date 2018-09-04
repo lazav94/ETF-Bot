@@ -23,7 +23,7 @@ block content
             .col-sm-12.col-md-3
               button.btn.btn-dark.broadcast Broadcast
       .col-sm-6
-        table#studentTable.table.table-striped.table-dark.table-hover.table-sm.table-borderless
+        table#broadcastTable.table.table-striped.table-dark.table-hover.table-sm.table-borderless
           thead
             tr
               th(scope='col') Date
@@ -31,5 +31,5 @@ block content
           tbody
             each message in messages
               tr
-                th.align-middle(scope='row')= message.date
+                th.align-middle(scope='row')= `${message.date.toLocaleString("en-US")}`
                 th.align-middle(scope='row')= message.message
