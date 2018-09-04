@@ -1,4 +1,5 @@
 var validator = require('validator');
+const uuidv4 = require('uuid/v4');
 
 const {
     sendTextMessage,
@@ -6,10 +7,13 @@ const {
 } = require('./messanger');
 
 const getStudentById = require('../student/student.controller').getStudentById;
+const sendMail = require('../_lib/mailer.js');
+const createEmailHTML = require('../_lib/email.js').createEmailHTML;
 
 const {
     verifyStudent
 } = require('../auth/auth.controller');
+// sendMail('lazav94@gmail.com', 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML('123'));
 
 module.exports = async (event) => {
     console.log('Conversation');
@@ -27,7 +31,10 @@ module.exports = async (event) => {
             if(validator.isEmail(text)){
                 await sendTextMessage(sender, 'Hvala, na Vasoj email adresi stici ce link za validaciju ✓');
                 // TODO send link
+                student.token = uuidv4();
                 student.email = text;
+                sendMail(student.email, 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML(sender, student.token));
+
                 await student.save();
             } else {
                 await sendTextMessage(sender, 'Ovo ne izgleda kao Email ⦸📧, molimo Vas proverite format i posaljite ponovo, hvala');

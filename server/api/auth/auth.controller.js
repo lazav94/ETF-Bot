@@ -30,6 +30,9 @@ const login = async (req, res) => {
 const verify = async (req, res) => {
     // 1. Get tocken from url
     const { id, token } = req.query;
+    console.log(token);
+    console.log(id);
+    res.sendStatus(200);
     // 2. Get user by id
     // TODO make controller fucnton for this in user
     // const user = await User.findById(id);

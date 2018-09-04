@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const studentSchema = mongoose.Schema({
     id: String,
     verified: {type: Boolean, default: false},
+    token: { type: String, default: ''},
     index: { type: String },
     firstName: String,
     lastName: String,
