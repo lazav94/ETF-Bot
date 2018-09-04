@@ -5,7 +5,7 @@ const getAllStudentsID = require('../student/student.controller').getAllStudents
 
 const createReminder = (message, date) => {
 
-    console.log('Cron job created for', new Date(date));
+    console.log('Cron job created for', new moment(new Date(date)).toDate());
 
 	let job = new CronJob(new moment(new Date(date)).toDate(), async () => {
 
@@ -26,7 +26,7 @@ const createReminder = (message, date) => {
 		// job = null;
 	},
 	false,
-	'Europe/Belgrade' // timeZone
+	null // timeZone
     );
     job.start();
 };
