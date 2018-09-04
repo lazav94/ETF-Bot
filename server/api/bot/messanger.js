@@ -153,7 +153,28 @@ const sendMessage = async (sender, message) => {
     }
 };
 
+const typingOn = (sender) => {
+	sendRequest('typing_on', sender, 'typing');
+}
+const typingOff = (sender) => {
+	sendRequest('typing_off', sender, 'typing');
+};
+
+const typing = (sender, seconds) => {
+	typingOn(sender);
+	if (typeof seconds === 'string') {
+		seconds = Number.parseInt(seconds);
+	}
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			typingOff(sender);
+			resolve();
+		}, seconds * 1000);
+	});
+};
+
 module.exports = {
+    typingOn,
     sendTextMessage,
     sendImage
 }

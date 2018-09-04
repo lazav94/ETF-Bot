@@ -1,7 +1,11 @@
+var validator = require('validator');
+
 const {
     sendTextMessage,
     sendImage
 } = require('./messanger');
+
+const getStudentById = require('../student/student.controller').getStudentById;
 
 const {
     verifyStudent
@@ -14,7 +18,23 @@ module.exports = async (event) => {
 
     if (event.message) {
         const { text } = event.message;
+        const Student = await getStudentById(sender);
         console.log('Text', text);
+
+        // If student isn't verified we are waiting for an email
+        if(!student.verified && student.email === ''){
+            console.log('Checking email...');
+            if(validator.isEmail(text)){
+                await sendTextMessage(sender, 'Hvala vam, na Vasoj email adresi stici ce link za validaciju');
+                // TODO send link
+                student.email = text;
+                await student.save();
+            } else {
+                await sendTextMessage(sender, 'Ovo ne izgleda kao Email, molimo Vas proverite format');
+            }
+            return;
+        }
+
         if (event.message.attachments) {
             console.log(`Sender ${sender} send a file`);
             return;
@@ -59,9 +79,9 @@ const getStarted = async sender => {
     const verified = await verifyStudent(sender);
     console.log('Studen verification ', verified);
     if(verified){
-        sendTextMessage(sender, 'Nastavi!');
+        await sendTextMessage(sender, 'Nastavi!');
     } else {
-        sendTextMessage(sender, 'You need to verifie');
+        await sendTextMessage(sender, 'Kako bi nastavili sa radom ostavite nam Vasu email adresu');
     }
 }
 
