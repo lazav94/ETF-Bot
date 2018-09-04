@@ -16,7 +16,7 @@ const createReminder = (message, date) => {
         const studentIDs = await getAllStudentsID();
         studentIDs.map(id => {
             console.log('Sending message to ', id);
-            sendTextMessage(id, text);
+            sendTextMessage(id, message);
         })
 
 
@@ -54,7 +54,7 @@ const broadcast = async (req, res) => {
         console.log(studentIDs);
         studentIDs.map(id => {
             console.log('Sending message to ', id);
-            sendTextMessage(id, text);
+            sendTextMessage(id, message);
         })
 
     }
