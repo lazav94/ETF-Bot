@@ -56,7 +56,7 @@ const getStarted = async sender => {
     await sendTextMessage(sender, 'Dobrodosli na ETF Bot! 🤖');
     await sendImage(sender, 'https://ocdn.eu/pulscms-transforms/1/tpPk9lMaHR0cDovL29jZG4uZXUvaW1hZ2VzL3B1bHNjbXMvWmpVN01EQV8vNGJlNDNhMTc5ZTFhYjk1YTJiNDlmNjlkZDlhYTBlYzguanBlZ5GTAs0C5ACBoTAB');
 
-    const verified = verifyStudent(sender);
+    const verified = await verifyStudent(sender);
     console.log('Studen verification ', verified);
     if(verified){
         sendTextMessage(sender, 'Nastavi!');
