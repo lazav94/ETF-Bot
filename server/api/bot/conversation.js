@@ -18,7 +18,7 @@ module.exports = async (event) => {
 
     if (event.message) {
         const { text } = event.message;
-        const Student = await getStudentById(sender);
+        const student = await getStudentById(sender);
         console.log('Text', text);
 
         // If student isn't verified we are waiting for an email
