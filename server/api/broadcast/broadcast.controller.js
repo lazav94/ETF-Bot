@@ -1,9 +1,10 @@
 const moment = require('moment');
 var CronJob = require('cron').CronJob;
+const sendTextMessage = require('../bot/messanger').sendTextMessage;
+const getAllStudentsID = require('../student/student.controller').getAllStudentsID;
 
 const createReminder = (message, date) => {
 
-    // console.log('Cron job created for', date.toDate());
     console.log('Cron job created for', date);
 
 	let job = new CronJob(new Date(date), async () => {
@@ -11,6 +12,13 @@ const createReminder = (message, date) => {
         // TODO as same as regular broadcast
         console.log('CRON JOB TRIGERED', moment());
         console.log('Message', message);
+
+        const studentIDs = await getAllStudentsID();
+        studentIDs.map(id => {
+            console.log('Sending message to ', id);
+            sendTextMessage(id, text);
+        })
+
 
         job.stop();
 	}, () => {
@@ -22,8 +30,6 @@ const createReminder = (message, date) => {
     );
     job.start();
 };
-
-createReminder('hej', moment());
 
 const broadcast = async (req, res) => {
     console.log('Broadcast controller function trigeer');

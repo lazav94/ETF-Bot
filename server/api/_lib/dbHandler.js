@@ -1,5 +1,6 @@
 const Course = require('../course/course.model');
 const Professor = require('../professor/professor.model');
+const Student = require('../student/student.model');
 
 const fillCourseCollection = async () => {
     const M1 = new Course({
@@ -179,8 +180,15 @@ const fillProfessorsCollection = async () => {
     // BoskoNikolic.save();
     // DraganMilicev.save();
 }
+
+const fillStudentCollection = async () => {
+    const lazarVasic = new Student({});
+    lazarVasic.save():
+
+}
 // fillCourseCollection();
 // fillProfessorsCollection();
+// fillStudentCollection();
 module.exports = {
     fillCourseCollection,
     fillProfessorsCollection

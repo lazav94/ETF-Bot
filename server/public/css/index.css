@@ -110,3 +110,9 @@ input:checked+.slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    margin-left: calc(50% - 50px);
+}

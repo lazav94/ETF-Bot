@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 
 const studentSchema = mongoose.Schema({
     id: String,
-    verified: Boolean,
-    index: String,
+    verified: {type: Boolean, default: false},
+    index: { type: String, required: true},
     firstName: String,
     lastName: String,
     parentName: String,
@@ -16,8 +16,6 @@ const studentSchema = mongoose.Schema({
     email: String,
     phone: Number,
     balance: Number,
-
-
     year: Number,
     yearOfStuding: Number,
     // prosek

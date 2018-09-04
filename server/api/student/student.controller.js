@@ -1,7 +1,7 @@
 const Student = require('./student.model');
 
 const getStudentById = async id => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         try {
             const student = await Student.findOne({
                 id
@@ -18,6 +18,11 @@ const getStudentById = async id => {
             reject(error);
         }
     });
+};
+
+const getAllStudentsID = async () => {
+    const students = await Student.find();
+    return students.map(student => student.id);
 }
 
 const index = (req, res) => {
@@ -26,6 +31,8 @@ const index = (req, res) => {
     res.render(student, {title: 'Student'});
 }
 
-moduel.exports = {
-    index
+module.exports = {
+    index,
+    getStudentById,
+    getAllStudentsID
 }

@@ -5,6 +5,7 @@ const {
 module.exports = async (event) => {
     console.log('Conversation');
     const sender = event.sender.id;
+    console.log('Sender', sender);
     await sendTextMessage(sender, 'First message to bot! Hello I\'m ETF bot');
 }
 
