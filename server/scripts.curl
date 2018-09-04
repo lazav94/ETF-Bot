@@ -1,6 +1,6 @@
 /********* GET STARTED *************/
 curl -X POST -H "Content-Type: application/json" -d '{
-  "get_started": {"payload": "Get Started"}
+  "get_started": {"payload": "GET_STARTED"}
 }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAD0sF4gH8YBAAEj6Gg87FDFLZBJ2Ckutvs8k9hrFFb7imAdkFRkpHOWNmpStc2iyGksUjZBKsXldXt5f8KNkxd6ZCTkZBAM5B0FrvO7u5tapv7rF28onkaeCVD24srefRZB4ff1yBOh9zhdZBsI6cjB55ZCPUYrfPCtzL8WDdgCwZDZD"
 
 
@@ -24,6 +24,15 @@ curl -X DELETE -H "Content-Type: application/json" -d '{
 
 
 
+curl -X POST -H "Content-Type: application/json" -d '{
+  "recipient": {
+    "id": "1898032266921906"
+  },
+  "message": {
+    "text": "hello, world!"
+  }
+}' "https://graph.facebook.com/v2.6/me/messages?access_token=EAAD0sF4gH8YBAAEj6Gg87FDFLZBJ2Ckutvs8k9hrFFb7imAdkFRkpHOWNmpStc2iyGksUjZBKsXldXt5f8KNkxd6ZCTkZBAM5B0FrvO7u5tapv7rF28onkaeCVD24srefRZB4ff1yBOh9zhdZBsI6cjB55ZCPUYrfPCtzL8WDdgCwZDZD"
+
 
 curl -X POST -H "Content-Type: application/json" -d '{
 "persistent_menu":[
@@ -31,19 +40,30 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "locale":"default",
     "call_to_actions":[
         {
-          "type":"web_url",
-          "url":"https://www.etf.bg.ac.rs/",
-          "title":"📧 Mail",
-          "webview_height_ratio":"tall"
+          "title":"👤 My Account",
+            "type":"nested",
+            "call_to_actions" :[
+          {
+            "type":"web_url",
+            "url":"https://www.etf.bg.ac.rs/",
+            "title":"🏫 ETF",
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"web_url",
+            "url":"https://outlook.office365.com/owa/",
+            "title":"📧 Mail",
+            "webview_height_ratio":"tall"
+          },
+           {
+            "type":"web_url",
+            "url":"https://student.etf.bg.ac.rs/",
+            "title":"🇪 Student",
+            "webview_height_ratio":"tall"
+          }]
         },
         {
-          "type":"web_url",
-          "url":"https://outlook.office365.com/owa/",
-          "title":"📧 Mail",
-          "webview_height_ratio":"tall"
-        },
-        {
-          "title":"☃ My Account",
+          "title":"☃ TODO",
           "type":"nested",
           "call_to_actions" :[
             {

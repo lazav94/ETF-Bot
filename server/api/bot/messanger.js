@@ -120,6 +120,18 @@ const sendTextMessage = async (sender, text) => {
     }, sender, access_token);
 };
 
+const sendImage = async (sender, url) => {
+    const messageData = {
+		attachment: {
+			type: 'image',
+			payload: {
+				url,
+				is_reusable: true
+			}
+		}
+	};
+	await sendRequest(messageData, sender);
+}
 
 const sendMessage = async (sender, message) => {
     switch (message.type) {
@@ -142,5 +154,6 @@ const sendMessage = async (sender, message) => {
 };
 
 module.exports = {
-    sendTextMessage
+    sendTextMessage,
+    sendImage
 }
