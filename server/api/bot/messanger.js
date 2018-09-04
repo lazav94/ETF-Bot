@@ -29,6 +29,7 @@ const sendRequest = (messageData, sender, messageType) => {
     if (messageType === 'typing') {
         json.message = undefined;
         json.sender_action = messageData;
+        console.log("FATAL ERROR");
     }
 
     return new Promise((resolve, reject) => {
@@ -40,6 +41,8 @@ const sendRequest = (messageData, sender, messageType) => {
             method: 'POST',
             json
         };
+
+        console.log(requestData);
         request(requestData, (error, response) => {
             if (error) {
                 console.error('Error sending messages: ', error);
