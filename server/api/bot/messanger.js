@@ -42,7 +42,6 @@ const sendRequest = (messageData, sender, messageType) => {
             json
         };
 
-        console.log(requestData);
         request(requestData, (error, response) => {
             if (error) {
                 console.error('Error sending messages: ', error);
@@ -73,8 +72,6 @@ const addGetStarted = () => {
     console.log('added get started');
     request.post(url, json);
 }
-
-addGetStarted();
 
 
 const addGreetingMessage = () => {
@@ -118,10 +115,8 @@ const prestantMenu = () => {
 }
 
 const sendTextMessage = async (sender, text) => {
-    console.log(sender, text);
-    console.log(access_token);
     await sendRequest({
-        text: text,
+        text,
     }, sender, access_token);
 };
 

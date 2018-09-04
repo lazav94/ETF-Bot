@@ -5,7 +5,7 @@ const getAllStudentsID = require('../student/student.controller').getAllStudents
 
 const createReminder = (message, date) => {
 
-    console.log('Cron job created for', date);
+    console.log('Cron job created for', new Date(date));
 
 	let job = new CronJob(new Date(date), async () => {
 
