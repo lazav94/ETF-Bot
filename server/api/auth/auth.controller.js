@@ -46,14 +46,7 @@ const verify = async (req, res) => {
 const verifyStudent = async sender => {
     const student = await getStudentById(sender);
     if(student){
-        console.log(student);
-        console.log(student.verified);
-        if(student.verified){
-            return false;
-        } else {
-            console.log('Student is verified');
-            return true;
-        }
+        return student.verified;
     } else {
         console.error('Fatal error, check verifyStudent function');
     }
