@@ -183,7 +183,7 @@ const fillProfessorsCollection = async () => {
 
 const fillStudentCollection = async () => {
     const lazarVasic = new Student({});
-    lazarVasic.save():
+    lazarVasic.save();
 
 }
 // fillCourseCollection();
