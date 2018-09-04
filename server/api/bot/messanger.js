@@ -116,6 +116,7 @@ const prestantMenu = () => {
 
 const sendTextMessage = async (sender, text) => {
     console.log(sender, text);
+    console.log(access_token);
     await sendRequest({
         text: text,
     }, sender, access_token);
