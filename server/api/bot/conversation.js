@@ -7,7 +7,6 @@ module.exports = async (event) => {
     console.log('Conversation');
     const sender = event.sender.id;
     console.log('Sender', sender);
-    await sendTextMessage(sender, 'First message to bot! Hello I\'m ETF bot');
 
     if (event.message) {
         const { text } = event.message;
@@ -18,6 +17,7 @@ module.exports = async (event) => {
         }
 
         // TODO handle api ai
+
 
     } else if(event.postback) {
         const {

@@ -8,7 +8,8 @@
     "assets": "webpack -w --display-max-modules 0",
     "start": "concurrently 'npm run watch' 'npm run assets' --names '☔ ⚓ ⚡ 📜' --prefix name",
     "prod": "node ./server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "push": "sudo git add . && sudo  git commit -m \":rocket:\" && sudo git push heroku master && sudo heroku logs -t -s app"
   },
   "author": "Lazar Vasic",
   "license": "ISC",

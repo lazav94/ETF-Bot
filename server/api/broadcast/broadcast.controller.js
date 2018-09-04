@@ -2,7 +2,20 @@ const moment = require('moment');
 var CronJob = require('cron').CronJob;
 const sendTextMessage = require('../bot/messanger').sendTextMessage;
 const getAllStudentsID = require('../student/student.controller').getAllStudentsID;
+const Broadcast = require('./broadcast.model');
 
+const broadcast = async message => {
+    const studentIDs = await getAllStudentsID();
+    studentIDs.map(id => {
+        console.log('Sending message to ', id);
+        sendTextMessage(id, message);
+    });
+
+    // Save broadcast message
+    await (new Broadcast({
+        message:
+    })).save();
+}
 const createReminder = (message, date) => {
 
     console.log('Cron job created for', new moment(new Date(date)).toDate());
@@ -13,11 +26,7 @@ const createReminder = (message, date) => {
         console.log('CRON JOB TRIGERED', moment());
         console.log('Message', message);
 
-        const studentIDs = await getAllStudentsID();
-        studentIDs.map(id => {
-            console.log('Sending message to ', id);
-            sendTextMessage(id, message);
-        })
+        broadcast(message);
 
 
         job.stop();
@@ -33,7 +42,6 @@ const createReminder = (message, date) => {
 
 const broadcast = async (req, res) => {
     console.log('Broadcast controller function trigeer');
-    console.log('Broadcast data', req.body);
 
     const {
         message,
@@ -42,23 +50,12 @@ const broadcast = async (req, res) => {
     } = req.body;
 
     if(reminderOn === 'true') {
-        // TODO create cron job
         console.log('Creating timed message');
-        // console.log(date);
-        console.log(date);
         createReminder(message, date)
     } else {
-        // send message now
         console.log('Sending messages to all user');
-        const studentIDs = await getAllStudentsID();
-        console.log(studentIDs);
-        studentIDs.map(id => {
-            console.log('Sending message to ', id);
-            sendTextMessage(id, message);
-        })
-
+        broadcast(message);
     }
-
     res.sendStatus(200);
 };
 
