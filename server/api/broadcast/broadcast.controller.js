@@ -13,7 +13,8 @@ const broadcast = async message => {
 
     // Save broadcast message
     await (new Broadcast({
-        message:
+        message,
+        date: Date.now()
     })).save();
 }
 const createReminder = (message, date) => {
