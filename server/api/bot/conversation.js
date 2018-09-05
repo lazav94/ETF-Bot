@@ -33,7 +33,7 @@ module.exports = async (event) => {
                 // TODO send link
                 student.token = uuidv4();
                 // student.email = text;
-                sendMail(text, 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML(sender, student.token));
+                sendMail(text, 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML(sender, student.token, text));
 
                 await student.save();
             } else {

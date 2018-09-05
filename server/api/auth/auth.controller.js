@@ -35,7 +35,8 @@ const verify = async (req, res) => {
     // 1. Get tocken from url
     const {
         id,
-        token
+        token,
+        email
     } = req.query;
     console.log('Token', token);
     console.log('Id', id);
@@ -55,6 +56,7 @@ const verify = async (req, res) => {
             // 3.1 if it is continue with the flow
             student.verified = true;
             student.token = undefined;
+            student.email = email;
             await student.save();
             await sendTextMessage(student.id, 'Usepseno ste vefirifikovali svoju adresu, dobicete poruku na Vasem FB');
             return res.send('Uspesna verifikacija');

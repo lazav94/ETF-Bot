@@ -1,7 +1,7 @@
 
 
-const createEmailHTML = (id, token) => {
-  const verifyAddress = `${process.env.DOMAIN}/auth/verify/?id=${id}&token=${token}`;
+const createEmailHTML = (id, token, email) => {
+  const verifyAddress = `${process.env.DOMAIN}/auth/verify/?id=${id}&token=${token}&email=${email}`;
   console.log(verifyAddress)
   return `<head>
           </head>
