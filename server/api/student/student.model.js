@@ -18,7 +18,6 @@ const studentSchema = mongoose.Schema({
     addressOfBirth: { type: String, default: '' },
     jmbg: {
         type: String,
-        minlength: 13,
         maxlength: 13,
         default: '',
     },
