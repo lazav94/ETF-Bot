@@ -19,7 +19,8 @@ const studentSchema = mongoose.Schema({
     jmbg: {
         type: String,
         minlength: 13,
-        maxlength: 13
+        maxlength: 13,
+        default: '',
     },
     email: { type: String, default: '' },
     phone: { type: String, default: ''},
