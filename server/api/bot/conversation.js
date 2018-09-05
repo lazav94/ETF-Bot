@@ -25,8 +25,13 @@ const conversation = async (event) => {
     if (event.message.attachments) {
         console.log(`Sender ${sender} send a file`);
         console.log('Attachment', event.message.attachments);
-        // student.image =  event.message.attachments[0];
-        // await student.save();
+        if(event.message.attachments[0].type === 'image'){
+            student.image =  event.message.attachments[0].payload.url;
+            await student.save();
+        } else {
+            console.log('Attachemnt must be image');
+            sendTextMessage(sender, 'Prilog mora biti slika');
+        }
         return;
     }
 
