@@ -99,11 +99,11 @@ const colectingStudentDate = async (sender, text) => {
         } else {
             await sendQuickReply(sender, 'Pol 👪', ['muski', 'zenski', '-']);
         }
-    } else if (!!student.dateOfBirth) {
+    } else if (student.dateOfBirth === '') {
         console.log('Date of birth');
         if (text && text !== '') {
             if (validator.toDate(text)) {
-                student.dateOfBirth = moment(text);
+                student.dateOfBirth = text;
                 await student.save();
                 await colectingStudentDate(sender);
             } else {
