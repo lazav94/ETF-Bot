@@ -45,8 +45,12 @@ const conversation = async (event) => {
             }
             return;
         } else {
-            console.log("Da li ovde treba da udje");
-            colectingStudentDate(sender, text);
+            if(needToCollectInfomation(student)){
+                await colectingStudentDate(sender, text);
+            } else {
+                console.log('Something else');
+                await sendTextMessage(sender, 'Something!');
+            }
         }
 
         if (event.message.attachments) {
@@ -71,9 +75,21 @@ const conversation = async (event) => {
     }
 };
 
+const needToCollectInfomation = student => (
+    student.parentName === ''  ||
+    !['muski', 'zenski', '-'].includes(student.gender) ||
+    student.dateOfBirth === '' ||
+    student.addressOfBirth === '' ||
+    student.jmbg === '' ||
+    student.phone === '' ||
+    student.field === ''
+);
+
 const colectingStudentDate = async (sender, text) => {
     console.log('Collceting data text:', text);
     const student = await getStudentById(sender);
+
+
 
     if (student.parentName === '') {
         console.log('Parrent name');
