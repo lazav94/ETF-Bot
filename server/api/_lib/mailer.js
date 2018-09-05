@@ -10,6 +10,7 @@ var transporter = nodemailer.createTransport({
            pass: 'etfbot2018'
        }
    });
+// https://myaccount.google.com/lesssecureapps?pli=1
 
 // let transporter = nodemailer.createTransport({
 //     host: 'smtp.ethereal.email',
