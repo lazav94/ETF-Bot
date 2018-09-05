@@ -16,6 +16,7 @@ const getStudentById = async id => {
                     firstName: user.first_name,
 			        lastName: user.last_name
                 });
+                await newStudent.save();
                 resolve(newStudent);
             }
         } catch (error) {
