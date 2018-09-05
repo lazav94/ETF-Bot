@@ -93,11 +93,8 @@ const colectingStudentDate = async (sender, text) => {
             } else {
                 await sendQuickReply(sender, 'Molimo Vas izaberite jednuo od navedenih opcija', ['muski', 'zenski', '-']);
             }
-
         } else {
-
             await sendQuickReply(sender, 'Pol 👪', ['muski', 'zenski', '-']);
-            colectingStudentDate(sender);
         }
     } else {
         console.log("KRAJ");
