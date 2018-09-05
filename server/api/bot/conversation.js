@@ -164,7 +164,7 @@ const colectingStudentDate = async (sender, text) => {
         console.log('Field');
         if (text && text !== '') {
             if (['RTI', 'SI', 'EE', 'OG', 'SS', 'TE', 'FE', 'Osnovne'].includes(text)) {
-                student.gender = text;
+                student.field = text;
                 await student.save();
                 await colectingStudentDate(sender);
             } else {
