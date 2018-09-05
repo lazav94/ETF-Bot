@@ -32,7 +32,7 @@ module.exports = async (event) => {
                 await sendTextMessage(sender, 'Hvala, na Vasoj email adresi stici ce link za validaciju ✓');
                 // TODO send link
                 student.token = uuidv4();
-                student.email = text;
+                // student.email = text;
                 sendMail(student.email, 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML(sender, student.token));
 
                 await student.save();
