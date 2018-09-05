@@ -2,6 +2,7 @@ var validator = require('validator');
 const uuidv4 = require('uuid/v4');
 
 const {
+    getUser,
     sendTextMessage,
     sendImage
 } = require('./messanger');
