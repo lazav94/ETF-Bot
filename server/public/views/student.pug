@@ -21,10 +21,7 @@ block content
       each student in students
         tr
           th.align-middle(scope='row')
-
-            img.avatar(src=`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZHEA16ZXF_244FFAtOw2pmhUE7iR0ikbDm3UI_gRdFgWWHIz8zg`, alt="")
-
-            //- img.avatar(src=`${student.image}`, alt="")
+            img.avatar(src=`${student.image}`)
           th.align-middle(scope='row')= `${student.firstName} (${student.parentName}) ${student.lastName}`
           th.align-middle(scope='row')= student.index
           th.align-middle(scope='row')= student.gender
