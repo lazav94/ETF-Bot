@@ -157,7 +157,7 @@ const sendGenericTemplate = async (sender, type) => {
 
     if (type === 'STUDENT_INFO') {
         const student = await getStudentById(sender);
-        title = `${student.firstName} (${student.parentName}) ${student.lastName} - ${student.field}-${student.year}`
+        title = `${student.firstName} (${student.parentName}) ${student.lastName} - ${student.field} - ${student.year}`
         image_url = student.image;
         subtitle =`${student.gender} ${student.jmbg} ${student.address}`
     }
@@ -165,8 +165,9 @@ const sendGenericTemplate = async (sender, type) => {
         attachment: {
             type: "template",
             payload: {
-                "template_type": "generic",
-                "elements": [{
+                image_aspect_ratio: 'square',
+                'template_type': 'generic',
+                'elements': [{
                     title,
                     image_url,
                     subtitle,
