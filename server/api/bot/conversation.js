@@ -85,7 +85,7 @@ const colectingStudentDate = async (sender, text) => {
         } else {
             await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime (ime roditalja)?👪', ['-']);
         }
-    } else if (student.gender) {
+    } else if (!['muski', 'zenski', '-'].includes(student.gender)) {
         console.log('Parrent gender');
 
         if(text && text !== '') {
