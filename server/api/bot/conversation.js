@@ -99,7 +99,7 @@ const colectingStudentDate = async (sender, text) => {
         } else {
             await sendQuickReply(sender, 'Pol 👪', ['muski', 'zenski', '-']);
         }
-    } else if (student.dateOfBirth) {
+    } else if (!!student.dateOfBirth) {
         console.log('Date of birth');
         if (text && text !== '') {
             if (validator.toDate(text)) {
@@ -134,7 +134,7 @@ const colectingStudentDate = async (sender, text) => {
         } else {
             await sendTextMessage(sender, 'JMBG? 📅');
         }
-    } else if (student.phone) {
+    } else if (student.phone != '') {
         console.log('PHONE');
         if (text && text !== '') {
             if (validator.isMobilePhone(text)) {
