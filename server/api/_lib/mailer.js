@@ -2,10 +2,12 @@ var nodemailer = require('nodemailer');
 
 
 var transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
-           user: 'lazav94@gmail.com',
-           pass: '89783397.5'
+           user: 'etf.bot.master@gmail.com',
+           pass: 'etfbot2018'
        }
    });
 
