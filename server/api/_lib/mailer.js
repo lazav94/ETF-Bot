@@ -7,9 +7,10 @@ var transporter = nodemailer.createTransport({
     secure: true,
     auth: {
            user: 'etf.bot.master@gmail.com',
-           pass: 'etfbot2018'
+           pass: 'etfbot2018master'
        }
    });
+
 // https://myaccount.google.com/lesssecureapps?pli=1
 
 // let transporter = nodemailer.createTransport({
