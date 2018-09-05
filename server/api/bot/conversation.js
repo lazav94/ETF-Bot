@@ -46,7 +46,7 @@ const conversation = async (event) => {
             return;
         } else {
             console.log("Da li ovde treba da udje");
-            // colectingStudentDate(sender, text);
+            colectingStudentDate(sender, text);
         }
 
         if (event.message.attachments) {
@@ -80,7 +80,6 @@ const colectingStudentDate = async (sender, text) => {
         if(text && text !== '') {
             student.parentName = text;
             await student.save();
-            colectingStudentDate(sender);
         } else {
             await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime (ime roditalja)?👪', ['-']);
         }
@@ -91,7 +90,6 @@ const colectingStudentDate = async (sender, text) => {
             if(['muski', 'zenski', '-'].includes(text)){
                 student.gender = text;
                 await student.save();
-                colectingStudentDate(sender);
             } else {
                 await sendQuickReply(sender, 'Molimo Vas izaberite jednuo od navedenih opcija', ['muski', 'zenski', '-']);
             }
