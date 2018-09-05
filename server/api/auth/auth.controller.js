@@ -1,5 +1,7 @@
 const getStudentById = require('../student/student.controller').getStudentById;
-
+const {
+    sendTextMessage
+} = require('../bot/messanger');
 const logger = require('winston');
 
 const login = async (req, res) => {
@@ -12,11 +14,13 @@ const login = async (req, res) => {
 
     console.log(process.env.EMAIL);
     console.log(process.env.PASSWORD);
-    if(email === process.env.EMAIL) {
-        if(password === process.env.PASSWORD) {
+    if (email === process.env.EMAIL) {
+        if (password === process.env.PASSWORD) {
             console.log('Render index');
             // TODO why this doesn't work
-            res.render('index.pug', {title: 'Home'});
+            res.render('index.pug', {
+                title: 'Home'
+            });
         } else {
             console.error('Password is not valid');
             res.sendStatus(307)
@@ -29,26 +33,42 @@ const login = async (req, res) => {
 
 const verify = async (req, res) => {
     // 1. Get tocken from url
-    const { id, token } = req.query;
-    console.log(token);
-    console.log(id);
-    res.sendStatus(200);
+    const {
+        id,
+        token
+    } = req.query;
+    console.log('Token', token);
+    console.log('Id', id);
+
+
+
     // 2. Get user by id
-    // TODO make controller fucnton for this in user
-    // const user = await User.findById(id);
+    const student = await getStudentById(id);
 
-    // 3. Compare token from URL with users token that we created before
-    // if(token === user.token) {
-    // 3.1 if it is continue with the flow
-    // } else {
-    // 3.2. suggest to user to resend the email with new token
-    // }
+    if (!student) {
+        console.error('Student not found');
+        return res.send('Greska ! Kontaktirajte lazav94@gmail.com');
+    } else {
+        // 3. Compare token from URL with users token that we created before
+        if (token === student.token) {
+            console.log('Uspesna verifikacija');
+            // 3.1 if it is continue with the flow
+            student.verified = true;
+            student.token = undefined;
+            await student.save();
+            res.send(`Usepseno ste vefirifikovali svoju adresu, dobicete poruku na ww.m.me/${student.id}`);
+        } else {
+            // 3.2. suggest to user to resend the email with new token
+            console.log('Pogresan token');
+            return res.send('Greska pri verifikaciji! Pogresan token. Kontaktirajte lazav94@gmail.com');
+        }
 
+    }
 };
 
 const verifyStudent = async sender => {
     const student = await getStudentById(sender);
-    if(student){
+    if (student) {
         return student.verified;
     } else {
         console.error('Fatal error, check verifyStudent function');
@@ -61,4 +81,3 @@ module.exports = {
     verify,
     verifyStudent
 }
-
