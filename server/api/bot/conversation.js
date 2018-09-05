@@ -71,7 +71,7 @@ const conversation = async (event) => {
     }
 };
 
-cosnt colectingStudentDate = async (sender, text) => {
+const colectingStudentDate = async (sender, text) => {
     console.log('Collceting data text:', text);
     const student = await getStudentById(sender);
 
