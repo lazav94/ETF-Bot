@@ -7,7 +7,7 @@ const studentSchema = mongoose.Schema({
     image: {type: String, default: '' },
     verified: {type: Boolean, default: false},
     token: { type: String, default: ''},
-    index: { type: String },
+    index: { type: String, default: '' },
     firstName: { type: String, requred: true },
     lastName: { type: String, required: true },
     parentName: { type: String, default: '' },
