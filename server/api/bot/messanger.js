@@ -192,5 +192,6 @@ module.exports = {
     getUserInfo,
     typingOn,
     sendTextMessage,
+    sendQuickReply,
     sendImage
 }
