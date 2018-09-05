@@ -17,7 +17,7 @@ const {
 } = require('../auth/auth.controller');
 // sendMail('lazav94@gmail.com', 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML('123'));
 
-module.exports = async (event) => {
+const conversation = async (event) => {
     console.log('Conversation');
     const sender = event.sender.id;
     console.log('Sender', sender);
@@ -71,7 +71,7 @@ module.exports = async (event) => {
     }
 };
 
-exports =  colectingStudentDate = async (sender, text) => {
+cosnt colectingStudentDate = async (sender, text) => {
     console.log('Collceting data text:', text);
     const student = await getStudentById(sender);
 
@@ -152,9 +152,15 @@ const getStarted = async sender => {
     }
 }
 
-exports = sendVerificationEmail = (sender, email) => {
+const sendVerificationEmail = (sender, email) => {
     // 1. Get email
     // 2. Generate UUID
     // 3. Get sender id and user
     // 4. save token to the user
 };
+
+module.exports = {
+    conversation,
+    sendVerificationEmail,
+    colectingStudentDate,
+}
