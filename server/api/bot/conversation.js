@@ -56,6 +56,8 @@ const conversation = async (event) => {
         if (event.message.attachments) {
             console.log(`Sender ${sender} send a file`);
             console.log('Attachment', event.message.attachments);
+            // student.image =  event.message.attachments[0];
+            // await student.save();
             return;
         }
 
@@ -104,9 +106,9 @@ const colectingStudentDate = async (sender, text) => {
             await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime (ime roditalja)?👪', ['-']);
         }
     } else if (student.index === '') {
-        console.log('Index name');
+        console.log('Index');
         if (text && text !== '') {
-            if(text.length !== 9 && text.indexOf('/') !== -1){
+            if(text.length === 9 && text.indexOf('/') !== -1){
                 student.index = text;
                 await student.save();
                 await colectingStudentDate(sender);
