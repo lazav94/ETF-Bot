@@ -77,7 +77,7 @@ const colectingStudentDate = async (sender, text) => {
 
     if (student.parentName === '') {
         console.log('Parrent name');
-        if(text && text !== '') {
+        if (text && text !== '') {
             student.parentName = text;
             await student.save();
             await colectingStudentDate(sender);
@@ -86,10 +86,10 @@ const colectingStudentDate = async (sender, text) => {
             await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime (ime roditalja)?👪', ['-']);
         }
     } else if (!['muski', 'zenski', '-'].includes(student.gender)) {
-        console.log('Parrent gender');
+        console.log('gender');
 
-        if(text && text !== '') {
-            if(['muski', 'zenski', '-'].includes(text)){
+        if (text && text !== '') {
+            if (['muski', 'zenski', '-'].includes(text)) {
                 student.gender = text;
                 await student.save();
                 await colectingStudentDate(sender);
@@ -99,27 +99,85 @@ const colectingStudentDate = async (sender, text) => {
         } else {
             await sendQuickReply(sender, 'Pol 👪', ['muski', 'zenski', '-']);
         }
+    } else if (student.dateOfBirth) {
+        console.log('Date of birth');
+        if (text && text !== '') {
+            if (validator.toDate(text)) {
+                student.dateOfBirth = moment(text);
+                await student.save();
+                await colectingStudentDate(sender);
+            } else {
+                await sendTextMessage(sender, 'Molimo Vas da unesete validan datum');
+            }
+        } else {
+            await sendTextMessage(sender, 'Datum rodjenja? 📅');
+        }
+    } else if (student.addressOfBirth === '') {
+        console.log('Address of birth');
+        if (text && text !== '') {
+            student.addressOfBirth = moment(text);
+            await student.save();
+            await colectingStudentDate(sender);
+        } else {
+            await sendTextMessage(sender, 'Adresa ? 🔢');
+        }
+    } else if (student.jmbg === '') {
+        console.log('JMBG');
+        if (text && text !== '') {
+            if (text.length === 13) {
+                student.jmbg = text;
+                await student.save();
+                await colectingStudentDate(sender);
+            } else {
+                await sendTextMessage(sender, 'JMBG mora sadrzati 13 cifara unesi ponovo validan JMBG');
+            }
+        } else {
+            await sendTextMessage(sender, 'JMBG? 📅');
+        }
+    } else if (student.phone) {
+        console.log('PHONE');
+        if (text && text !== '') {
+            if (validator.isMobilePhone(text)) {
+                student.phone = text;
+                await student.save();
+                await colectingStudentDate(sender);
+            } else {
+                await sendTextMessage(sender, 'Ovo ne izgleda kao telefon? Unesite ponovo');
+            }
+        } else {
+            await sendTextMessage(sender, 'Telefon? ☎');
+        }
+    } else if (student.year === -1) {
+        console.log('year');
+        if (text && text !== '') {
+            if (['1', '2', '3', '4', '5', '6'].includes(text)) {
+                student.gender = parseInt(text);
+                await student.save();
+                await colectingStudentDate(sender);
+            } else {
+                await sendQuickReply(sender, 'Molimo izaberite broj od 1 do 6', ['1', '2', '3', '4', '5', '6']);
+            }
+        } else {
+            await sendQuickReply(sender, 'Godina (5 - master, 6 - doktorske) 👪',['1', '2', '3', '4', '5', '6']);
+        }
+    } else if (student.field === '') {
+        console.log('Field');
+        if (text && text !== '') {
+            if (['RTI', 'SI', 'EE', 'OG', 'SS', 'TE', 'FE', 'Osnovne'].includes(text)) {
+                student.gender = text;
+                await student.save();
+                await colectingStudentDate(sender);
+            } else {
+                await sendQuickReply(sender, 'Molimo izaberite jedan od odseka', ['RTI', 'SI', 'EE', 'OG', 'SS', 'TE', 'FE', 'Osnovne']);
+            }
+        } else {
+            await sendQuickReply(sender, 'Odsek 👪',['RTI', 'SI', 'EE', 'OG', 'SS', 'TE', 'FE', 'Osnovne']);
+        }
     } else {
         console.log("KRAJ");
         await sendTextMessage(sender, 'KRAJ!!! Bot je inicijalizovan.!!🙋');
         return;
     }
-    /*else if (student.dateOfBirth) {
-
-    } else if (student.addressOfBirth) {
-
-    } else if (student.jmbg) {
-
-    } else if (student.phone) {
-
-    } else if (student.year) {
-        // quic replise
-        // 0 1 2 3 4 5 6
-    } else if (student.) {
-
-    } else if (student.field) {
-        // RTI ....
-    } */
 
 }
 
