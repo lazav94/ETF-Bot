@@ -115,7 +115,7 @@ const colectingStudentDate = async (sender, text) => {
     } else if (student.addressOfBirth === '') {
         console.log('Address of birth');
         if (text && text !== '') {
-            student.addressOfBirth = moment(text);
+            student.addressOfBirth = text;
             await student.save();
             await colectingStudentDate(sender);
         } else {
