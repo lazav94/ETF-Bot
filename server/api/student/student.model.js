@@ -9,7 +9,7 @@ const studentSchema = mongoose.Schema({
     index: { type: String },
     firstName: { type: String, requred: true },
     lastName: { type: String, required: true },
-    parentName: { type: String, required: true },
+    parentName: { type: String, default: '' },
     gender: {
         type: String,
         enum: ['muski', 'zensi', '-']
