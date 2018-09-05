@@ -26,6 +26,7 @@ const conversation = async (event) => {
         console.log(`Sender ${sender} send a file`);
         console.log('Attachment', event.message.attachments);
         if(event.message.attachments[0].type === 'image'){
+            const student = await getStudentById(sender);
             student.image =  event.message.attachments[0].payload.url;
             await student.save();
         } else {
