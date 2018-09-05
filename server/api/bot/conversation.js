@@ -80,6 +80,8 @@ const colectingStudentDate = async (sender, text) => {
         if(text && text !== '') {
             student.parentName = text;
             await student.save();
+            await colectingStudentDate(sender);
+
         } else {
             await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime (ime roditalja)?👪', ['-']);
         }
@@ -90,6 +92,7 @@ const colectingStudentDate = async (sender, text) => {
             if(['muski', 'zenski', '-'].includes(text)){
                 student.gender = text;
                 await student.save();
+                await colectingStudentDate(sender);
             } else {
                 await sendQuickReply(sender, 'Molimo Vas izaberite jednuo od navedenih opcija', ['muski', 'zenski', '-']);
             }
