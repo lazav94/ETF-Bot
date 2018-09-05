@@ -5,7 +5,8 @@ const {
     getUserInfo,
     sendTextMessage,
     sendQuickReply,
-    sendImage
+    sendImage,
+    sendGenericTemplate
 } = require('./messanger');
 
 const getStudentById = require('../student/student.controller').getStudentById;
@@ -64,6 +65,9 @@ const conversation = async (event) => {
             } else {
                 console.log('Something else');
                 await sendTextMessage(sender, 'Something!');
+                if(text === 'info'){
+                    await sendGenericTemplate(sender, 'STUDENT_INFO');
+                }
             }
         }
 

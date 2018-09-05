@@ -1,5 +1,7 @@
 const request = require('request');
 
+const getStudentById = require('../student/student.controller').getStudentById;
+
 // Facebook page access token
 // TODO get never expired access token
 const access_token = process.env.ACCESS_TOKEN;
@@ -122,30 +124,69 @@ const sendTextMessage = async (sender, text) => {
 
 const sendQuickReply = async (sender, text, quickReplies, payloads) => {
     const messageData = {
-		text,
-		quick_replies: [],
-	};
-	for (let i = 0; i < quickReplies.length; i++) {
-		messageData.quick_replies.push({
-			content_type: 'text',
-			title: quickReplies[i],
-			payload: (payloads && payloads[i] ? payloads[i]: text)
-		});
-	}
-	await sendRequest(messageData, sender);
+        text,
+        quick_replies: [],
+    };
+    for (let i = 0; i < quickReplies.length; i++) {
+        messageData.quick_replies.push({
+            content_type: 'text',
+            title: quickReplies[i],
+            payload: (payloads && payloads[i] ? payloads[i] : text)
+        });
+    }
+    await sendRequest(messageData, sender);
 };
 
 const sendImage = async (sender, url) => {
     const messageData = {
-		attachment: {
-			type: 'image',
-			payload: {
-				url,
-				is_reusable: true
-			}
-		}
-	};
-	await sendRequest(messageData, sender);
+        attachment: {
+            type: 'image',
+            payload: {
+                url,
+                is_reusable: true
+            }
+        }
+    };
+    await sendRequest(messageData, sender);
+}
+
+const sendGenericTemplate = async (sender, type) => {
+    let title;
+    let image_url;
+    let subtitle;
+
+    if (type === 'STUDENT_INFO') {
+        const student = await getStudentById(sender);
+        title = `${student.firstName} (${student.parentName}) ${student.lastName} - ${student.field}-${student.year}`
+        image_url = student.image;
+        subtitle =`${student.gender} ${student.jmbg} ${student.address}`
+    }
+    const messageData = {
+        attachment: {
+            type: "template",
+            payload: {
+                "template_type": "generic",
+                "elements": [{
+                    title,
+                    image_url,
+                    subtitle,
+                    /*buttons: [
+                            {
+                            "type": "web_url",
+                            "url": "https://petersfancybrownhats.com",
+                            "title": "View Website"
+                        }, {
+                            "type": "postback",
+                            "title": "Start Chatting",
+                            "payload": "DEVELOPER_DEFINED_PAYLOAD"
+                        }
+                    ]
+                    */
+                }]
+            }
+        }
+    };
+    await sendRequest(messageData, sender);
 }
 
 const sendMessage = async (sender, message) => {
@@ -168,24 +209,25 @@ const sendMessage = async (sender, message) => {
     }
 };
 
+
 const typingOn = (sender) => {
-	sendRequest('typing_on', sender, 'typing');
+    sendRequest('typing_on', sender, 'typing');
 }
 const typingOff = (sender) => {
-	sendRequest('typing_off', sender, 'typing');
+    sendRequest('typing_off', sender, 'typing');
 };
 
 const typing = (sender, seconds) => {
-	typingOn(sender);
-	if (typeof seconds === 'string') {
-		seconds = Number.parseInt(seconds);
-	}
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			typingOff(sender);
-			resolve();
-		}, seconds * 1000);
-	});
+    typingOn(sender);
+    if (typeof seconds === 'string') {
+        seconds = Number.parseInt(seconds);
+    }
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            typingOff(sender);
+            resolve();
+        }, seconds * 1000);
+    });
 };
 
 module.exports = {
@@ -193,5 +235,6 @@ module.exports = {
     typingOn,
     sendTextMessage,
     sendQuickReply,
+    sendGenericTemplate,
     sendImage
 }
