@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const studentSchema = mongoose.Schema({
     id: String,
+    image: {type: String, default: '' },
     verified: {type: Boolean, default: false},
     token: { type: String, default: ''},
     index: { type: String },

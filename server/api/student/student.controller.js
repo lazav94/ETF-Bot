@@ -30,14 +30,20 @@ const getAllStudentsID = async () => {
     return students.map(student => student.id);
 }
 
-const index = (req, res) => {
+const getAllStudents = async () => await Student.find();
+const getAllVerifiedStudents = async () => await Student.find({ verified: true });
+
+
+const index = async (req, res) => {
     console.log("Render student page");
     // TODO add student
-    res.render(student, {title: 'Student'});
+    const students = await getAllVerifiedStudents();
+    res.render('student', {title: 'Student', students });
 }
 
 module.exports = {
     index,
     getStudentById,
-    getAllStudentsID
+    getAllStudentsID,
+    getAllStudents
 }

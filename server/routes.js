@@ -4,6 +4,7 @@ const {
 
 const webhookRoutes = require('./api/bot/webhook/webhookRoutes');
 const authRoutes = require('./api/auth/auth.routes');
+const studentRoutes = require('./api/student/student.routes');
 const professorRoutes = require('./api/professor/professor.routes');
 const broadcastRoutes = require('./api/broadcast/broadcast.routes');
 
@@ -35,6 +36,7 @@ module.exports = app => {
     // app.use('/', startingRoutes)
     app.use('/auth', authRoutes);
     app.use('/webhook', webhookRoutes);
+    app.use('/students', studentRoutes);
     app.use('/professors', professorRoutes);
     app.use('/broadcast', broadcastRoutes);
 };

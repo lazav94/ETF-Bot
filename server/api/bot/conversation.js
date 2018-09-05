@@ -55,6 +55,7 @@ const conversation = async (event) => {
 
         if (event.message.attachments) {
             console.log(`Sender ${sender} send a file`);
+            console.log('Attachment', event.message.attachments);
             return;
         }
 
@@ -77,6 +78,7 @@ const conversation = async (event) => {
 
 const needToCollectInfomation = student => (
     student.parentName === ''  ||
+    student.index === ''  ||
     !['muski', 'zenski', '-'].includes(student.gender) ||
     student.dateOfBirth === '' ||
     student.addressOfBirth === '' ||
@@ -100,6 +102,19 @@ const colectingStudentDate = async (sender, text) => {
 
         } else {
             await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime (ime roditalja)?👪', ['-']);
+        }
+    } else if (student.index === '') {
+        console.log('Index name');
+        if (text && text !== '') {
+            if(text.length !== 9 && text.indexOf('/') !== -1){
+                student.index = text;
+                await student.save();
+                await colectingStudentDate(sender);
+            } else {
+                await sendTextMessage(sender, 'Nepravilan format indexa GGGG/BBBB');
+            }
+        } else {
+            await sendTextMessage(sender, 'Index? GGGG/BBBB');
         }
     } else if (!['muski', 'zenski', '-'].includes(student.gender)) {
         console.log('gender');

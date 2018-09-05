@@ -5,68 +5,33 @@ block content
   table#studentTable.table.table-striped.table-dark.table-hover.table-sm.table-borderless
     thead
       tr
-        th(scope='col') #
-        th(scope='col') First name
-        th(scope='col') Last name
+        th(scope='col') Image
+        th(scope='col') Ime
         th(scope='col') Index
+        th(scope='col') Pol
+        th(scope='col') Datum rodjenja
+        th(scope='col') Adresa
+        th(scope='col') JMBG
+        th(scope='col') EMail
+        th(scope='col') Telefon
+        th(scope='col') God. studija
+        th(scope='col') Smer
+
     tbody
-      tr
-        th(scope='row') 1
-        th(scope='row') Lazar
-        th(scope='row') Vasic
-        th(scope='row') 2017/3011
-      tr
-        th(scope='row') 2
-        th(scope='row') Pera
-        th(scope='row') Peric
-        th(scope='row') 3102/1342
-      tr
-        th(scope='row') 1
-        th(scope='row') Lazar
-        th(scope='row') Vasic
-        th(scope='row') 2017/3011
-      tr
-        th(scope='row') 2
-        th(scope='row') Pera
-        th(scope='row') Peric
-        th(scope='row') 3102/1342
-      tr
-        th(scope='row') 1
-        th(scope='row') Lazar
-        th(scope='row') Vasic
-        th(scope='row') 2017/3011
-      tr
-        th(scope='row') 2
-        th(scope='row') Pera
-        th(scope='row') Peric
-        th(scope='row') 3102/1342
-      tr
-        th(scope='row') 1
-        th(scope='row') Lazar
-        th(scope='row') Vasic
-        th(scope='row') 2017/3011
-      tr
-        th(scope='row') 2
-        th(scope='row') Pera
-        th(scope='row') Peric
-        th(scope='row') 3102/1342
-      tr
-        th(scope='row') 1
-        th(scope='row') Lazar
-        th(scope='row') Vasic
-        th(scope='row') 2017/3011
-      tr
-        th(scope='row') 2
-        th(scope='row') Pera
-        th(scope='row') Peric
-        th(scope='row') 3102/1342
-      tr
-        th(scope='row') 1
-        th(scope='row') Lazar
-        th(scope='row') Vasic
-        th(scope='row') 2017/3011
-      tr
-        th(scope='row') 2
-        th(scope='row') Pera
-        th(scope='row') Peric
-        th(scope='row') 3102/1342
+      each student in students
+        tr
+          th.align-middle(scope='row')
+
+            img.avatar(src=`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZHEA16ZXF_244FFAtOw2pmhUE7iR0ikbDm3UI_gRdFgWWHIz8zg`, alt="")
+
+            //- img.avatar(src=`${student.image}`, alt="")
+          th.align-middle(scope='row')= `${student.firstName} (${student.parentName}) ${student.lastName}`
+          th.align-middle(scope='row')= student.index
+          th.align-middle(scope='row')= student.gender
+          th.align-middle(scope='row')= student.dateOfBirth
+          th.align-middle(scope='row')= student.addressOfBirth
+          th.align-middle(scope='row')= student.jmbg
+          th.align-middle(scope='row')= student.email
+          th.align-middle(scope='row')= student.phone
+          th.align-middle(scope='row')= student.year
+          th.align-middle(scope='row')= student.field
