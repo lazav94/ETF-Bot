@@ -120,7 +120,7 @@ const sendTextMessage = async (sender, text) => {
     }, sender, access_token);
 };
 
-const sendQuickReply = async (sender, text, qrs, payloads) => {
+const sendQuickReply = async (sender, text, quickReplies, payloads) => {
     const messageData = {
 		text,
 		quick_replies: [],
