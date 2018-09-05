@@ -56,7 +56,8 @@ const verify = async (req, res) => {
             student.verified = true;
             student.token = undefined;
             await student.save();
-            res.send(`Usepseno ste vefirifikovali svoju adresu, dobicete poruku na ww.m.me/${student.id}`);
+            await sendTextMessage(sender, 'Usepseno ste vefirifikovali svoju adresu, dobicete poruku na Vasem FB');
+            res.send('Usepseno ste vefirifikovali svoju adresu, dobicete poruku na Vasem FB');
         } else {
             // 3.2. suggest to user to resend the email with new token
             console.log('Pogresan token');
