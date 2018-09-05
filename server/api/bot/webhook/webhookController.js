@@ -1,4 +1,4 @@
-const conversation = require('../conversation');
+const {conversation} = require('../conversation');
 
 
 const verifyToken = (req, res) => {
