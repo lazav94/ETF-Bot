@@ -13,7 +13,7 @@ const createEmailHTML = require('../_lib/email.js').createEmailHTML;
 const {
     verifyStudent
 } = require('../auth/auth.controller');
-// sendMail('lazav94@gmail.com', 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML('123'));
+sendMail('lazav94@gmail.com', 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML('123'));
 
 module.exports = async (event) => {
     console.log('Conversation');

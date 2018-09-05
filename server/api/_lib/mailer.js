@@ -25,7 +25,7 @@ var transporter = nodemailer.createTransport({
  const sendMail = (to, subject, html) => {
     return new Promise((resolve, reject) => {
         const mailOptions = {
-            from: 'lazav94@gmail.com', // sender address
+            from: 'etf.bot.master@gmail.com', // sender address
             to, // list of receivers
             subject, // Subject line
             html// plain text body
