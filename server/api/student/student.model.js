@@ -14,7 +14,7 @@ const studentSchema = mongoose.Schema({
         type: String,
         enum: ['muski', 'zensi', '-']
     },
-    dateOfBirth: { type: String, default: 'null' },
+    dateOfBirth: { type: String, default: '' },
     addressOfBirth: { type: String, default: '' },
     jmbg: {
         type: String,
