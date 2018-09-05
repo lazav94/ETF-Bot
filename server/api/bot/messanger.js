@@ -174,6 +174,7 @@ const typing = (sender, seconds) => {
 };
 
 module.exports = {
+    getUserInfo,
     typingOn,
     sendTextMessage,
     sendImage
