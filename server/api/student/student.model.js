@@ -7,22 +7,28 @@ const studentSchema = mongoose.Schema({
     verified: {type: Boolean, default: false},
     token: { type: String, default: ''},
     index: { type: String },
-    firstName: String,
-    lastName: String,
+    firstName: { type: String, requred: true },
+    lastName: { type: String, required: true },
     parentName: String,
-    gender: String, // ENUM
+    gender: {
+        type: String,
+        enum: ['muski', 'zensi', '-']
+    },
     dateOfBirth: Date,
-    addressOfBirth: String,
-    jmbg: Number,
+    addressOfBirth: { type: String, required: true },
+    jmbg: {
+        type: String,
+        minlength: 13,
+        maxlength: 13
+    },
     email: { type: String, default: '' },
-    phone: Number,
+    phone: { type: String, default: ''},
     balance: Number,
-    year: Number,
-    yearOfStuding: Number,
+    year: { type: Number, default: -1},
     // prosek
     // broj polozenih ispita
     // lista polozenih ispita
-    field: String // TODO maybe change to model
+    field: { type: String, default: ''} // TODO maybe change to model
     // predmete koje slusa
 
 });

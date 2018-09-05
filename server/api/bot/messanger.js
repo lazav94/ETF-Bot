@@ -120,6 +120,21 @@ const sendTextMessage = async (sender, text) => {
     }, sender, access_token);
 };
 
+const sendQuickReply = async (sender, text, qrs, payloads) => {
+    const messageData = {
+		text,
+		quick_replies: [],
+	};
+	for (let i = 0; i < quickReplies.length; i++) {
+		messageData.quick_replies.push({
+			content_type: 'text',
+			title: quickReplies[i],
+			payload: (payloads && payloads[i] ? payloads[i]: text)
+		});
+	}
+	await sendRequest(messageData, sender);
+};
+
 const sendImage = async (sender, url) => {
     const messageData = {
 		attachment: {

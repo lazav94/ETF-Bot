@@ -50,24 +50,29 @@ const verify = async (req, res) => {
         console.error('Student not found');
         return res.send('Greska ! Kontaktirajte lazav94@gmail.com');
     } else {
-        // 3. Compare token from URL with users token that we created before
-        if (token === student.token) {
-            console.log('Uspesna verifikacija');
-            // 3.1 if it is continue with the flow
-            student.verified = true;
-            student.token = undefined;
-            student.email = email;
-            await student.save();
-            await sendTextMessage(student.id, 'Usepseno ste vefirifikovali svoju adresu, dobicete poruku na Vasem FB');
-            return res.send('Uspesna verifikacija');
+        if (student.verified) {
+            return res.send('Vec ste vefifikovali svoju email adresu');
         } else {
-            // 3.2. suggest to user to resend the email with new token
-            console.log('Pogresan token');
-            await sendTextMessage(student.id, 'Greska pri verifikaciji! Pogresan token. Kontaktirajte lazav94@gmail.com');
+            // 3. Compare token from URL with users token that we created before
+            if (token === student.token) {
+                console.log('Uspesna verifikacija');
+                // 3.1 if it is continue with the flow
+                student.verified = true;
+                student.token = undefined;
+                student.email = email;
+                await student.save();
+                await sendTextMessage(student.id, 'Usepseno ste vefirifikovali svoju adresu, dobicete poruku na Vasem FB');
 
-            return res.send('Greska pri verifikaciji! Pogresan token. Kontaktirajte lazav94@gmail.com');
+                require('../bot/conversation').colectingStudentDate(student.id);
+
+                return res.send('Uspesna verifikacija');
+            } else {
+                // 3.2. suggest to user to resend the email with new token
+                console.log('Pogresan token');
+                await sendTextMessage(student.id, 'Greska pri verifikaciji! Pogresan token. Kontaktirajte lazav94@gmail.com');
+                return res.send('Greska pri verifikaciji! Pogresan token. Kontaktirajte lazav94@gmail.com');
+            }
         }
-
     }
 };
 
