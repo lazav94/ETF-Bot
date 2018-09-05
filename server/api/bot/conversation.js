@@ -134,7 +134,7 @@ const colectingStudentDate = async (sender, text) => {
         } else {
             await sendTextMessage(sender, 'JMBG? 📅');
         }
-    } else if (student.phone != '') {
+    } else if (student.phone === '') {
         console.log('PHONE');
         if (text && text !== '') {
             if (validator.isMobilePhone(text)) {
