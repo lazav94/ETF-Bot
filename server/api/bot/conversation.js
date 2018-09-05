@@ -151,7 +151,7 @@ const colectingStudentDate = async (sender, text) => {
         console.log('year');
         if (text && text !== '') {
             if (['1', '2', '3', '4', '5', '6'].includes(text)) {
-                student.gender = parseInt(text);
+                student.year = parseInt(text);
                 await student.save();
                 await colectingStudentDate(sender);
             } else {
