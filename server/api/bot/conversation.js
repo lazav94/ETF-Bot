@@ -22,6 +22,14 @@ const conversation = async (event) => {
     const sender = event.sender.id;
     console.log('Sender', sender);
 
+    if (event.message.attachments) {
+        console.log(`Sender ${sender} send a file`);
+        console.log('Attachment', event.message.attachments);
+        // student.image =  event.message.attachments[0];
+        // await student.save();
+        return;
+    }
+
     if (event.message) {
         const {
             text
@@ -53,13 +61,7 @@ const conversation = async (event) => {
             }
         }
 
-        if (event.message.attachments) {
-            console.log(`Sender ${sender} send a file`);
-            console.log('Attachment', event.message.attachments);
-            // student.image =  event.message.attachments[0];
-            // await student.save();
-            return;
-        }
+
 
         // TODO handle api ai
 
