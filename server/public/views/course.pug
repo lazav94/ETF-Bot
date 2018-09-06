@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  //- .table-bordered.table-responsive
+  table#studentTable.table.table-striped.table-dark.table-hover.table-sm.table-borderless
+    thead
+      tr
+        th(scope='col') Name
+        th(scope='col') Code
+        th(scope='col') Status
+        th(scope='col') Modul
+        th(scope='col') Year
+        th(scope='col') ESPB
+
+    tbody
+      each course in courses
+        tr
+          th.align-middle(scope='row')= course.name
+          th.align-middle(scope='row')= course.code
+          th.align-middle(scope='row')= course.status
+          th.align-middle(scope='row')= course.modul
+          th.align-middle(scope='row')= course.year
+          th.align-middle(scope='row')= course.espb

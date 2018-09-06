@@ -24,9 +24,15 @@ const findCourseByNameOrCode = async searchString => Course.findOne({ $or : [
 ]})
 
 
+const index = async (req, res) => {
+    const courses = await getAllCourses();
+    res.render('course', {title: "Title | Braodcast", courses });
+}
+
 module.exports = {
     getAllCourses,
     getCourseByID,
     getAllCoursesNamesAndCodes,
-    findCourseByNameOrCode
+    findCourseByNameOrCode,
+    index
 }

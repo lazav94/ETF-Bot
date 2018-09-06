@@ -1,5 +1,6 @@
 [] posalji personalnu poruku studentu
-[] Only valid email need to have student.etf.bg.ac.rs
-[] Resend email
-[] Slika potvrde da je neko student
+[] potvrda da je neko student
 [] Bolji regex za index
+[] Courses stranica treba da ima jos informacije od predmetima
+[] validiraj da adresa mora da sadrzi student.etf.bg.ac.rs
+[] Resend email

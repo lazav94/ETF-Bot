@@ -7,6 +7,7 @@ const authRoutes = require('./api/auth/auth.routes');
 const studentRoutes = require('./api/student/student.routes');
 const professorRoutes = require('./api/professor/professor.routes');
 const broadcastRoutes = require('./api/broadcast/broadcast.routes');
+const courseRoutes = require('./api/course/course.routes');
 
 const sendMail = require('./api/_lib/mailer');
 
@@ -39,4 +40,5 @@ module.exports = app => {
     app.use('/students', studentRoutes);
     app.use('/professors', professorRoutes);
     app.use('/broadcast', broadcastRoutes);
+    app.use('/courses', courseRoutes);
 };
