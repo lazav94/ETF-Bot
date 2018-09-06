@@ -23,6 +23,10 @@ const conversation = async (event) => {
     const sender = event.sender.id;
     console.log('Sender', sender);
 
+    console.log('=============================')
+
+	console.log('EVent', event);
+	console.log('=============================')
 
 
     if (event.message) {
