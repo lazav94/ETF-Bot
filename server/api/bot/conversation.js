@@ -72,7 +72,7 @@ const conversation = async (event) => {
                 console.log('APIAI or something else!');
                 const response = await apiai(sender, text);
                 if(response && response !== '') {
-                    if(response !== 'etf_location' || response !== 'help'){
+                    if(response !== 'etf_location' && response !== 'help'){
                         await sendTextMessage(sender, response);
                     }
                 } else {
