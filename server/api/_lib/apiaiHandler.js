@@ -287,7 +287,7 @@ module.exports = apiaiHandler = (sender, text) => {
                     break;
                 case 'etf_location':
                     await messanger.sendLocationButton(sender);
-                    resolve();
+                    resolve(false);
                 case 'input.unknown':
                 default:
                     console.log("DEFAULT INTENT", action);

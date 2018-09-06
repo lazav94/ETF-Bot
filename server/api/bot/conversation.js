@@ -72,7 +72,9 @@ const conversation = async (event) => {
                 console.log('APIAI or something else!');
                 const response = await apiai(sender, text);
                 if(response && response !== '') {
-                    await sendTextMessage(sender, response);
+                    if(response !== 'etf_location'){
+                        await sendTextMessage(sender, response);
+                    }
                 } else {
                     await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
                 }
