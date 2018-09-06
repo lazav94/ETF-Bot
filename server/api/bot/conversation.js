@@ -12,6 +12,7 @@ const {
 const getStudentById = require('../student/student.controller').getStudentById;
 const sendMail = require('../_lib/mailer.js');
 const createEmailHTML = require('../_lib/email.js').createEmailHTML;
+const apiai = require('../_lib/apiaiHandler.js');
 
 const {
     verifyStudent
@@ -69,8 +70,9 @@ const conversation = async (event) => {
             if(needToCollectInfomation(student)){
                 await colectingStudentDate(sender, text);
             } else {
-                console.log('Something else');
-                await sendTextMessage(sender, 'Something!');
+                console.log('APIAI or something else!');
+                const response = await apiai(sender, text);
+                await sendTextMessage(sender, response);
                 if(text === 'info'){
                     await sendGenericTemplate(sender, 'STUDENT_INFO');
                 }

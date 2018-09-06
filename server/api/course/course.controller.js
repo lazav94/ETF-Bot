@@ -14,7 +14,7 @@ const getAllCoursesNamesAndCodes = async () => {
             }
         }
     ]);
-    console.log(names);
+    // console.log(names);
     return names;
 };
 
