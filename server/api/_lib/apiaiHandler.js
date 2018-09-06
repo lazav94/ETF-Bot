@@ -191,6 +191,7 @@ module.exports = apiaiHandler = (sender, text) => {
                     break;
                 case 'course_content':
                     course = response.result.parameters.course;
+                    if(!course) resolve('Nije pronadjen predmet za akciju', action);
                     console.log('Course', course);
                     const contentResult = await content(course);
                     console.log('contentResult', contentResult)
@@ -199,6 +200,7 @@ module.exports = apiaiHandler = (sender, text) => {
                 case 'course_espb':
                     course = response.result.parameters.course;
                     console.log('Course', course);
+                    if(!course) resolve('Nije pronadjen predmet za akciju', action);
                     const espbResult = await espb(course);
                     console.log('espbResult', espbResult)
                     return resolve(espbResult);
@@ -206,6 +208,7 @@ module.exports = apiaiHandler = (sender, text) => {
                 case 'course_goal':
                     course = response.result.parameters.course;
                     console.log('Course', course);
+                    if(!course) resolve('Nije pronadjen predmet za akciju', action);
                     const goalResult = await goal(course);
                     console.log('result', goalResult)
                     return resolve(goalResult);
@@ -213,6 +216,7 @@ module.exports = apiaiHandler = (sender, text) => {
                 case 'course_info':
                     course = response.result.parameters.course;
                     console.log('Course', course);
+                    if(!course) resolve('Nije pronadjen predmet za akciju', action);
                     const infoResult = await info(course);
                     console.log('infoResult', infoResult)
                     return resolve(infoResult);
@@ -220,6 +224,7 @@ module.exports = apiaiHandler = (sender, text) => {
                 case 'course_passing':
                     course = response.result.parameters.course;
                     console.log('Course', course);
+                    if(!course) resolve('Nije pronadjen predmet za akciju', action);
                     const passingResult = await passing(course);
                     console.log('passingResult', passingResult);
                     return resolve(passingResult);
