@@ -47,17 +47,20 @@ curl -X POST -H "Content-Type: application/json" -d '{
             "type":"web_url",
             "url":"https://www.etf.bg.ac.rs/",
             "title":"🏫 ETF",
+				    "messenger_extensions": "true",
             "webview_height_ratio":"tall"
           },
           {
             "type":"web_url",
             "url":"https://outlook.office365.com/owa/",
+				    "messenger_extensions": "true",
             "title":"📧 Mail",
             "webview_height_ratio":"tall"
           },
            {
             "type":"web_url",
             "url":"https://student.etf.bg.ac.rs/",
+				    "messenger_extensions": "true",
             "title":"🇪 Student",
             "webview_height_ratio":"tall"
           }]

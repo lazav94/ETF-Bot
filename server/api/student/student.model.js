@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const studentSchema = mongoose.Schema({
     id: String,
-    image: {type: String, default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZHEA16ZXF_244FFAtOw2pmhUE7iR0ikbDm3UI_gRdFgWWHIz8zg' },
+    image: {type: String, default: 'https://cdn4.iconfinder.com/data/icons/professions-1-2/151/8-512.png' },
     verified: {type: Boolean, default: false},
     token: { type: String, default: ''},
     index: { type: String, default: '' },

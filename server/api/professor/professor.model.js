@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const professorSchema = mongoose.Schema({
     image: {
         type: String,
-        default: ''
+        default: 'https://cdn.iconscout.com/public/images/icon/premium/png-512/professor-avatar-teacher-scholar-manager-boss-professional-371c015c33da7fca-512x512.png'
     },
     firstName: {
         type: String,

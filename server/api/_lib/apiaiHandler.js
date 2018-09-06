@@ -2,6 +2,8 @@ const apiai = require('apiai');
 const app = apiai(process.env.APIAI_ACCESS_TOKEN);
 const stringSimilarity = require('string-similarity');
 
+const messanger = require('../bot/messanger');
+
 const {
     getCourseByID,
     getAllCoursesNamesAndCodes,
@@ -283,7 +285,8 @@ module.exports = apiaiHandler = (sender, text) => {
                     console.log('profesorOfficeResult', professorOfficeResult);
                     return resolve(professorOfficeResult);
                     break;
-
+                case 'etf_location':
+                    messanger.sendLocationButton(sender);
 
                 case 'input.unknown':
                 default:
