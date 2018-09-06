@@ -72,7 +72,7 @@ const conversation = async (event) => {
                 console.log('APIAI or something else!');
                 const response = await apiai(sender, text);
                 if(response && response !== '') {
-                    if(response !== 'etf_location' && response !== 'help'){
+                    if(response !== 'done') {
                         await sendTextMessage(sender, response);
                     }
                 } else {
@@ -250,6 +250,7 @@ const payloadHandler = async (sender, payload) => {
             break;
         case 'HELP':
             await help(sender);
+            break;
         default:
             console.error("Didnt recognize this payload:", payload);
             break;

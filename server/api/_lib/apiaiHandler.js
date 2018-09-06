@@ -287,10 +287,18 @@ module.exports = apiaiHandler = (sender, text) => {
                     break;
                 case 'etf_location':
                     await messanger.sendLocationButton(sender);
-                    resolve('etf_location');
+                    resolve('done');
                 case 'help':
                     await messanger.sendHelpButton(sender);
-                    resolve('help');
+                    resolve('done');
+                    break;
+                case 'thank_you':
+                case 'bye':
+                case 'input.welcome':
+                    const responseText = response.result.fulfillment.speech;
+                    console.log('responseText', responseText);
+                    await messanger.sendTextMessage(sender, responseText);
+                    resolve('done');
 					break;
                 case 'input.unknown':
                 default:
@@ -307,6 +315,9 @@ module.exports = apiaiHandler = (sender, text) => {
         request.end();
     });
 };
+
+
+apiaiHandler('123', 'Cao');
 
 
 // apiaiHandler('123', 'Gde mogu naci profesora Boska Nikolica?');
