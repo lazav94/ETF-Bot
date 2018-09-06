@@ -281,5 +281,6 @@ module.exports = {
     sendQuickReply,
     sendGenericTemplate,
     sendImage,
-    sendLocationButton
+    sendLocationButton,
+    sendHelpButton
 }
