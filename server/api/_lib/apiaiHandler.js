@@ -54,30 +54,35 @@ const apply = async () => {
 const content = async (course) => {
     console.log(`[ACTION] course_content -> param: ${course}`);
     const subject = await getBestMatch(course);
+    if(!subject) return 'None'
     return subject.content;
 };
 
 const espb = async (course) => {
     console.log(`[ACTION] course_esbp -> param: ${course}`);
     const subject = await getBestMatch(course);
+    if(!subject) return 'None'
     return `Pronadjeni predmet ${subject.name} nosi ${subject.esbp} ESPB.\nAko ovo nije predmet koji ste trazili pokusajte sa preciznijim imenom!`;
 };
 
 const goal = async (course) => {
     console.log(`[ACTION] course_goal -> param: ${course}`);
     const subject = await getBestMatch(course);
+    if(!subject) return 'None'
     return subject.goal;
 };
 
 const info = async (course) => {
     console.log(`[ACTION] course_info -> param: ${course}`);
     const subject = await getBestMatch(course);
+    if(!subject) return 'None'
     // TODO ovde treba sve i slika i sve i sajt
     return subject.info;
 };
 const passing = async (course) => {
     console.log(`[ACTION] course_passing -> param: ${course}`);
     const subject = await getBestMatch(course);
+    if(!subject) return 'None'
     return `Predmet ${subject.name}: ${await getHoursOfCourse(subject.hours)} i boduje se ${await getHowCourseIsScoring(subject.scoring)}`;
 };
 
@@ -210,7 +215,7 @@ module.exports = apiaiHandler = (sender, text) => {
                     console.log('Course', course);
                     if(!course) resolve('Nije pronadjen predmet za akciju', action);
                     const goalResult = await goal(course);
-                    console.log('result', goalResult)
+                    console.log('goalResult', goalResult)
                     return resolve(goalResult);
                     break;
                 case 'course_info':

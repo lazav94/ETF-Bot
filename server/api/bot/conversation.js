@@ -24,10 +24,9 @@ const conversation = async (event) => {
     const sender = event.sender.id;
     console.log('Sender', sender);
 
-    console.log('=============================')
-
-	console.log('EVent', event);
-	console.log('=============================')
+    // console.log('=============================')
+	// console.log('EVENT', event);
+	// console.log('=============================')
 
 
     if (event.message) {
@@ -72,10 +71,14 @@ const conversation = async (event) => {
             } else {
                 console.log('APIAI or something else!');
                 const response = await apiai(sender, text);
-                await sendTextMessage(sender, response);
-                if(text === 'info'){
-                    await sendGenericTemplate(sender, 'STUDENT_INFO');
+                if(response) {
+                    await sendTextMessage(sender, response);
+                } else {
+                    await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
                 }
+                // if(text === 'info'){
+                    // await sendGenericTemplate(sender, 'STUDENT_INFO');
+                // }
             }
         }
 
