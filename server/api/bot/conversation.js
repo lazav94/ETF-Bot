@@ -71,7 +71,7 @@ const conversation = async (event) => {
             } else {
                 console.log('APIAI or something else!');
                 const response = await apiai(sender, text);
-                if(response) {
+                if(response && response !== '') {
                     await sendTextMessage(sender, response);
                 } else {
                     await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
