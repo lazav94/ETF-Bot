@@ -289,7 +289,8 @@ module.exports = apiaiHandler = (sender, text) => {
                     await messanger.sendLocationButton(sender);
                     resolve('etf_location');
                 case 'help':
-					await messanger.sendHelpButton(sender);
+                    await messanger.sendHelpButton(sender);
+                    resolve('help');
 					break;
                 case 'input.unknown':
                 default:
