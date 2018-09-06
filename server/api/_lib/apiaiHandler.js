@@ -69,7 +69,7 @@ const goal = async (course) => {
     console.log(`[ACTION] course_goal -> param: ${course}`);
     const subject = await getBestMatch(course);
     if(!subject) return 'None'
-    return subject.goal;
+    return subject.goals;
 };
 
 const info = async (course) => {
@@ -256,7 +256,7 @@ module.exports = apiaiHandler = (sender, text) => {
         request.end();
     });
 };
-// apiaiHandler('123', 'test');
+apiaiHandler('123', 'cilj predmeta mata 1 ?');
 // apiaiHandler('123', 'Koliko espb nosi Kruska?');
 // apiaiHandler('123', 'opis o  PSZ?');
 
