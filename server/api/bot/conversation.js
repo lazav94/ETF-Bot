@@ -79,6 +79,8 @@ const conversation = async (event) => {
 
 
     } else if (event.postback) {
+        const student = await getStudentById(sender);
+
         const {
             postback
         } = event;
@@ -243,6 +245,7 @@ const payloadHandler = async (sender, payload) => {
 
 const getStarted = async sender => {
     console.log('Get started');
+
     await sendTextMessage(sender, 'Dobrodosli na ETF Bot! 🤖');
     await sendImage(sender, 'https://ocdn.eu/pulscms-transforms/1/tpPk9lMaHR0cDovL29jZG4uZXUvaW1hZ2VzL3B1bHNjbXMvWmpVN01EQV8vNGJlNDNhMTc5ZTFhYjk1YTJiNDlmNjlkZDlhYTBlYzguanBlZ5GTAs0C5ACBoTAB');
 
