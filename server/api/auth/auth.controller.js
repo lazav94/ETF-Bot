@@ -12,9 +12,9 @@ const login = async (req, res) => {
 
     console.log(`Email: ${email} password: ${password}`);
 
-    console.log(process.env.EMAIL);
+    console.log(process.env.AUTH_EMAIL);
     console.log(process.env.PASSWORD);
-    if (email === process.env.EMAIL) {
+    if (email === process.env.AUTH_EMAIL) {
         if (password === process.env.PASSWORD) {
             console.log('Render index');
             // TODO why this doesn't work

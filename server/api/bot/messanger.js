@@ -1,4 +1,5 @@
 const request = require('request');
+const dashbot = require('dashbot')(process.env.DASHBOT_API_KEY).facebook;
 
 const getStudentById = require('../student/student.controller').getStudentById;
 
@@ -52,9 +53,7 @@ const sendRequest = (messageData, sender, messageType) => {
                 console.error('Error: ', response.body.error);
                 reject(response.body.error);
             } else {
-                // if (process.env.ENV === 'production') {
-                // 	dashbot.logOutgoing(requestData, response.body);
-                // }
+                dashbot.logOutgoing(requestData, response.body);
                 resolve();
             }
         });

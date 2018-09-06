@@ -1,5 +1,8 @@
 const {conversation} = require('../conversation');
-
+const dashbot = require('dashbot')(process.env.DASHBOT_API_KEY).facebook;
+const {
+	pausedUsers
+} = require('../../_lib/dashbot');
 
 const verifyToken = (req, res) => {
 	try {
@@ -36,12 +39,10 @@ const startConversation = async (req, res) => {
 				for (let i = 0; i < data.length; i += 1) {
 					const event = data[i];
 					if (event) {
-						// if(process.env.ENV === 'production'){
-						// 	dashbot.logIncoming(req.body);
-						// }
-						// if (!pausedUsers[event.sender.id]) {
+						dashbot.logIncoming(req.body);
+						if (!pausedUsers[event.sender.id]) {
 							await conversation(event);
-						// }
+						}
 					}
 				}
 				res.sendStatus(200);

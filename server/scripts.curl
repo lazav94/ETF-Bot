@@ -70,9 +70,9 @@ curl -X POST -H "Content-Type: application/json" -d '{
           "type":"nested",
           "call_to_actions" :[
             {
-              "title":"🙍 Talk to Agent",
+              "title":"🎧 Pomoc",
               "type":"postback",
-              "payload": "CONTACT"
+              "payload": "HELP"
             },
             {
               "title":"🛍 My Account",

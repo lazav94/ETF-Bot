@@ -267,6 +267,17 @@ const getStarted = async sender => {
     } else {
         await sendTextMessage(sender, 'Kako bi nastavili sa radom ostavite nam Vasu email adresu');
     }
+};
+
+const help = async sender => {
+    try {
+		await sendTextMessage(sender, 'Neko ce Vam se uskoro javiti. Molimo sacekajte ⏲');
+		sendMail(process.env.EMAIL, 'Zahtev za pomoc | ETF BOT', `<b>Student sa facebook id ${sender} je potrebna pomoc
+		<a href='https://reports.dashbot.io/live/session/13894/${sender}'>GO TO DASHBOT</a></b>`);
+
+	} catch (error) {
+		console.error('Help error:', error);
+	}
 }
 
 const sendVerificationEmail = (sender, email) => {

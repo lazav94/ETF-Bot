@@ -6,8 +6,8 @@ var transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-           user: 'etf.bot.master@gmail.com',
-           pass: 'etfbot2018master'
+           user: process.env.EMAIL,
+           pass: process.env.EMAIL_PASS
        }
    });
 
@@ -27,7 +27,7 @@ var transporter = nodemailer.createTransport({
  const sendMail = (to, subject, html) => {
     return new Promise((resolve, reject) => {
         const mailOptions = {
-            from: 'etf.bot.master@gmail.com', // sender address
+            from: process.env.EMAIL, // sender address
             to, // list of receivers
             subject, // Subject line
             html// plain text body

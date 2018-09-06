@@ -2,6 +2,10 @@ const {
     catchErrors
 } = require("./api/_lib/ErrorHandler");
 
+const {
+	pause
+} = require('./api/_lib/dashbot');
+
 const webhookRoutes = require('./api/bot/webhook/webhookRoutes');
 const authRoutes = require('./api/auth/auth.routes');
 const studentRoutes = require('./api/student/student.routes');
@@ -32,6 +36,8 @@ module.exports = app => {
         res.render('index');
     });
 
+
+    app.post('/pause', pause);
 
 
     // app.use('/', startingRoutes)
