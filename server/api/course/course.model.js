@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const courseSchema = mongoose.Schema({
+    url: {
+        type: String,
+        default: ''
+    },
     code: {
         type: String,
         required: true,

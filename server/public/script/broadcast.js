@@ -57,4 +57,11 @@ $(document).ready(() => {
     });
 
 
+    $(".dropdown-menu li a").click(() => {
+        console.log('something')
+        $(".btn:first-child").text($(this).text());
+        $(".btn:first-child").val($(this).text());
+     });
+
+
 });

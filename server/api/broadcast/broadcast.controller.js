@@ -66,10 +66,14 @@ const broadcast = async (req, res) => {
     res.sendStatus(200);
 };
 
-
+const index = async (req, res) => {
+    const messages = await getAllMessages();
+    res.render('index', {title: "Title | Braodcast", messages });
+}
 
 
 module.exports = {
+    index,
     broadcast,
     getAllMessages
 }
