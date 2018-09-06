@@ -11,7 +11,7 @@ const getStudentById = async id => {
             console.log('student ', student);
 
             if (student) {
-                resolve(student);
+                return resolve(student);
             } else {
                 const getUserInfo = require('../bot/messanger').getUserInfo;
                 const user = await getUserInfo(id);
@@ -21,13 +21,14 @@ const getStudentById = async id => {
                     firstName: user.first_name,
 			        lastName: user.last_name
                 });
+                //5b913ab313966400044646b6 5b91395bbaa44f0004e9f54b
                 console.log('new student1' ,newStudent);
                 await newStudent.save();
                 console.log('new student2', newStudent)
-                resolve(newStudent);
+                return resolve(newStudent);
             }
         } catch (error) {
-            reject(error);
+            return reject(error);
         }
     });
 };
