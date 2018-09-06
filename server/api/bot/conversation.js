@@ -273,7 +273,7 @@ const help = async sender => {
     try {
 		await sendTextMessage(sender, 'Neko ce Vam se uskoro javiti. Molimo sacekajte ⏲');
 		sendMail(process.env.EMAIL, 'Zahtev za pomoc | ETF BOT', `<b>Student sa facebook id ${sender} je potrebna pomoc
-		<a href='https://reports.dashbot.io/live/session/13894/${sender}'>GO TO DASHBOT</a></b>`);
+		<a href='https://reports.dashbot.io/live/session/15834/${sender}'>GO TO DASHBOT</a></b>`);
 
 	} catch (error) {
 		console.error('Help error:', error);
