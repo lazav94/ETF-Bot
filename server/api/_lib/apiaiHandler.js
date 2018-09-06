@@ -167,10 +167,31 @@ const getProfessorBestMatch = async (name) => {
     return bestMatchingProfessor;
 }
 
+const professorEmail = async (name) => {
+    const professor = await getProfessorBestMatch(name);
+    if(!professor) return 'No professor found';
+    return professor.email;
+  }
+const professorPhone = async (name) => {
+    const professor = await getProfessorBestMatch(name);
+    if(!professor) return 'No professor found';
+    return professor.phone;
+  }
+
 const professorInfo = async name => {
     let professor = await getProfessorBestMatch(name);
     return `${professor.image} ${professor.title} ${professor.firstName} ${professor.lastName} ${professor.email} ${professor.phone} ${professor.office}`;
 };
+
+const professorOffice = async (name) => {
+    const professor = await getProfessorBestMatch(name);
+    if(!professor) return 'No professor found';
+    return professor.office;
+}
+
+
+
+
 
 
 module.exports = apiaiHandler = (sender, text) => {
@@ -234,13 +255,36 @@ module.exports = apiaiHandler = (sender, text) => {
                     console.log('passingResult', passingResult);
                     return resolve(passingResult);
                     break;
+                case 'professor_email':
+                    professorName = response.result.parameters.professor_name;
+                    console.log('Professor name:', professorName);
+                    const professorEmailResult = await professorEmail(response.result.parameters.professor_name);
+                    console.log('profesorEmailResult', professorEmailResult);
+                    return resolve(professorEmailResult);
+                    break;
                 case 'professor_info':
-                    console.log('PROFESSOR INFO', response.result.parameters.any);
-                    const professorInfoResult = await professorInfo(response.result.parameters.any);
-                    console.log(professorInfoResult);
-                    // console.log('result', )
+                    professorName = response.result.parameters.professor_name;
+                    console.log('Professor name:', professorName);
+                    const professorInfoResult = await professorInfo(response.result.parameters.professor_name);
+                    console.log('profesorInfoResult', professorInfoResult);
                     return resolve(professorInfoResult);
                     break;
+                case 'professor_phone':
+                    professorName = response.result.parameters.professor_name;
+                    console.log('Professor name:', professorName);
+                    const professorPhoneResult = await professorPhone(response.result.parameters.professor_name);
+                    console.log('profesorPhoneResult', professorPhoneResult);
+                    return resolve(professorPhoneResult);
+                    break;
+                case 'professor_office':
+                    professorName = response.result.parameters.professor_name;
+                    console.log('Professor name:', professorName);
+                    const professorOfficeResult = await professorOffice(response.result.parameters.professor_name);
+                    console.log('profesorOfficeResult', professorOfficeResult);
+                    return resolve(professorOfficeResult);
+                    break;
+
+
                 case 'input.unknown':
                 default:
                     console.log("DEFAULT INTENT", action);
@@ -256,7 +300,15 @@ module.exports = apiaiHandler = (sender, text) => {
         request.end();
     });
 };
-apiaiHandler('123', 'cilj predmeta mata 1 ?');
+
+// apiaiHandler('123', 'Gde mogu naci profesora Boska Nikolica?');
+// apiaiHandler('123', 'telefon profesora Boska Nikolica?');
+// apiaiHandler('123', 'informacija o profesoru Bosku Nikolicu?');
+
+apiaiHandler('123', 'email profesora Boska nikolica?');
+
+
+// apiaiHandler('123', 'cilj predmeta mata 1 ?');
 // apiaiHandler('123', 'Koliko espb nosi Kruska?');
 // apiaiHandler('123', 'opis o  PSZ?');
 

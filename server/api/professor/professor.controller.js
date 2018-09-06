@@ -5,7 +5,7 @@ const getProfessorByID = async id => Professor.findById(id);
 const findProfessorByName = async name => {
     const professors = await getAllProfessors();
     const professor = professors.map(professor => {
-        if(professor.firstName === name ||  professor.firstName === name || `${professor.firstName} ${professor.lastName}` === name || `${professor.lastName} ${professor.firstName}` === name)
+        if(professor.firstName === name ||  professor.lastName === name || `${professor.firstName} ${professor.lastName}` === name || `${professor.lastName} ${professor.firstName}` === name)
             return professor;
     }).filter(professor => professor);
 
