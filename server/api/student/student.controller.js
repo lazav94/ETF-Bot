@@ -21,8 +21,9 @@ const getStudentById = async id => {
                     firstName: user.first_name,
 			        lastName: user.last_name
                 });
+                console.log('new student1' ,newStudent);
                 await newStudent.save();
-                console.log('new student', newStudent)
+                console.log('new student2', newStudent)
                 resolve(newStudent);
             }
         } catch (error) {

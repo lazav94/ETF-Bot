@@ -233,8 +233,6 @@ const payloadHandler = async (sender, payload) => {
     console.log('Payload Handler', payload);
     const student = await getStudentById(sender);
 
-    console.log('STUDENT', student);
-
     switch (payload) {
         case 'GET_STARTED':
             await getStarted(sender);

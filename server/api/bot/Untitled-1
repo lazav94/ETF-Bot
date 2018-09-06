@@ -1,0 +1,72 @@
+2018-09-06T14:28:25.030599+00:00 app[web.1]: Start conversation
+2018-09-06T14:28:25.030677+00:00 app[web.1]: Conversation
+2018-09-06T14:28:25.030776+00:00 app[web.1]: Sender 1898032266921906
+2018-09-06T14:28:25.030878+00:00 app[web.1]: Payload Handler GET_STARTED
+2018-09-06T14:28:25.031023+00:00 app[web.1]: getStudentById 1898032266921906
+2018-09-06T14:28:25.035578+00:00 app[web.1]: student  null
+2018-09-06T14:28:25.408224+00:00 app[web.1]: user { first_name: 'Lazar',
+
+2018-09-06T14:28:25.963603+00:00 app[web.1]: user { first_name: 'Lazar',
+
+2018-09-06T14:28:25.963613+00:00 app[web.1]: last_name: 'Vasic',
+2018-09-06T14:28:25.963615+00:00 app[web.1]: profile_pic: 'https://platform-lookaside.fbsbx.com/platform/profilepic/?psid=1898032266921906&width=1024&ext=1538836105&hash=AeQxC7kzaEEzQYgS',
+2018-09-06T14:28:25.963616+00:00 app[web.1]: id: '1898032266921906' }
+2018-09-06T14:28:25.967184+00:00 app[web.1]: Messenger error { MongoError: E11000 duplicate key error index: etf-bot.students.$code_1 dup key: { : null }
+2018-09-06T14:28:25.967187+00:00 app[web.1]: at Function.create (/app/node_modules/mongodb-core/lib/error.js:43:12)
+2018-09-06T14:28:25.967188+00:00 app[web.1]: at toError (/app/node_modules/mongodb/lib/utils.js:149:22)
+2018-09-06T14:28:25.967190+00:00 app[web.1]: at coll.s.topology.insert (/app/node_modules/mongodb/lib/operations/collection_ops.js:828:39)
+2018-09-06T14:28:25.967191+00:00 app[web.1]: at /app/node_modules/mongodb-core/lib/connection/pool.js:532:18
+2018-09-06T14:28:25.967195+00:00 app[web.1]: at _combinedTickCallback (internal/process/next_tick.js:131:7)
+2018-09-06T14:28:25.967196+00:00 app[web.1]: at process._tickCallback (internal/process/next_tick.js:180:9)
+2018-09-06T14:28:25.967198+00:00 app[web.1]: driver: true,
+2018-09-06T14:28:25.967199+00:00 app[web.1]: name: 'MongoError',
+2018-09-06T14:28:25.967201+00:00 app[web.1]: index: 0,
+2018-09-06T14:28:25.967202+00:00 app[web.1]: code: 11000,
+2018-09-06T14:28:25.967203+00:00 app[web.1]: errmsg: 'E11000 duplicate key error index: etf-bot.students.$code_1 dup key: { : null }',
+2018-09-06T14:28:25.967205+00:00 app[web.1]: [Symbol(mongoErrorContextSymbol)]: {} }
+2018-09-06T14:28:26.125614+00:00 app[web.1]: Start conversation
+2018-09-06T14:28:26.125667+00:00 app[web.1]: Conversation
+2018-09-06T14:28:26.125737+00:00 app[web.1]: Sender 1898032266921906
+2018-09-06T14:28:26.125810+00:00 app[web.1]: Payload Handler GET_STARTED
+2018-09-06T14:28:26.125905+00:00 app[web.1]: getStudentById 1898032266921906
+2018-09-06T14:28:26.127758+00:00 app[web.1]: student  null
+2018-09-06T14:28:25.408241+00:00 app[web.1]: last_name: 'Vasic',
+2018-09-06T14:28:25.408243+00:00 app[web.1]: profile_pic: 'https://platform-lookaside.fbsbx.com/platform/profilepic/?psid=1898032266921906&width=1024&ext=1538836105&hash=AeQxC7kzaEEzQYgS',
+2018-09-06T14:28:25.408244+00:00 app[web.1]: id: '1898032266921906' }
+2018-09-06T14:28:25.424215+00:00 app[web.1]: Messenger error { MongoError: E11000 duplicate key error index: etf-bot.students.$code_1 dup key: { : null }
+2018-09-06T14:28:25.424218+00:00 app[web.1]: at Function.create (/app/node_modules/mongodb-core/lib/error.js:43:12)
+2018-09-06T14:28:25.424220+00:00 app[web.1]: at toError (/app/node_modules/mongodb/lib/utils.js:149:22)
+2018-09-06T14:28:25.424221+00:00 app[web.1]: at coll.s.topology.insert (/app/node_modules/mongodb/lib/operations/collection_ops.js:828:39)
+2018-09-06T14:28:25.424222+00:00 app[web.1]: at /app/node_modules/mongodb-core/lib/connection/pool.js:532:18
+2018-09-06T14:28:25.424223+00:00 app[web.1]: at _combinedTickCallback (internal/process/next_tick.js:131:7)
+2018-09-06T14:28:25.424225+00:00 app[web.1]: at process._tickCallback (internal/process/next_tick.js:180:9)
+2018-09-06T14:28:25.424227+00:00 app[web.1]: driver: true,
+2018-09-06T14:28:25.424228+00:00 app[web.1]: name: 'MongoError',
+2018-09-06T14:28:25.424229+00:00 app[web.1]: index: 0,
+2018-09-06T14:28:25.424230+00:00 app[web.1]: code: 11000,
+2018-09-06T14:28:25.424232+00:00 app[web.1]: errmsg: 'E11000 duplicate key error index: etf-bot.students.$code_1 dup key: { : null }',
+2018-09-06T14:28:25.424233+00:00 app[web.1]: [Symbol(mongoErrorContextSymbol)]: {} }
+2018-09-06T14:28:25.572749+00:00 app[web.1]: Start conversation
+2018-09-06T14:28:25.572849+00:00 app[web.1]: Conversation
+2018-09-06T14:28:25.572937+00:00 app[web.1]: Sender 1898032266921906
+2018-09-06T14:28:25.573019+00:00 app[web.1]: Payload Handler GET_STARTED
+2018-09-06T14:28:25.573113+00:00 app[web.1]: getStudentById 1898032266921906
+2018-09-06T14:28:25.575540+00:00 app[web.1]: student  null
+
+2018-09-06T14:28:26.524237+00:00 app[web.1]: user { first_name: 'Lazar',
+2018-09-06T14:28:26.524249+00:00 app[web.1]: last_name: 'Vasic',
+2018-09-06T14:28:26.524252+00:00 app[web.1]: profile_pic: 'https://platform-lookaside.fbsbx.com/platform/profilepic/?psid=1898032266921906&width=1024&ext=1538836106&hash=AeT7e725pJKR6KtC',
+2018-09-06T14:28:26.524253+00:00 app[web.1]: id: '1898032266921906' }
+2018-09-06T14:28:26.527689+00:00 app[web.1]: Messenger error { MongoError: E11000 duplicate key error index: etf-bot.students.$code_1 dup key: { : null }
+2018-09-06T14:28:26.527692+00:00 app[web.1]: at Function.create (/app/node_modules/mongodb-core/lib/error.js:43:12)
+2018-09-06T14:28:26.527694+00:00 app[web.1]: at toError (/app/node_modules/mongodb/lib/utils.js:149:22)
+2018-09-06T14:28:26.527695+00:00 app[web.1]: at coll.s.topology.insert (/app/node_modules/mongodb/lib/operations/collection_ops.js:828:39)
+2018-09-06T14:28:26.527696+00:00 app[web.1]: at /app/node_modules/mongodb-core/lib/connection/pool.js:532:18
+2018-09-06T14:28:26.527698+00:00 app[web.1]: at _combinedTickCallback (internal/process/next_tick.js:131:7)
+2018-09-06T14:28:26.527699+00:00 app[web.1]: at process._tickCallback (internal/process/next_tick.js:180:9)
+2018-09-06T14:28:26.527701+00:00 app[web.1]: driver: true,
+2018-09-06T14:28:26.527702+00:00 app[web.1]: name: 'MongoError',
+2018-09-06T14:28:26.527703+00:00 app[web.1]: index: 0,
+2018-09-06T14:28:26.527705+00:00 app[web.1]: code: 11000,
+2018-09-06T14:28:26.527706+00:00 app[web.1]: errmsg: 'E11000 duplicate key error index: etf-bot.students.$code_1 dup key: { : null }',
+2018-09-06T14:28:26.527708+00:00 app[web.1]: [Symbol(mongoErrorContextSymbol)]: {} }

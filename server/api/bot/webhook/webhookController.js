@@ -15,7 +15,11 @@ const verifyToken = (req, res) => {
 };
 
 const startConversation = async (req, res) => {
-    console.log("Start conversation");
+	console.log("Start conversation");
+	console.log('=============================')
+
+	console.log('EVent', event);
+	console.log('=============================')
 	try {
 		if (req.body.entry) {
 			let data;
