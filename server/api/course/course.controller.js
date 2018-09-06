@@ -3,6 +3,9 @@ const Course = require('./course.model');
 
 const getAllCourses = async () => Course.find();
 
+const getAllCoursesByYear = async (year) => Course.find(year);
+
+
 const getCourseByID = async (id) => Course.findById(id);
 
 const getAllCoursesNamesAndCodes = async () => {

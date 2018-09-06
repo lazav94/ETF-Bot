@@ -16,6 +16,8 @@ block content
         th(scope='col') Phone
         th(scope='col') Year
         th(scope='col') Field
+        th(scope='col') GPA
+
 
     tbody
       each student in students
@@ -32,3 +34,5 @@ block content
           th.align-middle(scope='row')= student.phone
           th.align-middle(scope='row')= student.year
           th.align-middle(scope='row')= student.field
+          th.align-middle(scope='row')= student.gpa
+

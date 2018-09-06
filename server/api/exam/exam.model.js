@@ -2,9 +2,18 @@ const mongoose = require('mongoose');
 
 
 const examSchema = mongoose.Schema({
-    // datum odrzavanja
-    // prijavljeni studenti
-    // po
+    date: {
+        type: Date,
+        required: true
+    },
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course'
+    },
+    students: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Student'
+    }]
 });
 
 module.exports = mongoose.model('Exam', examSchema);

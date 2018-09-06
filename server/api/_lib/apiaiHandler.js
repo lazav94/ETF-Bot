@@ -212,7 +212,13 @@ module.exports = apiaiHandler = (sender, text) => {
             console.log('ACTION: ', action);
 
             let course = '';
+
             switch (action) {
+                case 'course_year':
+                    const year = response.result.parameters.year;
+                    console.log('year', year);
+                    resolve('TODO poslati sve predmete za neku godinu');
+                    break;
                 case 'course_apply':
                     // const applyResult = await ();
                     return resolve('TODO mozete polagati sledce predmete!');
@@ -317,8 +323,8 @@ module.exports = apiaiHandler = (sender, text) => {
 };
 
 
-apiaiHandler('123', 'Cao');
 
+apiaiHandler('123', 'Predmeti II godine?');
 
 // apiaiHandler('123', 'Gde mogu naci profesora Boska Nikolica?');
 // apiaiHandler('123', 'telefon profesora Boska Nikolica?');
