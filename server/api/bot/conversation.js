@@ -79,8 +79,6 @@ const conversation = async (event) => {
 
 
     } else if (event.postback) {
-        const student = await getStudentById(sender);
-
         const {
             postback
         } = event;
@@ -233,9 +231,13 @@ const colectingStudentDate = async (sender, text) => {
 // Payload haneler
 const payloadHandler = async (sender, payload) => {
     console.log('Payload Handler', payload);
+    const student = await getStudentById(sender);
+
+    console.log('STUDENT', student);
+
     switch (payload) {
         case 'GET_STARTED':
-            getStarted(sender);
+            await getStarted(sender);
             break;
         default:
             console.error("Didnt recognize this payload:", payload);
