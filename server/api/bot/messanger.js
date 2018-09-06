@@ -211,9 +211,27 @@ const sendLocationButton = async (sender) => {
 		}
 	};
     await sendRequest(messageData, sender);
-
 }
 // sendLocationButton('1898032266921906');
+const sendHelpButton =  async (sender) => {
+    const messageData = {
+		attachment: {
+			type: 'template',
+			payload: {
+				template_type: 'button',
+				text: 'Kliknite na ⤵ dugme ispod kako bi razovarali sa pravom osobom!',
+				buttons: [
+                    {
+                        title: '☎️ Pricaj sa osobom',
+                        type: 'postback',
+                        payload: 'HELP'
+                    }
+                ]
+			}
+		}
+	};
+    await sendRequest(messageData, sender);
+}
 
 const sendMessage = async (sender, message) => {
     switch (message.type) {
