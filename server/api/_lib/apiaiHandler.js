@@ -307,6 +307,7 @@ module.exports = apiaiHandler = (sender, text) => {
     });
 };
 
+
 // apiaiHandler('123', 'Gde mogu naci profesora Boska Nikolica?');
 // apiaiHandler('123', 'telefon profesora Boska Nikolica?');
 // apiaiHandler('123', 'informacija o profesoru Bosku Nikolicu?');
