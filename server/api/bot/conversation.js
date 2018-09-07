@@ -26,7 +26,7 @@ const {
 // sendMail('lazav94@gmail.com', 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML('123'));
 
 
-exports = applyFlag = false;
+var applyFlag = true;
 const conversation = async (event) => {
   try {
 
