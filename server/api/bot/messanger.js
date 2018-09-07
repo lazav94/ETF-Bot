@@ -247,7 +247,7 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
     messageData.attachment.payload.elements.push({
       title: `${professor.title} ${professor.firstName} ${professor.lastName}`,
       subtitle: `Email: ${professor.email}\nPhone: ${professor.phone}\nOffice:  ${professor.office}`,
-      image_url: `professor.image,
+      image_url: professor.image,
       buttons: [
         {
           type: 'postback',
