@@ -5,7 +5,7 @@ const getAllCourses = async () => Course.find();
 
 const getAllCoursesByYear = async (year) => Course.find({year});
 
-const getAllCoursesByModul = async (module) => Course.find({module : {$regex : module }});
+const getAllCoursesByModul = async (module) => Course.find({modul : {$regex : module }});
 
 
 const getCourseByID = async (id) => Course.findById(id);

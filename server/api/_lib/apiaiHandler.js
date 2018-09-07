@@ -240,6 +240,7 @@ const apiaiHandler = (sender, text) => {
           const modul = response.result.parameters.modul;
           console.log('modul', modul);
           const coursesModul = await getAllCoursesByModul(modul);
+          console.log(coursesModul);
           await messanger.sendCourseGenericTemplate(sender, coursesModul);
           resolve('done');
           break;
@@ -289,7 +290,6 @@ const apiaiHandler = (sender, text) => {
           break;
         case 'course_passing':
           course = response.result.parameters.course;
-          console.log('Course', course);
           if (!course) resolve('Nije pronadjen predmet za akciju', action);
           const passingResult = await passing(course);
           console.log('passingResult', passingResult);
@@ -382,6 +382,8 @@ const apiaiHandler = (sender, text) => {
     }
   });
 };
+
+apiaiHandler('1898032266921906', 'Predmeti na RTI');
 
 // apiaiHandler('1898032266921906', 'Kada pocinje januarski rok?');
 
