@@ -76,13 +76,13 @@ const applyExam = async (id, courseId) => {
     }).populate('exams.exam').exec();
 
     if (student) {
-      console.log('ID');
       console.log('Student', student.firstName);
       // console.log('Exams', student.exams);
       const exams = student.exams
         .filter(e => e.status === '-')
         .map(e => e.exam);
-      const courses = await Promise.all(exams.map(async e => {
+      await Promise.all(exams.map(async e => {
+        console.log(e.course, courseId);
         if (e.course === courseId) {
           e.status = 'PRIJAVIO';
           console.log(e)
