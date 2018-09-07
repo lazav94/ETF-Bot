@@ -373,7 +373,6 @@ const consultation = async (sender, professorId) => {
   const professor = await professorController.getProfessorByID(professorId);
   await sendTextMessage(sender, 'TODO');
 };
-// courses('1898032266921906');
 
 const applyRoute = async (req, res) => {
   applyFlag = req.body.apply === 'true';
