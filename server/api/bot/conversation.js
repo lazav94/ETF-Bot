@@ -269,22 +269,26 @@ const payloadHandler = async (sender, payload) => {
     await help(sender);
     break;
   default:
-    if(payload.includes('COURSE/')){
+    if(payload.includes('COURSE')){
         const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
         const courseId = payload.slice(payload.lastIndexOf('/') + 1);
         console.log('ACTION', action);
         console.log(courseId);
-        if(action === 'GOALS') {
+        if(action === ''){
+          await courses(sender);
+        } else if(action === 'GOALS') {
           console.log("GOALS");
           await goals(sender, courseId);
         } else if(action === 'CONTENT') {
           console.log("CONTENT");
           await content(sender, courseId);
         }
-    } else if(payload.includes('PROFESSOR/')) {
+    } else if(payload.includes('PROFESSOR')) {
       const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
       const professorId = payload.slice(payload.lastIndexOf('/') + 1);
-      if(action === 'CONTACT'){
+      if(action === ''){
+        await professors(sender);
+      } else if(action === 'CONTACT'){
         await contact(sender, professorId);
       } else if(action === 'CONSULTATION'){
         await consultation(sender, professorId);

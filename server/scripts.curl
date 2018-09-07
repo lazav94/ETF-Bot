@@ -70,27 +70,33 @@ curl -X POST -H "Content-Type: application/json" -d '{
           "type":"nested",
           "call_to_actions" :[
             {
-              "title":"🎧 Pomoc",
-              "type":"postback",
-              "payload": "HELP"
-            },
-            {
               "title":"🛍 My Account",
               "type":"nested",
               "call_to_actions" :[
                 {
                   "title":"🎁 My Info",
                   "type": "postback",
-                  "payload": "ORDERS"
+                  "payload": "INFO"
                 },
                 {
-                    "title":"🛒 Subject",
+                    "title":"📚 Predmeti",
                     "type":"postback",
-                    "payload": "CHECKOUT"
+                    "payload": "COURSES"
+                },
+                {
+                    "title":"📚 Profesori",
+                    "type":"postback",
+                    "payload": "PROFESSORS"
                 }
+
               ]
             }
         ]
+        },
+        {
+              "title":"🎧 Pomoc",
+              "type":"postback",
+              "payload": "HELP"
         }
     ]
     }
