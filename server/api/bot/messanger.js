@@ -242,7 +242,7 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
       }
     }
   };
-  professors.forEach((course, index) => {
+  professors.forEach((professor, index) => {
     messageData.attachment.payload.elements.push({
       title: `${professors.title} ${professors.firstName}${professors.lastName}`,
       subtitle: `ESBP: ${professors.espb} Status: ${professors.status}`,
@@ -250,13 +250,13 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
       buttons: [
         {
           type: 'postback',
-          title: 'Start Chatting',
-          payload: `PROFESSOR_CONTACT/${course.goals}`
+          title: 'Contact',
+          payload: `PROFESSOR_CONTACT/${professor._id}`
         },
         {
           type: 'postback',
-          title: 'Start Chatting',
-          payload: `CONSULTATION/${professor_id}`
+          title: 'Konsultacije',
+          payload: `CONSULTATION/${professor._id}`
         }
       ]
     });

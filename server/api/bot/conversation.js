@@ -1,4 +1,4 @@
-var validator = require('validator');
+const validator = require('validator');
 const uuidv4 = require('uuid/v4');
 
 const {
@@ -281,6 +281,14 @@ const payloadHandler = async (sender, payload) => {
           console.log("CONTENT");
           await content(sender, courseId);
         }
+    } else if(payload.includes('PROFESSOR/')) {
+      const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
+      const professorId = payload.slice(payload.lastIndexOf('/') + 1);
+      if(action === 'CONTACT'){
+        await contact(sender, professorId);
+      } else if(action === 'CONSULTATION'){
+        await consultation(sender, professorId);
+      }
     } else {
       console.error('Didnt recognize this payload:', payload);
     }
@@ -342,6 +350,15 @@ const professors = async sender => {
     console.error('Professors error:', error);
   }
 };
+
+const contact = async (sender, professorId) => {
+  const professor = await professorController.getProfessorByID(professorId);
+  await sendTextMessage(sender, `Email: ${professor.email}\nPhone${professor.phone}\nOffice:${professor.office}`);
+}
+const consultation = async (sender, professorId) => {
+  const professor = await professorController.getProfessorByID(professorId);
+  await sendTextMessage(sender, `TODO`);
+}
 // courses('1898032266921906');
 
 
