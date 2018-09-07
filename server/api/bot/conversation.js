@@ -353,7 +353,7 @@ const professors = async sender => {
 
 const contact = async (sender, professorId) => {
   const professor = await professorController.getProfessorByID(professorId);
-  await sendTextMessage(sender, `Email: ${professor.email}\nPhone${professor.phone}\nOffice:${professor.office}`);
+  await sendTextMessage(sender, `Email: ${professor.email}\nPhone: ${professor.phone}\nOffice: ${professor.office}`);
 }
 const consultation = async (sender, professorId) => {
   const professor = await professorController.getProfessorByID(professorId);

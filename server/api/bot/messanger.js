@@ -231,7 +231,8 @@ const sendCourseGenericTemplate = async (sender, courses) => {
 
 const sendProffesorGenericTemplate = async (sender, professors) => {
   professors = professors.slice(0,10);
-  console.log(professors)
+  console.log(professors);
+
   const messageData = {
     attachment: {
       type: 'template',
@@ -242,10 +243,10 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
       }
     }
   };
-  professors.forEach((professor, index) => {
+  await Promise.all(professors.map((professor, index) => {
     messageData.attachment.payload.elements.push({
-      title: `${professors.title} ${professors.firstName}${professors.lastName}`,
-      subtitle: `${professors.office}`,
+      title: `${professors.title} ${professors.firstName} ${professors.lastName}`,
+      subtitle: professors.office,
       image_url: professors.image,
       buttons: [
         {
@@ -260,7 +261,7 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
         }
       ]
     });
-  });
+  }));
   await sendRequest(messageData, sender);
 };
 
