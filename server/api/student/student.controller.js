@@ -67,7 +67,6 @@ const getApplyExam = async id => {
   }
 
 };
-getApplyExam();
 
 const index = async (req, res) => {
   console.log('Render student page');
