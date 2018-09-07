@@ -76,8 +76,8 @@ const conversation = async (event) => {
         await colectingStudentDate(sender, text);
       } else {
         if(text === 'suncica'){
-          await messanger.sendTextMessage(sender, 'FT1P');
-          await messanger.sendImage(sender, 'https://image.ibb.co/bLDMxz/suncica.jpg');
+          await sendTextMessage(sender, 'FT1P');
+          await sendImage(sender, 'https://image.ibb.co/bLDMxz/suncica.jpg');
           return;
         }
         if(text === 'info'){
