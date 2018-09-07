@@ -82,7 +82,7 @@ const applyExam = async (id, courseId) => {
         .filter(e => e.status === '-');
 
       await Promise.all(exams.map(async e => {
-        console.log(e.course.toString(), courseId);
+        console.log(e.exam.course.toString(), courseId);
         console.log(typeof e.exam.course, typeof courseId);
         console.log(typeof e.exam.course, typeof courseId);
         console.log(e.exam.course.toString().length, courseId.length);
