@@ -75,11 +75,16 @@ const conversation = async (event) => {
       if(needToCollectInfomation(student)){
         await colectingStudentDate(sender, text);
       } else {
+        if(text === 'suncica'){
+          await messanger.sendTextMessage(sender, 'FT1P');
+          await messanger.sendImage(sender, 'https://image.ibb.co/bLDMxz/suncica.jpg');
+          return;
+        }
         if(text === 'info'){
           await sendGenericTemplate(sender, 'STUDENT_INFO');
           return;
         }
-        if(text === 'cc'){
+        else if(text === 'cc'){
           await courses(sender);
           return;
         }

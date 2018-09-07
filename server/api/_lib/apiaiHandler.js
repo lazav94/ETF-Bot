@@ -307,12 +307,6 @@ const apiaiHandler = (sender, text) => {
         await messanger.sendTextMessage(sender, responseText);
         resolve('done');
         break;
-      case 'suncica':
-        console.log('speech', response.result.fulfillment.speech.toString());
-        await messanger.sendTextMessage(sender, response.result.fulfillment.speech.toString());
-        await messanger.sendImage(sender, 'https://image.ibb.co/bLDMxz/suncica.jpg');
-        resolve('done');
-        break;
       case 'input.unknown':
       default:
         console.log('DEFAULT INTENT', action);
