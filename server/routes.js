@@ -6,7 +6,7 @@ const {
   pause
 } = require('./api/_lib/dashbot');
 
-const apply = require('./api/bot/conversation').applyFlag;
+var apply = require('./api/bot/conversation').applyFlag;
 
 
 const webhookRoutes = require('./api/bot/webhook/webhookRoutes');
