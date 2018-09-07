@@ -5,6 +5,7 @@ const {
   getAllStudentsID,
   getAllStudentsByField
 } = require('../student/student.controller');
+const apply = require('../bot/conversation').applyFlag;
 
 const Broadcast = require('./broadcast.model');
 
@@ -35,7 +36,7 @@ const broadcastMessage = async (message, modul) => {
   })).save();
 };
 
-const createReminder = (message, date) => {
+const createReminder = (message, date, modul) => {
 
   console.log('Cron job created for', new moment(new Date(date)).toDate());
 
@@ -71,7 +72,7 @@ const broadcast = async (req, res) => {
 
   if (reminderOn === 'true') {
     console.log('Creating timed message');
-    createReminder(message, date);
+    createReminder(message, date, modul);
   } else {
     console.log('Sending messages to all user');
     broadcastMessage(message, modul);
@@ -83,7 +84,8 @@ const index = async (req, res) => {
   const messages = await getAllMessages();
   res.render('index', {
     title: 'Title | Braodcast',
-    messages
+    messages,
+    apply
   });
 };
 

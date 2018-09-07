@@ -403,6 +403,8 @@ const fillExamCollection = async () => {
 
 
 const fillExamPeriodCollection = async () => {
+  await ExamPeriod.collection.drop();
+
   const septembarExamPeriod = new ExamPeriod({
     name: 'Septembarski',
     startDate: moment().add(5, 'days').toDate(),
@@ -414,11 +416,29 @@ const fillExamPeriodCollection = async () => {
 };
 
 
+const giveMeExams = async () => {
+  const lazarVasic = await Student.findOne({firstName: 'Lazar'}).populate('exams.exam');
+  const examPSZ = await Exam.findById('5b929892ee7d426a89feb0e9');
+
+
+  console.log(lazarVasic);
+
+  // lazarVasic.exams[0] = { };
+  // lazarVasic.exams[0].status = '-';
+  // lazarVasic.exams[0].exam = examPSZ;
+  // await lazarVasic.save();
+  // console.log(lazarVasic.exams);
+
+};
+// giveMeExams();
+
 // fillCourseCollection();
 // fillProfessorsCollection();
 // fillStudentCollection();
 // fillExamCollection();
-fillExamPeriodCollection();
+// fillExamPeriodCollection();
+
+
 
 
 module.exports = {

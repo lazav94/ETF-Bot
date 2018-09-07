@@ -190,7 +190,7 @@ const sendGenericTemplate = async (sender, type) => {
 };
 
 
-const sendCourseGenericTemplate = async (sender, courses) => {
+const sendCourseGenericTemplate = async (sender, courses, apply) => {
   // TODO fix this
   courses = courses.slice(0,10);
   const messageData = {
@@ -208,12 +208,13 @@ const sendCourseGenericTemplate = async (sender, courses) => {
       title: `${course.name}`,
       subtitle: `Sifra: ${course.code}\nESBP: ${course.esbp} \nStatus: ${course.status}\nYear: ${course.year}`,
       // image_url:
+      default_action: {
+        type: 'web_url',
+        url: course.url,
+        messenger_extensions: false,
+        webview_height_ratio: 'tall'
+      },
       buttons: [
-        {
-          type: 'web_url',
-          url: course.url,
-          title: '📃 Sajt predmeta'
-        },
         {
           type: 'postback',
           title: 'Cilj predemeta ',
@@ -223,7 +224,20 @@ const sendCourseGenericTemplate = async (sender, courses) => {
           type: 'postback',
           title: 'Sadrzaj predmeta ',
           payload: `COURSE/CONTENT/${course._id}`
-        }
+        },
+        ...((apply) ?
+          [{
+            type: 'postback',
+            title: 'Prijavi predmet',
+            payload: `COURSE/APPLY/${course._id}`
+          }]
+          :
+          [{
+            type: 'web_url',
+            url: course.url,
+            title: '📃 Sajt predmeta'
+          }]
+        )
       ]
     });
   });

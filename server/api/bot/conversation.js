@@ -25,6 +25,8 @@ const {
 } = require('../auth/auth.controller');
 // sendMail('lazav94@gmail.com', 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML('123'));
 
+
+let applyFlag = false;
 const conversation = async (event) => {
   try {
 
@@ -79,11 +81,6 @@ const conversation = async (event) => {
           await colectingStudentDate(sender, text);
         } else {
 
-          // if (text === 'suncica') {
-          //   await sendTextMessage(sender, 'FT1P');
-          //   await sendImage(sender, 'https://image.ibb.co/bLDMxz/suncica.jpg');
-          //   return;
-          // }
           if (text === 'info') {
             await sendGenericTemplate(sender, 'STUDENT_INFO');
             return;
@@ -268,46 +265,46 @@ const payloadHandler = async (sender, payload) => {
   const student = await getStudentById(sender);
 
   switch (payload) {
-    case 'GET_STARTED':
-      await getStarted(sender);
-      break;
-    case 'HELP':
-      await help(sender);
-      break;
-    case 'INFO':
-      await sendGenericTemplate(sender, 'STUDENT_INFO');
-      break;
-    case 'COURSES':
-      await courses(sender);
-      break;
-    case 'PROFESSORS':
-      await professors(sender);
-      break;
-    default:
-      if (payload.includes('COURSE/')) {
-        const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
-        const courseId = payload.slice(payload.lastIndexOf('/') + 1);
-        console.log('ACTION', action);
-        console.log(courseId);
-        if (action === 'GOALS') {
-          console.log("GOALS");
-          await goals(sender, courseId);
-        } else if (action === 'CONTENT') {
-          console.log("CONTENT");
-          await content(sender, courseId);
-        }
-      } else if (payload.includes('PROFESSOR/')) {
-        const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
-        const professorId = payload.slice(payload.lastIndexOf('/') + 1);
-        if (action === 'CONTACT') {
-          await contact(sender, professorId);
-        } else if (action === 'CONSULTATION') {
-          await consultation(sender, professorId);
-        }
-      } else {
-        console.error('Didnt recognize this payload:', payload);
+  case 'GET_STARTED':
+    await getStarted(sender);
+    break;
+  case 'HELP':
+    await help(sender);
+    break;
+  case 'INFO':
+    await sendGenericTemplate(sender, 'STUDENT_INFO');
+    break;
+  case 'COURSES':
+    await courses(sender);
+    break;
+  case 'PROFESSORS':
+    await professors(sender);
+    break;
+  default:
+    if (payload.includes('COURSE/')) {
+      const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
+      const courseId = payload.slice(payload.lastIndexOf('/') + 1);
+      console.log('ACTION', action);
+      console.log(courseId);
+      if (action === 'GOALS') {
+        console.log('GOALS');
+        await goals(sender, courseId);
+      } else if (action === 'CONTENT') {
+        console.log('CONTENT');
+        await content(sender, courseId);
       }
-      break;
+    } else if (payload.includes('PROFESSOR/')) {
+      const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
+      const professorId = payload.slice(payload.lastIndexOf('/') + 1);
+      if (action === 'CONTACT') {
+        await contact(sender, professorId);
+      } else if (action === 'CONSULTATION') {
+        await consultation(sender, professorId);
+      }
+    } else {
+      console.error('Didnt recognize this payload:', payload);
+    }
+    break;
   }
 };
 
@@ -369,15 +366,20 @@ const professors = async sender => {
 const contact = async (sender, professorId) => {
   const professor = await professorController.getProfessorByID(professorId);
   await sendTextMessage(sender, `Email: ${professor.email}\nPhone: ${professor.phone}\nOffice: ${professor.office}`);
-}
+};
 const consultation = async (sender, professorId) => {
   const professor = await professorController.getProfessorByID(professorId);
-  await sendTextMessage(sender, `TODO`);
-}
+  await sendTextMessage(sender, 'TODO');
+};
 // courses('1898032266921906');
 
-
+const applyRoute = async (req, res) => {
+  console.log('Apply changed to', req.body.apply);
+  applyFlag = req.body.apply;
+};
 module.exports = {
   conversation,
   colectingStudentDate,
+  applyRoute,
+  applyFlag
 };

@@ -3,7 +3,14 @@ const app = apiai(process.env.APIAI_ACCESS_TOKEN);
 const stringSimilarity = require('string-similarity');
 const moment = require('./services').moment;
 
+const {
+  applyFlag
+} = require('../bot/conversation');
 const messanger = require('../bot/messanger');
+
+const {
+  getApplyExam
+} = require('../student/student.controller');
 
 const {
   getCourseByID,
@@ -232,6 +239,13 @@ const apiaiHandler = (sender, text) => {
           break;
         case 'course_apply':
           // const applyResult = await ();
+          if(!applyFlag){
+            await messanger.sendTextMessage(sender, 'Prijava ispita nije u toku!');
+          } else {
+            const courses = await getApplyExam(sender);
+            // TODO ispite koje student moze da prijavi
+            await messanger.sendCourseGenericTemplate(sender, courses, true);
+          }
           resolve('TODO mozete polagati sledce predmete!');
           break;
         case 'course_content':
@@ -307,8 +321,8 @@ const apiaiHandler = (sender, text) => {
           console.log('exam_period:', examPeriod);
           const examPeriodResult = await examperiod(examPeriod);
           // TODO better logic about next exam period
-          if(examPeriod !== examPeriodResult.name) {
-            if(examPeriod === 'sledeci'){
+          if (examPeriod !== examPeriodResult.name) {
+            if (examPeriod === 'sledeci') {
               await messanger.sendTextMessage(sender, `Sledeci, ${examPeriodResult.name} rok pocinje ${moment(examPeriodResult.startDate).format('DD/MM/YYYY')} i traje do ${moment(examPeriodResult.endDate).format('DD/MM/YYYY')}`);
             } else {
               await messanger.sendTextMessage(sender, `Nemamo podatak kada pocinje ${examPeriod}, sledeci rok je ${examPeriodResult.name} i pocinje ${moment(examPeriodResult.startDate).format('DD/MM/YYYY')} i traje do ${moment(examPeriodResult.endDate).format('DD/MM/YYYY')}`);

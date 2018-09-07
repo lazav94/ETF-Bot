@@ -1,46 +1,52 @@
 extends layout
 block content
-
     .row
-      .col-sm-6
-        .paper-card.card.paper-card.paper-card-box
-          .row
-            .col-sm-12
-              .title Broadcast
-          .row.messageRow
-            .col-sm-12
-              textarea.message
-          .row.lastRow
-            .col-sm-12.col-md-3
-              label.switch
-                input(type="checkbox")
-                span.slider.round
-            .col-sm-12.col-md-4
-              .input-group.date#datetimepicker
-                input#date.form-control(type="text")
-                span.input-group-addon
-                  span.glyphicon.glyphicon-calendar
-            .col-sm-12.col-md-2
-              select.modul
-                option(value="") Svi
-                option(value="RTI") RTI
-                option(value="SI") SI
-                option(value="OE") OE
-                option(value="EG") EG
-                option(value="SS") SS
-                option(value="TE") TE
-                option(value="FE") FE
-                option(value="Osnovne") Osnovne
-            .col-sm-12.col-md-3
-              button.btn.btn-dark.broadcast Broadcast
-      .col-sm-6
-        table#broadcastTable.table.table-striped.table-dark.table-hover.table-sm.table-borderless
-          thead
-            tr
-              th(scope='col') Date
-              th(scope='col') Message
-          tbody
-            each message in messages
-              tr
-                th.align-middle(scope='row')= `${message.date.toLocaleString("en-US")}`
-                th.align-middle(scope='row')= message.message
+      .col-sm-2
+        .div Prijava ispita
+      .col-sm-2
+        label.switch
+          input(type="checkbox")
+          span.applyslider.slider.round(checked=`${apply ? 'checked': ''}`)
+    .row
+     .col-sm-6
+       .paper-card.card.paper-card.paper-card-box
+         .row
+           .col-sm-12
+             .title Broadcast
+         .row.messageRow
+           .col-sm-12
+             textarea.message
+         .row.lastRow
+           .col-sm-12.col-md-3
+             label.switch
+               input(type="checkbox")
+               span.dateslider.slider.round
+           .col-sm-12.col-md-4
+             .input-group.date#datetimepicker
+               input#date.form-control(type="text")
+               span.input-group-addon
+                 span.glyphicon.glyphicon-calendar
+           .col-sm-12.col-md-2
+             select.modul
+               option(value="") Svi
+               option(value="RTI") RTI
+               option(value="SI") SI
+               option(value="OE") OE
+               option(value="EG") EG
+               option(value="SS") SS
+               option(value="TE") TE
+               option(value="FE") FE
+               option(value="Osnovne") Osnovne
+           .col-sm-12.col-md-3
+             button.btn.btn-dark.broadcast Broadcast
+     .col-sm-6
+       table#broadcastTable.table.table-striped.table-dark.table-hovertable-sm.table-borderless
+         thead
+           tr
+             th(scope='col') Date
+             th(scope='col') Message
+         tbody
+           each message in messages
+             tr
+               th.align-middle(scope='row')= `${message.date.toLocaleString("en-US")}`
+               th.align-middle(scope='row')= message.message
