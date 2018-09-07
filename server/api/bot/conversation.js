@@ -378,7 +378,7 @@ const consultation = async (sender, professorId) => {
 const applyRoute = async (req, res) => {
   applyFlag = req.body.apply === 'true';
   console.log('Apply flag:', applyFlag);
-  console.lo
+  res.sendStatus(200);
 };
 
 module.exports = {
