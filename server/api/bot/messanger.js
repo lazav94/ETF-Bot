@@ -230,6 +230,8 @@ const sendCourseGenericTemplate = async (sender, courses) => {
 };
 
 const sendProffesorGenericTemplate = async (sender, professors) => {
+  professors = professors.slice(0,10);
+  console.log(professors)
   const messageData = {
     attachment: {
       type: 'template',
