@@ -264,7 +264,6 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
   await sendRequest(messageData, sender);
 };
 
-
 const sendLocationButton = async (sender) => {
   const etfOnMap = 'https://www.google.com/maps/place/44%C2%B048\'19.9%22N+20%C2%B028\'34.0%22E/@44.8055162,20.4753893,18z/data=!4m6!3m5!1s0x0:0x0!7e2!8m2!3d44.8055276!4d20.4761055';
   const messageData = {
