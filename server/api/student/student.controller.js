@@ -83,7 +83,7 @@ const applyExam = async (id, courseId) => {
         .map(e => e.exam);
       await Promise.all(exams.map(async e => {
         console.log(e.course, courseId);
-        if (e.course === courseId) {
+        if (e.course.toString() === courseId) {
           e.status = 'PRIJAVIO';
           console.log(e)
         }
