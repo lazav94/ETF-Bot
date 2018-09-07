@@ -47,7 +47,9 @@ const getAllVerifiedStudents = async () => Student.find({
 const getApplyExam = async id => {
   try {
 
-    const student = await Student.findOne({id}).populate('exams.exam').exec();
+    const student = await Student.findOne({
+      id
+    }).populate('exams.exam').exec();
 
     if (student) {
       console.log('ID');
@@ -65,7 +67,35 @@ const getApplyExam = async id => {
   } catch (error) {
     console.error('Get apply exam', error);
   }
+};
 
+const applyExam = async (id, courseId) => {
+  try {
+    const student = await Student.findOne({
+      id
+    }).populate('exams.exam').exec();
+
+    if (student) {
+      console.log('ID');
+      console.log('Student', student.firstName);
+      // console.log('Exams', student.exams);
+      const exams = student.exams
+        .filter(e => e.status === '-')
+        .map(e => e.exam);
+      const courses = await Promise.all(exams.map(async e => {
+        if (e.course === courseId) {
+          e.status = 'PRIJAVIO';
+          console.log(e)
+        }
+      }));
+      await student.save();
+      // await Promise.all(exams);
+    } else {
+      throw new Error('Student is null');
+    }
+  } catch (error) {
+    console.error('Get apply exam', error);
+  }
 };
 
 const index = async (req, res) => {
@@ -78,12 +108,12 @@ const index = async (req, res) => {
   });
 };
 
-
 module.exports = {
   index,
   getStudentById,
   getAllStudentsID,
   getAllStudents,
   getAllStudentsByField,
-  getApplyExam
+  getApplyExam,
+  applyExam
 };

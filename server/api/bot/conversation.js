@@ -13,7 +13,8 @@ const {
 
 const {
   getStudentById,
-  getApplyExam
+  getApplyExam,
+  applyExam
 } = require('../student/student.controller');
 const getCourseById = require('../course/course.controller').getCourseByID;
 
@@ -359,20 +360,7 @@ const content = async (sender, courseId) => {
 };
 
 const apply = async (sender, courseId) => {
-  const student = await getApplyExam(sender);
-
-  await Promise.all(student.exams.map(e => {
-    if (e.exam.course === courseId) {
-      if (e.status === '-') {
-        e.status = 'PRIJAVIO';
-        console.log('Prijavio ispit', e);
-      }
-    }
-    student.save();
-
-  }))
-
-
+  await applyExam(sender, courseId);
 }
 
 
