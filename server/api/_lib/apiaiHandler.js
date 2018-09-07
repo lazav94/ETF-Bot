@@ -328,7 +328,7 @@ const apiaiHandler = (sender, text) => {
   });
 };
 
-// apiaiHandler('1898032266921906', 'suncica');
+apiaiHandler('1898032266921906', 'suncica');
 
 
 // apiaiHandler('123', 'Predmeti II godine?');
