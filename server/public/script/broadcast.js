@@ -31,6 +31,9 @@ $(document).ready(() => {
         const date = $('#date').val().trim();
         console.log('Date', date);
 
+        const modul = $('.modul').val().trim();
+        console.log('Modul', modul);
+
         if (message === '' || (reminderOn && date === '')) {
             console.error(`Fields are qureired: message empty -> ${message === ''} date empty -> ${reminderOn && date === ''}`);
         } else {
@@ -41,7 +44,8 @@ $(document).ready(() => {
                 data: {
                     message,
                     reminderOn,
-                    date: (new Date(date)).toLocaleString()
+                    date: (new Date(date)).toLocaleString(),
+                    modul
                 },
                 success: (result) => {
                     console.log('success ajax broadcast');

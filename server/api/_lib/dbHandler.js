@@ -372,7 +372,7 @@ const fillExamPeriodCollection = async () => {
 
 
 // fillCourseCollection();
-fillProfessorsCollection();
+// fillProfessorsCollection();
 // fillStudentCollection();
 
 

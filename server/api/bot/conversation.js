@@ -90,6 +90,7 @@ const conversation = async (event) => {
 
         console.log('APIAI or something else!');
         const response = await apiai(sender, text);
+        console.log('Api ai response', response);
         if(response && response !== '') {
           if(response !== 'done') {
             await sendTextMessage(sender, response);
@@ -238,15 +239,15 @@ const colectingStudentDate = async (sender, text) => {
   } else if (student.field === '') {
     console.log('Field');
     if (text && text !== '') {
-      if (['RTI', 'SI', 'EE', 'OG', 'SS', 'TE', 'FE', 'Osnovne'].includes(text)) {
+      if (['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne'].includes(text)) {
         student.field = text;
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendQuickReply(sender, 'Molimo izaberite jedan od odseka', ['RTI', 'SI', 'EE', 'OG', 'SS', 'TE', 'FE', 'Osnovne']);
+        await sendQuickReply(sender, 'Molimo izaberite jedan od odseka', ['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne']);
       }
     } else {
-      await sendQuickReply(sender, 'Odsek 👪',['RTI', 'SI', 'EE', 'OG', 'SS', 'TE', 'FE', 'Osnovne']);
+      await sendQuickReply(sender, 'Odsek 👪',['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne']);
     }
   } else {
     console.log('KRAJ');

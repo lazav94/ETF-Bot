@@ -77,12 +77,12 @@ curl -X POST -H "Content-Type: application/json" -d '{
                 {
                     "title":"📚 Predmeti",
                     "type":"postback",
-                    "payload": "COURSE"
+                    "payload": "COURSES"
                 },
                 {
                     "title":"📚 Profesori",
                     "type":"postback",
-                    "payload": "PROFESSOR"
+                    "payload": "PROFESSORS"
                 }
         ]
         },

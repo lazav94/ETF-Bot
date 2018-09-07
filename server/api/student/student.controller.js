@@ -31,8 +31,9 @@ const getAllStudentsID = async () => {
     return students.map(student => student.id);
 }
 
-const getAllStudents = async () => await Student.find();
-const getAllVerifiedStudents = async () => await Student.find({ verified: true });
+const getAllStudents = async () => Student.find();
+const getAllStudentsByField = async (field) => Student.find({field});
+const getAllVerifiedStudents = async () => Student.find({ verified: true });
 
 
 const index = async (req, res) => {
@@ -46,5 +47,6 @@ module.exports = {
     index,
     getStudentById,
     getAllStudentsID,
-    getAllStudents
+    getAllStudents,
+    getAllStudentsByField
 }
