@@ -1,5 +1,5 @@
 const getStudentById = require('../student/student.controller').getStudentById;
-const apply = require('../bot/conversation').applyFlag;
+var apply = require('../bot/conversation').applyFlag;
 
 const {
   sendTextMessage

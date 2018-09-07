@@ -5,7 +5,7 @@ const {
   getAllStudentsID,
   getAllStudentsByField
 } = require('../student/student.controller');
-const apply = require('../bot/conversation').applyFlag;
+var apply = require('../bot/conversation').applyFlag;
 
 const Broadcast = require('./broadcast.model');
 

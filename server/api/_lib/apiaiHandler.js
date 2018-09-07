@@ -3,7 +3,7 @@ const app = apiai(process.env.APIAI_ACCESS_TOKEN);
 const stringSimilarity = require('string-similarity');
 const moment = require('./services').moment;
 
-const {
+var {
   applyFlag
 } = require('../bot/conversation');
 const messanger = require('../bot/messanger');
