@@ -245,7 +245,7 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
   professors.forEach((professor, index) => {
     messageData.attachment.payload.elements.push({
       title: `${professors.title} ${professors.firstName}${professors.lastName}`,
-      subtitle: `ESBP: ${professors.espb} Status: ${professors.status}`,
+      subtitle: `${professors.office}`,
       image_url: professors.image,
       buttons: [
         {
