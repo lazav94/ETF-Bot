@@ -245,9 +245,9 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
   };
   await Promise.all(professors.map((professor, index) => {
     messageData.attachment.payload.elements.push({
-      title: `${professors.title} ${professors.firstName} ${professors.lastName}`,
-      subtitle: professors.office,
-      image_url: professors.image,
+      title: `${professor.title} ${professor.firstName} ${professor.lastName}`,
+      subtitle: professor.office,
+      image_url: professor.image,
       buttons: [
         {
           type: 'postback',
