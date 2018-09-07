@@ -94,7 +94,7 @@ const conversation = async (event) => {
           return;
         }
 
-        console.log('APIAI or something else!');
+        console.log('APIAI or something else!', text);
         const response = await apiai(sender, text);
         console.log('Api ai response', response);
         if(response && response !== '') {
