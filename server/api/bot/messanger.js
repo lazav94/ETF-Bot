@@ -216,12 +216,12 @@ const sendCourseGenericTemplate = async (sender, courses) => {
         {
           type: 'postback',
           title: 'Cilj predemeta ',
-          payload: `COURSE_GOALS/${course.goals}`
+          payload: `COURSE/GOALS/${course._id}`
         },
         {
           type: 'postback',
           title: 'Sadrzaj predmeta ',
-          payload: `COURSE_CONTENT/${course.content}`
+          payload: `COURSE/CONTENT/${course._id}`
         }
       ]
     });
