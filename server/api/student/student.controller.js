@@ -47,10 +47,7 @@ const getAllVerifiedStudents = async () => Student.find({
 const getApplyExam = async id => {
   try {
 
-    const student = await Student.findOne(id).populate('exams.exam').exec();
-    // const student = await Student.findOne({
-      // firstName: 'Lazar'
-    // }).populate('exams.exam').exec();
+    const student = await Student.findOne({id}).populate('exams.exam').exec();
 
     if (student) {
       console.log('ID');
