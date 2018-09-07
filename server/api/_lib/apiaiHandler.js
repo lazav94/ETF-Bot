@@ -323,7 +323,6 @@ const apiaiHandler = (sender, text) => {
     });
 
     request.on('error', error => reject(error));
-
     request.end();
   });
 };
