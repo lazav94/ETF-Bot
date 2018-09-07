@@ -93,6 +93,9 @@ const conversation = async (event) => {
           await professors(sender);
           return;
         }
+        if(text === 'asdfsadfasdfasdfasdf'){
+          return;
+        }
 
         console.log('APIAI or something else!', text);
         const response = await apiai(sender, text);
