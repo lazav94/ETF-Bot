@@ -337,7 +337,7 @@ const content = async (sender, courseId) => {
 const professors = async sender => {
   try{
     const professors = await professorController.getAllProfessors();
-    await sendProffesorGenericTemplate(sender, courses);
+    await sendProffesorGenericTemplate(sender, professors);
   } catch (error) {
     console.error('Professors error:', error);
   }
