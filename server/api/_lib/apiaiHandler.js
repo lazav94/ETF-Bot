@@ -308,7 +308,11 @@ const apiaiHandler = (sender, text) => {
           const examPeriodResult = await examperiod(examPeriod);
           // TODO better logic about next exam period
           if(examPeriod !== examPeriodResult.name) {
-            await messanger.sendTextMessage(sender, `Nemamo podatak kada pocinje ${examPeriod}, sledeci rok je ${examPeriodResult.name} i pocinje ${moment(examPeriodResult.startDate).format('DD/MM/YYYY')} i traje do ${moment(examPeriodResult.endDate).format('DD/MM/YYYY')}`);
+            if(examPeriod === 'sledeci'){
+              await messanger.sendTextMessage(sender, `Sledeci, ${examPeriodResult.name} rok pocinje ${moment(examPeriodResult.startDate).format('DD/MM/YYYY')} i traje do ${moment(examPeriodResult.endDate).format('DD/MM/YYYY')}`);
+            } else {
+              await messanger.sendTextMessage(sender, `Nemamo podatak kada pocinje ${examPeriod}, sledeci rok je ${examPeriodResult.name} i pocinje ${moment(examPeriodResult.startDate).format('DD/MM/YYYY')} i traje do ${moment(examPeriodResult.endDate).format('DD/MM/YYYY')}`);
+            }
           } else {
             await messanger.sendTextMessage(sender, `${examPeriod} rok pocinje ${moment(examPeriodResult.startDate).format('DD/MM/YYYY')} i traje do ${moment(examPeriodResult.endDate).format('DD/MM/YYYY')}`);
           }
