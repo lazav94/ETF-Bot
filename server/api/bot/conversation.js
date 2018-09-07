@@ -2,6 +2,7 @@ const validator = require('validator');
 const uuidv4 = require('uuid/v4');
 
 const {
+  typingOn,
   getUserInfo,
   sendTextMessage,
   sendQuickReply,
@@ -69,15 +70,12 @@ const conversation = async (event) => {
       if (!student.verified && student.email === '') {
         console.log('Checking email...');
         if (validator.isEmail(text)) {
-          await sendTextMessage(sender, 'Hvala, na Vasoj email adresi stici ce link za validaciju ✓');
-          // TODO send link
+          await sendTextMessage(sender, 'Hvala, na Vasoj email adresi stici ce link za validaciju 📬');
           student.token = uuidv4();
-          // student.email = text;
           sendMail(text, 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML(sender, student.token, text));
-
           await student.save();
         } else {
-          await sendTextMessage(sender, 'Ovo ne izgleda kao Email ⦸📧, molimo Vas proverite format i posaljite ponovo, hvala');
+          await sendTextMessage(sender, 'Nešto nije u redu sa email adrsom koju ste poslali ❎. Molimo Vas proverite format 📫');
         }
         return;
       } else {
@@ -142,30 +140,28 @@ const colectingStudentDate = async (sender, text) => {
   console.log('Collceting data text:', text);
   const student = await getStudentById(sender);
 
-
-
   if (student.parentName === '') {
     console.log('Parrent name');
     if (text && text !== '') {
       student.parentName = text;
       await student.save();
       await colectingStudentDate(sender);
-
     } else {
-      await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime (ime roditalja)?👪', ['-']);
+      await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime ? 👪', ['-']);
     }
   } else if (student.index === '') {
     console.log('Index');
     if (text && text !== '') {
+      // TODO ako imamo validaciju sa studenskog emaila iz njega mozemo izvuci broj indexa
       if (text.length === 9 && text.indexOf('/') !== -1) {
         student.index = text;
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendTextMessage(sender, 'Nepravilan format indexa GGGG/BBBB');
+        await sendTextMessage(sender, 'Nepravilan format indexa ⛔.\nUnesite broj indexa u formatu GGGG/BBBB ');
       }
     } else {
-      await sendTextMessage(sender, 'Index? GGGG/BBBB');
+      await sendTextMessage(sender, 'Vaš broj index? (GGGG/BBBB)');
     }
   } else if (!['muski', 'zenski', '-'].includes(student.gender)) {
     console.log('gender');
@@ -176,10 +172,10 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendQuickReply(sender, 'Molimo Vas izaberite jednuo od navedenih opcija', ['muski', 'zenski', '-']);
+        await sendQuickReply(sender, 'Molimo Vas, izaberite jednu od ponuđenih opicija ⚥...', ['muski', 'zenski', '-']);
       }
     } else {
-      await sendQuickReply(sender, 'Pol 👪', ['muski', 'zenski', '-']);
+      await sendQuickReply(sender, 'Pol ⚥ ?', ['muski', 'zenski', '-']);
     }
   } else if (student.dateOfBirth === '') {
     console.log('Date of birth');
@@ -189,7 +185,7 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendTextMessage(sender, 'Molimo Vas da unesete validan datum');
+        await sendTextMessage(sender, 'Unesite pravilan datum rođenja? 📆');
       }
     } else {
       await sendTextMessage(sender, 'Datum rodjenja? 📅');
@@ -201,7 +197,7 @@ const colectingStudentDate = async (sender, text) => {
       await student.save();
       await colectingStudentDate(sender);
     } else {
-      await sendTextMessage(sender, 'Adresa ? 🔢');
+      await sendTextMessage(sender, 'Vaša adresa prebivališta ? 🏠');
     }
   } else if (student.jmbg === '') {
     console.log('JMBG');
@@ -211,10 +207,10 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendTextMessage(sender, 'JMBG mora sadrzati 13 cifara unesi ponovo validan JMBG');
+        await sendTextMessage(sender, 'JMBG mora sadržati 13 ⏹ Molimo Vas da unesete tačan JMBG');
       }
     } else {
-      await sendTextMessage(sender, 'JMBG? 📅');
+      await sendTextMessage(sender, 'JMBG ? 🔢');
     }
   } else if (student.phone === '') {
     console.log('PHONE');
@@ -224,10 +220,10 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendTextMessage(sender, 'Ovo ne izgleda kao telefon? Unesite ponovo');
+        await sendTextMessage(sender, 'Niste uneli validan telefon 📱 ? Unesite ponovo');
       }
     } else {
-      await sendTextMessage(sender, 'Telefon? ☎');
+      await sendTextMessage(sender, 'Telefon ? ☎');
     }
   } else if (student.year === -1) {
     console.log('year');
@@ -240,7 +236,7 @@ const colectingStudentDate = async (sender, text) => {
         await sendQuickReply(sender, 'Molimo izaberite broj od 1 do 6', ['1', '2', '3', '4', '5', '6']);
       }
     } else {
-      await sendQuickReply(sender, 'Godina (5 - master, 6 - doktorske) 👪', ['1', '2', '3', '4', '5', '6']);
+      await sendQuickReply(sender, 'Trenutna godina studija  ⃣:\nmaster - 5\ndoktorske - 6) ', ['1', '2', '3', '4', '5', '6']);
     }
   } else if (student.field === '') {
     console.log('Field');
@@ -250,14 +246,14 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendQuickReply(sender, 'Molimo izaberite jedan od odseka', ['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne']);
+        await sendQuickReply(sender, 'Modul na kojem ste? 📚', ['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne']);
       }
     } else {
       await sendQuickReply(sender, 'Odsek 👪', ['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne']);
     }
   } else {
     console.log('KRAJ');
-    await sendTextMessage(sender, 'KRAJ!!! Bot je inicijalizovan.!!🙋');
+    await sendTextMessage(sender, 'Hvala Vam na saradnji 😄.\n Bot 🤖 je inicijalizovan\nSada mozete postavljati pitanja ❓');
     return;
   }
 
@@ -269,67 +265,78 @@ const payloadHandler = async (sender, payload) => {
   const student = await getStudentById(sender);
 
   switch (payload) {
-    case 'GET_STARTED':
-      await getStarted(sender);
-      break;
-    case 'HELP':
-      await help(sender);
-      break;
-    case 'INFO':
-      await sendGenericTemplate(sender, 'STUDENT_INFO');
-      break;
-    case 'COURSES':
-      await courses(sender);
-      break;
-    case 'PROFESSORS':
-      await professors(sender);
-      break;
-    default:
-      if (payload.includes('COURSE/')) {
-        const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
-        const courseId = payload.slice(payload.lastIndexOf('/') + 1);
-        console.log('ACTION', action);
-        console.log('courseId', courseId);
+  case 'GET_STARTED':
+    await getStarted(student);
+    break;
+  case 'HELP':
+    await help(sender);
+    break;
+  case 'INFO':
+    await sendGenericTemplate(sender, 'STUDENT_INFO');
+    break;
+  case 'COURSES':
+    await courses(sender);
+    break;
+  case 'PROFESSORS':
+    await professors(sender);
+    break;
+  default:
+    if (payload.includes('COURSE/')) {
+      const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
+      const courseId = payload.slice(payload.lastIndexOf('/') + 1);
+      console.log('ACTION', action);
+      console.log('courseId', courseId);
 
-        console.log(courseId);
-        if (action === 'GOALS') {
-          console.log('GOALS');
-          await goals(sender, courseId);
-        } else if (action === 'CONTENT') {
-          console.log('CONTENT');
-          await content(sender, courseId);
-        } else if (action === 'APPLY') {
-          await apply(sender, courseId);
-        }
-      } else if (payload.includes('PROFESSOR/')) {
-        const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
-        const professorId = payload.slice(payload.lastIndexOf('/') + 1);
-        if (action === 'CONTACT') {
-          await contact(sender, professorId);
-        } else if (action === 'CONSULTATION') {
-          await consultation(sender, professorId);
-        }
-      } else {
-        console.error('Didnt recognize this payload:', payload);
+      console.log(courseId);
+      if (action === 'GOALS') {
+        console.log('GOALS');
+        await goals(sender, courseId);
+      } else if (action === 'CONTENT') {
+        console.log('CONTENT');
+        await content(sender, courseId);
+      } else if (action === 'APPLY') {
+        await apply(sender, courseId);
       }
-      break;
+    } else if (payload.includes('PROFESSOR/')) {
+      const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
+      const professorId = payload.slice(payload.lastIndexOf('/') + 1);
+      if (action === 'CONTACT') {
+        await contact(sender, professorId);
+      } else if (action === 'CONSULTATION') {
+        await consultation(sender, professorId);
+      }
+    } else {
+      console.error('Didnt recognize this payload:', payload);
+    }
+    break;
   }
 };
 
-const getStarted = async sender => {
+
+const getStarted = async student => {
   console.log('Get started');
+  const sender = student.id;
+  const teslaPictureUrl = 'https://ocdn.eu/pulscms-transforms/1/tpPk9lMaHR0cDovL29jZG4uZXUvaW1hZ2VzL3B1bHNjbXMvWmpVN01EQV8vNGJlNDNhMTc5ZTFhYjk1YTJiNDlmNjlkZDlhYTBlYzguanBlZ5GTAs0C5ACBoTAB';
 
-  await sendTextMessage(sender, 'Dobrodosli na ETF Bot! 🤖');
-  await sendImage(sender, 'https://ocdn.eu/pulscms-transforms/1/tpPk9lMaHR0cDovL29jZG4uZXUvaW1hZ2VzL3B1bHNjbXMvWmpVN01EQV8vNGJlNDNhMTc5ZTFhYjk1YTJiNDlmNjlkZDlhYTBlYzguanBlZ5GTAs0C5ACBoTAB');
-
-  const verified = await verifyStudent(sender);
-  console.log('Studen verification ', verified);
-  if (verified) {
-    await sendTextMessage(sender, 'Nastavi!');
+  if(student.verified && !needToCollectInfomation(student)){
+    await sendTextMessage(sender, 'Dobrodošli nazad 🔙\nDrago nam je da Vas vidimo ponovo 👋\nDa li mogu da pomognem ⁉');
   } else {
-    await sendTextMessage(sender, 'Kako bi nastavili sa radom ostavite nam Vasu email adresu');
+    await sendTextMessage(sender, `👋 Zdravo ${student.firstName}❗ \nDobrodošli 👐\nJa samvo je ETF Bot! 🤖`);
+    await sendImage(sender, teslaPictureUrl);
+    await sendTextMessage(sender, 'Kako bi koristili bota prvo morate izvršiti inicijalizaciju, postavićemo Vam par pitanja o Vama');
+    await sendTextMessage(sender, 'U bilo kom trenutku možete da pošaljete Vašu sliku 🖼, samo poslednja slika bice sačuvana');
+    await sendTextMessage(sender, 'Za početak, kako bi Vas verifikovali pošaljite nam Vašu email adresu 📧');
   }
+
 };
+
+const testGetStarted = async () => {
+  //2244552305573217 rti
+  //1898032266921906 lazar
+  const student = await getStudentById('2244552305573217');
+  getStarted(student);
+};
+testGetStarted();
 
 const help = async sender => {
   try {
@@ -363,7 +370,7 @@ const content = async (sender, courseId) => {
 
 const apply = async (sender, courseId) => {
   await applyExam(sender, courseId);
-}
+};
 
 
 const professors = async sender => {
