@@ -267,10 +267,14 @@ const payloadHandler = async (sender, payload) => {
     if(payload.includes('COURSE/')){
         const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
         const courseId = payload.slice(payload.lastIndexOf('/') + 1);
+        console.log('ACTION', action);
+        console.log(courseId);
         if(action === 'GOALS') {
-           await goals(sender, courseId);
-        } else if(action === 'CONTENT'){
-           await content(sender, courseId);
+          console.log("GOALS");
+          await goals(sender, courseId);
+        } else if(action === 'CONTENT') {
+          console.log("CONTENT");
+          await content(sender, courseId);
         }
     } else {
       console.error('Didnt recognize this payload:', payload);
