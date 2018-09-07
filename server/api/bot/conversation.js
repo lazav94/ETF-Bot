@@ -292,6 +292,8 @@ const payloadHandler = async (sender, payload) => {
       } else if (action === 'CONTENT') {
         console.log('CONTENT');
         await content(sender, courseId);
+      } else if (action === 'APPLY') {
+        await apply(sender, courseId);
       }
     } else if (payload.includes('PROFESSOR/')) {
       const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
@@ -374,8 +376,8 @@ const consultation = async (sender, professorId) => {
 // courses('1898032266921906');
 
 const applyRoute = async (req, res) => {
-  console.log('Apply changed to', req.body.apply);
   applyFlag = req.body.apply;
+  console.log('Apply flag:' applyFlag);
 };
 module.exports = {
   conversation,

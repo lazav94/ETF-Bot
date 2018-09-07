@@ -246,7 +246,7 @@ const apiaiHandler = (sender, text) => {
             // TODO ispite koje student moze da prijavi
             await messanger.sendCourseGenericTemplate(sender, courses, true);
           }
-          resolve('TODO mozete polagati sledce predmete!');
+          resolve('done');
           break;
         case 'course_content':
           course = response.result.parameters.course;

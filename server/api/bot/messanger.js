@@ -44,7 +44,6 @@ const sendRequest = (messageData, sender, messageType) => {
       json
     };
 
-    console.log('Request data %j', requestData);
     request(requestData, (error, response) => {
       if (error) {
         console.error('Error sending messages: ', error);
