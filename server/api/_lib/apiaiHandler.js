@@ -15,7 +15,8 @@ const {
 const {
   // getCourseByID,
   getAllCoursesNamesAndCodes,
-  findCourseByNameOrCode
+  findCourseByNameOrCode,
+  getAllCoursesByYear
 } = require('../course/course.controller');
 
 const {
@@ -230,7 +231,9 @@ const apiaiHandler = (sender, text) => {
         case 'course_year':
           const year = response.result.parameters.year;
           console.log('year', year);
-          resolve('TODO poslati sve predmete za neku godinu');
+          const courses = await getAllCoursesByYear(year);
+          await messanger.sendCourseGenericTemplate(sender, courses);
+          resolve('done');
           break;
         case 'course_apply':
           console.log('Apply flag api ai:', applyFlag);
