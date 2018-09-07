@@ -74,6 +74,15 @@ const conversation = async (event) => {
       if(needToCollectInfomation(student)){
         await colectingStudentDate(sender, text);
       } else {
+        if(text === 'info'){
+          await sendGenericTemplate(sender, 'STUDENT_INFO');
+          return;
+        }
+        if(text === 'cc'){
+          await courses(sender);
+          return;
+        }
+
         console.log('APIAI or something else!');
         const response = await apiai(sender, text);
         if(response && response !== '') {
@@ -83,9 +92,7 @@ const conversation = async (event) => {
         } else {
           await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
         }
-        // if(text === 'info'){
-        // await sendGenericTemplate(sender, 'STUDENT_INFO');
-        // }
+
       }
     }
 
