@@ -16,7 +16,8 @@ const {
   // getCourseByID,
   getAllCoursesNamesAndCodes,
   findCourseByNameOrCode,
-  getAllCoursesByYear
+  getAllCoursesByYear,
+  getAllCoursesByModul
 } = require('../course/course.controller');
 
 const {
@@ -232,6 +233,13 @@ const apiaiHandler = (sender, text) => {
           const year = response.result.parameters.year;
           console.log('year', year);
           const courses = await getAllCoursesByYear(year);
+          await messanger.sendCourseGenericTemplate(sender, courses);
+          resolve('done');
+          break;
+        case 'course_modul':
+          const modul = response.result.parameters.modul;
+          console.log('modul', modul);
+          const courses = await getAllCoursesByModul(modul);
           await messanger.sendCourseGenericTemplate(sender, courses);
           resolve('done');
           break;
