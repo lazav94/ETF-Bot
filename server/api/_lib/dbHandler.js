@@ -6,7 +6,7 @@ const Course = require('../course/course.model');
 const Professor = require('../professor/professor.model');
 const Student = require('../student/student.model');
 const Exam = require('../exam/exam.model');
-const ExamPeriod = require('../exam/examPerion.model');
+const ExamPeriod = require('../exam/examPeriod.model');
 
 
 /**
@@ -66,7 +66,7 @@ G. Božilović, D. Olćan, A. Đorđević, Zbirka zadataka iz Osnova elektrotehn
 
   const M2 = new Course({
     url: 'http://matematika1.etf.bg.ac.rs/',
-    code: 'Matematika 2',
+    code: '13E081MM2',
     name: 'Matematika 2',
     status: 'Obavezan',
     year: 2,
@@ -194,7 +194,7 @@ Najnoviji radovi po izboru predavača.`
 
   const ASP = new Course({
     url: 'https://rti.etf.bg.ac.rs/rti/ri3sp/index.html',
-    code: '13M111OPJ',
+    code: '13M111ASP',
     name: 'Algoritmi i strukture podataka',
     status: 'Izborni',
     modul: 'Softversko inženjerstvo,Računarska tehnika i informatika',
@@ -216,7 +216,7 @@ Najnoviji radovi po izboru predavača.`
 
   const OS1 = new Course({
     url: 'http://os.etf.rs/',
-    code: '13E112OS1',
+    code: '13E111OS1',
     name: 'Operativni sistemi 1',
     status: 'Obavezan',
     modul: 'Računarska tehnika i informatika',
@@ -241,7 +241,7 @@ Najnoviji radovi po izboru predavača.`
 
   const BP1 = new Course({
     url: 'https://rti.etf.bg.ac.rs/rti/bp1/index.html',
-    code: '13E112OS1',
+    code: '13E113BP1',
     name: 'Baze podataka 1',
     status: 'Obavezan',
     modul: 'Računarska tehnika i informatika',
@@ -292,19 +292,19 @@ MacKenzie I. Scott, THE 8051 MICROCONTROLLER, Prentice Hall`
   });
 
 
-  // await Course.collection.drop();
+  await Course.collection.drop();
 
-  // await M1.save();
-  // await M2.save();
-  // await OET1.save();
-  // await OET2.save();
-  // await PSZ.save();
-  // await OPJ.save();
-  // await GI.save();
-  // await ASP.save();
-  // await OS1.save();
-  // await BP1.save();
-  // await MIPS.save();
+  await M1.save();
+  await M2.save();
+  await OET1.save();
+  await OET2.save();
+  await PSZ.save();
+  await OPJ.save();
+  await GI.save();
+  await ASP.save();
+  await OS1.save();
+  await BP1.save();
+  await MIPS.save();
 
 
   // console.log(M1);
@@ -358,22 +358,67 @@ const fillStudentCollection = async () => {
 };
 
 const fillExamCollection = async () => {
-  const psz = new Exam({
-    date: moment().add(10, 'days'),
-    // course:
-  });
+
+  await Exam.collection.drop();
+
+  const courseMM1 = await Course.findOne({code:   '13E081MM1'});
+  const courseMM2 = await Course.findOne({code:   '13E081MM2'});
+  const courseOE1 = await Course.findOne({code:   '13E071OE1'});
+  const courseOE2 = await Course.findOne({code:   '13E071OE2'});
+  const coursePSZ = await Course.findOne({code:   '13M111PSZ'});
+  const courseOPJ = await Course.findOne({code:   '13M111OPJ'});
+  const courseGI  = await Course.findOne({code:  '13M111GI'});
+  const courseASP = await Course.findOne({code:   '13M111ASP'});
+  const courseOS1 = await Course.findOne({code:   '13E111OS1'});
+  const courseBP1 = await Course.findOne({code:   '13E113BP1'});
+  const courseMIPS = await Course.findOne({code:  '13E114MIPS'});
+
+  const examMM1 = new Exam({date: moment().add(2, 'days').toDate(), course: courseMM1._id});
+  const examMM2 = new Exam({date: moment().add(2, 'days').toDate(), course: courseMM2._id});
+  const examOE1 = new Exam({date: moment().add(2, 'days').toDate(), course: courseOE1._id});
+  const examOE2 = new Exam({date: moment().add(2, 'days').toDate(), course: courseOE2._id});
+  const examPSZ = new Exam({date: moment().add(2, 'days').toDate(), course: coursePSZ._id});
+  const examOPJ = new Exam({date: moment().add(2, 'days').toDate(), course: courseOPJ._id});
+  const examGI = new Exam({date: moment().add(2, 'days').toDate(), course: courseGI._id});
+  const examASP = new Exam({date: moment().add(2, 'days').toDate(), course: courseASP._id});
+  const examOS1 = new Exam({date: moment().add(2, 'days').toDate(), course: courseOS1._id});
+  const examBP1 = new Exam({date: moment().add(2, 'days').toDate(), course: courseBP1._id});
+  const examMIPS = new Exam({date: moment().add(2, 'days').toDate(), course: courseMIPS._id});
+
+  await examMM1.save();
+  await examMM2.save();
+  await examOE1.save();
+  await examOE2.save();
+  await examPSZ.save();
+  await examOPJ.save();
+  await examGI.save();
+  await examASP.save();
+  await examOS1.save();
+  await examBP1.save();
+  await examMIPS.save();
+
+  console.log('Done... filling exams in DB');
+
 };
+
 
 const fillExamPeriodCollection = async () => {
   const septembarExamPeriod = new ExamPeriod({
+    name: 'Septembarski',
+    startDate: moment().add(5, 'days').toDate(),
+    endDate: moment().add(15, 'days').toDate(),
+    exams: await Exam.find()
   });
-  septembarExamPeriod.save();
+
+  await septembarExamPeriod.save();
 };
 
 
 // fillCourseCollection();
 // fillProfessorsCollection();
 // fillStudentCollection();
+// fillExamCollection();
+fillExamPeriodCollection();
 
 
 module.exports = {
