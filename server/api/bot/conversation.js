@@ -19,6 +19,7 @@ const createEmailHTML = require('../_lib/email.js').createEmailHTML;
 const apiai = require('../_lib/apiaiHandler.js');
 
 const courseController = require('../course/course.controller');
+const professorController = require('../professor/professor.controller');
 const {
   verifyStudent
 } = require('../auth/auth.controller');
@@ -80,6 +81,10 @@ const conversation = async (event) => {
         }
         if(text === 'cc'){
           await courses(sender);
+          return;
+        }
+        if(text === 'pp'){
+          await professors(sender);
           return;
         }
 
@@ -328,6 +333,15 @@ const content = async (sender, courseId) => {
     await sendTextMessage(sender, course.content);
 };
 
+
+const professors = async sender => {
+  try{
+    const professors = await professorController.getAllProfessors();
+    await sendProffesorGenericTemplate(sender, courses);
+  } catch (error) {
+    console.error('Professors error:', error);
+  }
+};
 
 
 // courses('1898032266921906');
