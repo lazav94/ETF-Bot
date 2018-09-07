@@ -16,7 +16,7 @@ const getCourseById = require('../course/course.controller').getCourseByID;
 
 const sendMail = require('../_lib/mailer.js');
 const createEmailHTML = require('../_lib/email.js').createEmailHTML;
-const apiai = require('../_lib/apiaiHandler.js');
+const apiaiHandler = require('../_lib/apiaiHandler.js');
 
 const courseController = require('../course/course.controller');
 const professorController = require('../professor/professor.controller');
@@ -95,7 +95,7 @@ const conversation = async (event) => {
             return;
           } else {
             console.log('APIAI input:', text);
-            const response = await apiai(sender, text);
+            const response = await apiaiHandler(sender, text);
             console.log('Api ai response', response);
             if (response && response !== '') {
               if (response !== 'done') {

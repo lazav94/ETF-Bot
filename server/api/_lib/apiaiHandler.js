@@ -378,4 +378,4 @@ const testAPIAI = async () => {
 };
 // testAPIAI();
 
-module.exports = apiai;
+module.exports = apiaiHandler;
