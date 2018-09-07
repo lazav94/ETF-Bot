@@ -309,7 +309,7 @@ const apiaiHandler = (sender, text) => {
         break;
       case 'suncica':
         console.log('speech', response.result.fulfillment.speech.toString());
-        await messanger.sendTextMessage(sender, response.result.fulfillment.speech);
+        await messanger.sendTextMessage(sender, response.result.fulfillment.speech.toString());
         await messanger.sendImage(sender, 'https://image.ibb.co/bLDMxz/suncica.jpg');
         resolve('done');
         break;
