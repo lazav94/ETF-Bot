@@ -101,15 +101,15 @@ const conversation = async (event) => {
 
 
           console.log('APIAI or something else!', text);
-          const response = await apiai(sender, text);
-          console.log('Api ai response', response);
-          if (response && response !== '') {
-            if (response !== 'done') {
-              await sendTextMessage(sender, response);
-            }
-          } else {
+          // const response = await apiai(sender, text);
+          // console.log('Api ai response', response);
+          // if (response && response !== '') {
+            // if (response !== 'done') {
+              // await sendTextMessage(sender, response);
+            // }
+          // } else {
             await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
-          }
+          // }
         }
       }
     } else if (event.postback) {
