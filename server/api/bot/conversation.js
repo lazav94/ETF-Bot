@@ -289,6 +289,8 @@ const payloadHandler = async (sender, payload) => {
         const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
         const courseId = payload.slice(payload.lastIndexOf('/') + 1);
         console.log('ACTION', action);
+        console.log('courseId', courseId);
+
         console.log(courseId);
         if (action === 'GOALS') {
           console.log('GOALS');

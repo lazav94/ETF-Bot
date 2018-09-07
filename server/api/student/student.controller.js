@@ -79,18 +79,18 @@ const applyExam = async (id, courseId) => {
       console.log('Student', student.firstName);
       // console.log('Exams', student.exams);
       const exams = student.exams
-        .filter(e => e.status === '-')
-        .map(e => e.exam);
+        .filter(e => e.status === '-');
+
       await Promise.all(exams.map(async e => {
         console.log(e.course.toString(), courseId);
-        console.log(typeof e.course, typeof courseId);
-        console.log(typeof e.course, typeof courseId);
-        console.log(e.course.length, courseId.length);
-        console.log(e.course.toString() === courseId);
+        console.log(typeof e.exam.course, typeof courseId);
+        console.log(typeof e.exam.course, typeof courseId);
+        console.log(e.exam.course.toString().length, courseId.length);
+        console.log(e.exam.course.toString() === courseId);
         console.log('-----------------');
-        if (e.course.toString() === courseId) {
+        if (e.exam.course.toString() === courseId) {
           e.status = 'PRIJAVIO';
-          console.log(e)
+          console.log(e);
         }
       }));
       await student.save();
