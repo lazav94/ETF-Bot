@@ -239,8 +239,8 @@ const apiaiHandler = (sender, text) => {
         case 'course_modul':
           const modul = response.result.parameters.modul;
           console.log('modul', modul);
-          const courses = await getAllCoursesByModul(modul);
-          await messanger.sendCourseGenericTemplate(sender, courses);
+          const coursesModul = await getAllCoursesByModul(modul);
+          await messanger.sendCourseGenericTemplate(sender, coursesModul);
           resolve('done');
           break;
         case 'course_apply':
