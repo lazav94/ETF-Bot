@@ -11,7 +11,10 @@ const {
   sendProffesorGenericTemplate
 } = require('./messanger');
 
-const getStudentById = require('../student/student.controller').getStudentById;
+const {
+  getStudentById,
+  getApplyExam
+} = require('../student/student.controller');
 const getCourseById = require('../course/course.controller').getCourseByID;
 
 const sendMail = require('../_lib/mailer.js');
@@ -265,48 +268,48 @@ const payloadHandler = async (sender, payload) => {
   const student = await getStudentById(sender);
 
   switch (payload) {
-  case 'GET_STARTED':
-    await getStarted(sender);
-    break;
-  case 'HELP':
-    await help(sender);
-    break;
-  case 'INFO':
-    await sendGenericTemplate(sender, 'STUDENT_INFO');
-    break;
-  case 'COURSES':
-    await courses(sender);
-    break;
-  case 'PROFESSORS':
-    await professors(sender);
-    break;
-  default:
-    if (payload.includes('COURSE/')) {
-      const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
-      const courseId = payload.slice(payload.lastIndexOf('/') + 1);
-      console.log('ACTION', action);
-      console.log(courseId);
-      if (action === 'GOALS') {
-        console.log('GOALS');
-        await goals(sender, courseId);
-      } else if (action === 'CONTENT') {
-        console.log('CONTENT');
-        await content(sender, courseId);
-      } else if (action === 'APPLY') {
-        await apply(sender, courseId);
+    case 'GET_STARTED':
+      await getStarted(sender);
+      break;
+    case 'HELP':
+      await help(sender);
+      break;
+    case 'INFO':
+      await sendGenericTemplate(sender, 'STUDENT_INFO');
+      break;
+    case 'COURSES':
+      await courses(sender);
+      break;
+    case 'PROFESSORS':
+      await professors(sender);
+      break;
+    default:
+      if (payload.includes('COURSE/')) {
+        const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
+        const courseId = payload.slice(payload.lastIndexOf('/') + 1);
+        console.log('ACTION', action);
+        console.log(courseId);
+        if (action === 'GOALS') {
+          console.log('GOALS');
+          await goals(sender, courseId);
+        } else if (action === 'CONTENT') {
+          console.log('CONTENT');
+          await content(sender, courseId);
+        } else if (action === 'APPLY') {
+          await apply(sender, courseId);
+        }
+      } else if (payload.includes('PROFESSOR/')) {
+        const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
+        const professorId = payload.slice(payload.lastIndexOf('/') + 1);
+        if (action === 'CONTACT') {
+          await contact(sender, professorId);
+        } else if (action === 'CONSULTATION') {
+          await consultation(sender, professorId);
+        }
+      } else {
+        console.error('Didnt recognize this payload:', payload);
       }
-    } else if (payload.includes('PROFESSOR/')) {
-      const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
-      const professorId = payload.slice(payload.lastIndexOf('/') + 1);
-      if (action === 'CONTACT') {
-        await contact(sender, professorId);
-      } else if (action === 'CONSULTATION') {
-        await consultation(sender, professorId);
-      }
-    } else {
-      console.error('Didnt recognize this payload:', payload);
-    }
-    break;
+      break;
   }
 };
 
@@ -356,13 +359,13 @@ const content = async (sender, courseId) => {
 };
 
 const apply = async (sender, courseId) => {
-  const student = await getStudentById(sender).populate('exams.exam').exec();
-  const course = await getCourseById(courseId);
+  const student = await getApplyExam(sender);
 
   await Promise.all(student.exams.map(e => {
-    if(e.exam.course === courseId){
-      if(e.status === '-'){
+    if (e.exam.course === courseId) {
+      if (e.status === '-') {
         e.status = 'PRIJAVIO';
+        console.log('Prijavio ispit', e);
       }
     }
     student.save();
