@@ -47,7 +47,7 @@ const startConversation = async (req, res) => {
 				}
 				res.sendStatus(200);
 			} catch (e) {
-				console.log('Messenger error', e);
+				console.log('👽 Messenger error', e);
 				res.sendStatus(404);
 			}
 		} else {

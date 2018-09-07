@@ -26,119 +26,118 @@ const {
 // sendMail('lazav94@gmail.com', 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML('123'));
 
 const conversation = async (event) => {
-  console.log('Conversation');
-  const sender = event.sender.id;
-  console.log('Sender', sender);
-
-  // console.log('=============================')
-  // console.log('EVENT', event);
-  // console.log('=============================')
+  try {
 
 
-  if (event.message) {
-    if (event.message.attachments) {
-      console.log(`Sender ${sender} send a file`);
-      console.log('Attachment', event.message.attachments);
-      if(event.message.attachments[0].type === 'image'){
-        const student = await getStudentById(sender);
-        student.image =  event.message.attachments[0].payload.url;
-        await student.save();
-      } else {
-        console.log('Attachemnt must be image');
-        sendTextMessage(sender, 'Prilog mora biti slika');
-      }
-      return;
-    }
+    console.log('Conversation');
+    const sender = event.sender.id;
+    console.log('Sender', sender);
 
-    const {
-      text
-    } = event.message;
-    const student = await getStudentById(sender);
-    console.log('Text', text);
+    // console.log('=============================')
+    // console.log('EVENT', event);
+    // console.log('=============================')
 
-    // If student isn't verified we are waiting for an email
-    if (!student.verified && student.email === '') {
-      console.log('Checking email...');
-      if (validator.isEmail(text)) {
-        await sendTextMessage(sender, 'Hvala, na Vasoj email adresi stici ce link za validaciju ✓');
-        // TODO send link
-        student.token = uuidv4();
-        // student.email = text;
-        sendMail(text, 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML(sender, student.token, text));
 
-        await student.save();
-      } else {
-        await sendTextMessage(sender, 'Ovo ne izgleda kao Email ⦸📧, molimo Vas proverite format i posaljite ponovo, hvala');
-      }
-      return;
-    } else {
-      if(needToCollectInfomation(student)){
-        await colectingStudentDate(sender, text);
-      } else {
-
-        if(text === 'suncica'){
-          await sendTextMessage(sender, 'FT1P');
-          await sendImage(sender, 'https://image.ibb.co/bLDMxz/suncica.jpg');
-          return;
-        }
-        if(text === 'info'){
-          await sendGenericTemplate(sender, 'STUDENT_INFO');
-          return;
-        }
-        else if(text === 'cc'){
-          await courses(sender);
-          return;
-        }
-        if(text === 'pp'){
-          await professors(sender);
-          return;
-        }
-        if(text === 'asdfsadfasdfasdfasdf'){
-          return;
-        }
-
-        console.log('APIAI or something else!', text);
-        const response = await apiai(sender, text);
-        console.log('Api ai response', response);
-        if(response && response !== '') {
-          if(response !== 'done') {
-            await sendTextMessage(sender, response);
-          }
+    if (event.message) {
+      if (event.message.attachments) {
+        console.log(`Sender ${sender} send a file`);
+        console.log('Attachment', event.message.attachments);
+        if (event.message.attachments[0].type === 'image') {
+          const student = await getStudentById(sender);
+          student.image = event.message.attachments[0].payload.url;
+          await student.save();
         } else {
-          await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
+          console.log('Attachemnt must be image');
+          sendTextMessage(sender, 'Prilog mora biti slika');
         }
-
+        return;
       }
+
+      const {
+        text
+      } = event.message;
+      const student = await getStudentById(sender);
+      console.log('Text', text);
+
+      // If student isn't verified we are waiting for an email
+      if (!student.verified && student.email === '') {
+        console.log('Checking email...');
+        if (validator.isEmail(text)) {
+          await sendTextMessage(sender, 'Hvala, na Vasoj email adresi stici ce link za validaciju ✓');
+          // TODO send link
+          student.token = uuidv4();
+          // student.email = text;
+          sendMail(text, 'Verification Email ⚡ | ETF Bot 🤖', createEmailHTML(sender, student.token, text));
+
+          await student.save();
+        } else {
+          await sendTextMessage(sender, 'Ovo ne izgleda kao Email ⦸📧, molimo Vas proverite format i posaljite ponovo, hvala');
+        }
+        return;
+      } else {
+        if (needToCollectInfomation(student)) {
+          await colectingStudentDate(sender, text);
+        } else {
+
+          if (text === 'suncica') {
+            await sendTextMessage(sender, 'FT1P');
+            await sendImage(sender, 'https://image.ibb.co/bLDMxz/suncica.jpg');
+            return;
+          }
+          if (text === 'info') {
+            await sendGenericTemplate(sender, 'STUDENT_INFO');
+            return;
+          } else if (text === 'cc') {
+            await courses(sender);
+            return;
+          }
+          if (text === 'pp') {
+            await professors(sender);
+            return;
+          }
+          if (text === 'asdfsadfasdfasdfasdf') {
+            return;
+          }
+
+
+          console.log('APIAI or something else!', text);
+          const response = await apiai(sender, text);
+          console.log('Api ai response', response);
+          if (response && response !== '') {
+            if (response !== 'done') {
+              await sendTextMessage(sender, response);
+            }
+          } else {
+            await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
+          }
+        }
+      }
+    } else if (event.postback) {
+      const {
+        postback
+      } = event;
+      const {
+        payload,
+        referral
+      } = postback;
+      await payloadHandler(sender, payload);
+    } else {
+      console.error('Check what student send you');
     }
-
-
-
-    // TODO handle api ai
-
-
-  } else if (event.postback) {
-    const {
-      postback
-    } = event;
-    const {
-      payload,
-      referral
-    } = postback;
-    await payloadHandler(sender, payload);
-  } else {
-    console.error('Check what student send you');
+  } catch (error) {
+    console.log('Conversation error', error);
   }
 };
 
 const needToCollectInfomation = student => (
-  student.parentName === ''  ||
-    student.index === ''  ||
-    !['muski', 'zenski', '-'].includes(student.gender) ||
-    student.dateOfBirth === '' ||
-    student.addressOfBirth === '' ||
-    student.jmbg === '' ||
-    student.phone === '' ||
-    student.field === ''
+  student.parentName === '' ||
+  student.index === '' ||
+  !['muski', 'zenski', '-'].includes(student.gender) ||
+  student.dateOfBirth === '' ||
+  student.addressOfBirth === '' ||
+  student.jmbg === '' ||
+  student.phone === '' ||
+  student.field === ''
 );
 
 const colectingStudentDate = async (sender, text) => {
@@ -160,7 +159,7 @@ const colectingStudentDate = async (sender, text) => {
   } else if (student.index === '') {
     console.log('Index');
     if (text && text !== '') {
-      if(text.length === 9 && text.indexOf('/') !== -1){
+      if (text.length === 9 && text.indexOf('/') !== -1) {
         student.index = text;
         await student.save();
         await colectingStudentDate(sender);
@@ -243,7 +242,7 @@ const colectingStudentDate = async (sender, text) => {
         await sendQuickReply(sender, 'Molimo izaberite broj od 1 do 6', ['1', '2', '3', '4', '5', '6']);
       }
     } else {
-      await sendQuickReply(sender, 'Godina (5 - master, 6 - doktorske) 👪',['1', '2', '3', '4', '5', '6']);
+      await sendQuickReply(sender, 'Godina (5 - master, 6 - doktorske) 👪', ['1', '2', '3', '4', '5', '6']);
     }
   } else if (student.field === '') {
     console.log('Field');
@@ -256,7 +255,7 @@ const colectingStudentDate = async (sender, text) => {
         await sendQuickReply(sender, 'Molimo izaberite jedan od odseka', ['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne']);
       }
     } else {
-      await sendQuickReply(sender, 'Odsek 👪',['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne']);
+      await sendQuickReply(sender, 'Odsek 👪', ['RTI', 'SI', 'OE', 'EG', 'SS', 'TE', 'FE', 'Osnovne']);
     }
   } else {
     console.log('KRAJ');
@@ -272,46 +271,46 @@ const payloadHandler = async (sender, payload) => {
   const student = await getStudentById(sender);
 
   switch (payload) {
-  case 'GET_STARTED':
-    await getStarted(sender);
-    break;
-  case 'HELP':
-    await help(sender);
-    break;
-  case 'INFO':
-    await sendGenericTemplate(sender, 'STUDENT_INFO');
-    break;
-  case 'COURSES':
-    await courses(sender);
-    break;
-  case 'PROFESSORS':
-    await professors(sender);
-    break;
-  default:
-    if(payload.includes('COURSE/')){
+    case 'GET_STARTED':
+      await getStarted(sender);
+      break;
+    case 'HELP':
+      await help(sender);
+      break;
+    case 'INFO':
+      await sendGenericTemplate(sender, 'STUDENT_INFO');
+      break;
+    case 'COURSES':
+      await courses(sender);
+      break;
+    case 'PROFESSORS':
+      await professors(sender);
+      break;
+    default:
+      if (payload.includes('COURSE/')) {
         const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
         const courseId = payload.slice(payload.lastIndexOf('/') + 1);
         console.log('ACTION', action);
         console.log(courseId);
-        if(action === 'GOALS') {
+        if (action === 'GOALS') {
           console.log("GOALS");
           await goals(sender, courseId);
-        } else if(action === 'CONTENT') {
+        } else if (action === 'CONTENT') {
           console.log("CONTENT");
           await content(sender, courseId);
         }
-    } else if(payload.includes('PROFESSOR/')) {
-      const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
-      const professorId = payload.slice(payload.lastIndexOf('/') + 1);
-      if(action === 'CONTACT'){
-        await contact(sender, professorId);
-      } else if(action === 'CONSULTATION'){
-        await consultation(sender, professorId);
+      } else if (payload.includes('PROFESSOR/')) {
+        const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
+        const professorId = payload.slice(payload.lastIndexOf('/') + 1);
+        if (action === 'CONTACT') {
+          await contact(sender, professorId);
+        } else if (action === 'CONSULTATION') {
+          await consultation(sender, professorId);
+        }
+      } else {
+        console.error('Didnt recognize this payload:', payload);
       }
-    } else {
-      console.error('Didnt recognize this payload:', payload);
-    }
-    break;
+      break;
   }
 };
 
@@ -342,7 +341,7 @@ const help = async sender => {
 };
 
 const courses = async sender => {
-  try{
+  try {
     const courses = await courseController.getAllCourses();
     await sendCourseGenericTemplate(sender, courses);
   } catch (error) {
@@ -351,18 +350,18 @@ const courses = async sender => {
 };
 
 const goals = async (sender, courseId) => {
-    const course = await getCourseById(courseId);
-    await sendTextMessage(sender, course.goals);
+  const course = await getCourseById(courseId);
+  await sendTextMessage(sender, course.goals);
 };
 
 const content = async (sender, courseId) => {
-    const course = await getCourseById(courseId);
-    await sendTextMessage(sender, course.content);
+  const course = await getCourseById(courseId);
+  await sendTextMessage(sender, course.content);
 };
 
 
 const professors = async sender => {
-  try{
+  try {
     const professors = await professorController.getAllProfessors();
     await sendProffesorGenericTemplate(sender, professors);
   } catch (error) {
