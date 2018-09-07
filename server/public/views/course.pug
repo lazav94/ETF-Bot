@@ -11,13 +11,21 @@ block content
         th(scope='col') Modul
         th(scope='col') Year
         th(scope='col') ESPB
+        th(scope='col') Literature
+
 
     tbody
       each course in courses
         tr
-          th.align-middle(scope='row')= course.name
-          th.align-middle(scope='row')= course.code
+          th.align-middle(scope='row')
+            a(href=`${course.url}` data-toggle="tooltip" data-placement="bottom" title=`${course.goals}`)= course.name
+          th.align-middle(scope='row')
+              a(href=`${course.url}`)= course.code
           th.align-middle(scope='row')= course.status
           th.align-middle(scope='row')= course.modul
           th.align-middle(scope='row')= course.year
           th.align-middle(scope='row')= course.esbp
+          th.align-middle(scope='row')
+            span.glyphicon.glyphicon-calendar(data-toggle="tooltip" data-placement="bottom" title=`${course.literature}`)
+
+
