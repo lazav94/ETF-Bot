@@ -13,14 +13,14 @@ const {
 } = require('../student/student.controller');
 
 const {
-  getCourseByID,
+  // getCourseByID,
   getAllCoursesNamesAndCodes,
   findCourseByNameOrCode
 } = require('../course/course.controller');
 
 const {
   getAllProfessors,
-  getProfessorByID,
+  // getProfessorByID,
   findProfessorByName
 } = require('../professor/professor.controller');
 
@@ -57,11 +57,6 @@ const getBestMatch = async course => {
   const bestMatchingCourse = await findCourseByNameOrCode(max.target);
   return bestMatchingCourse;
 
-};
-
-const apply = async () => {
-  console.log('[ACTION] course_apply');
-  // TODO send all subject that can be applicied
 };
 
 const content = async (course) => {
@@ -372,7 +367,7 @@ const apiaiHandler = (sender, text) => {
 
       request.end();
     } catch (apiaiError) {
-      console.log('API.AI error: ', error);
+      console.log('API.AI error: ', apiaiError);
     }
   });
 };
@@ -394,7 +389,7 @@ const apiaiHandler = (sender, text) => {
 // apiaiHandler('123', 'Koliko espb nosi Kruska?');
 // apiaiHandler('123', 'opis o  PSZ?');
 
-
+/*
 const testAPIAI = async () => {
   const [
     // apply,
@@ -423,6 +418,7 @@ const testAPIAI = async () => {
   console.log('passing     | ', passing === 'course_passing', ' | ', passing);
   console.log('=====================================================');
 };
+*/
 // testAPIAI();
 
 module.exports = apiaiHandler;

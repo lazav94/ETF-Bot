@@ -59,61 +59,6 @@ const sendRequest = (messageData, sender, messageType) => {
   });
 };
 
-const url = `https://graph.facebook.com/v3.1/me/messenger_profile?access_token=${access_token}`;
-
-const addGetStarted = () => {
-  const json = {
-    form: {
-      get_started: {
-        payload: 'Get Started'
-      }
-    }
-  };
-  console.log('added get started');
-  request.post(url, json);
-};
-
-
-const addGreetingMessage = () => {
-  const json = {
-    form: {
-      setting_type: 'greeting',
-      greeting: {
-        text: 'Pocetna poruka.'
-      }
-    }
-  };
-  request.post(url, json);
-  console.log('Greeting message added');
-};
-
-
-const prestantMenu = () => {
-  const json = {
-    form: {
-      'setting_type': 'call_to_actions',
-      'thread_state': 'existing_thread',
-      'call_to_actions': [{
-          'type': 'postback',
-          'title': 'Help',
-          'payload': 'DEVELOPER_DEFINED_PAYLOAD_FOR_HELP'
-        },
-        {
-          'type': 'postback',
-          'title': 'Latest Posts',
-          'payload': 'DEVELOPER_DEFINED_PAYLOAD_FOR_LATEST_POSTS'
-        },
-        {
-          'type': 'web_url',
-          'title': 'View Website',
-          'url': 'http://yoursite.com/'
-        }
-      ]
-    }
-  };
-  request.post(url, json);
-};
-
 const sendTextMessage = async (sender, text) => {
   await sendRequest({
     text,
@@ -191,7 +136,7 @@ const sendGenericTemplate = async (sender, type) => {
 
 const sendCourseGenericTemplate = async (sender, courses, apply) => {
   // TODO fix this
-  if (courses || courses.length === 0) {
+  if (!courses || courses.length === 0) {
     await sendTextMessage(sender, 'Nema ispita koje mozete prijaviti :D');
     return;
   } else {
@@ -207,7 +152,7 @@ const sendCourseGenericTemplate = async (sender, courses, apply) => {
         }
       }
     };
-    courses.forEach((course, index) => {
+    courses.forEach((course) => {
       messageData.attachment.payload.elements.push({
         title: `${course.name}`,
         subtitle: `Sifra: ${course.code}\nESBP: ${course.esbp} \nStatus: ${course.status}\nYear: ${course.year}`,
@@ -219,24 +164,24 @@ const sendCourseGenericTemplate = async (sender, courses, apply) => {
           webview_height_ratio: 'tall'
         },
         buttons: [{
-            type: 'postback',
-            title: 'Cilj predemeta ',
-            payload: `COURSE/GOALS/${course._id}`
-          },
-          {
-            type: 'postback',
-            title: 'Sadrzaj predmeta ',
-            payload: `COURSE/CONTENT/${course._id}`
-          },
-          ...((apply) ? [{
-            type: 'postback',
-            title: 'Prijavi predmet',
-            payload: `COURSE/APPLY/${course._id}`
-          }] : [{
-            type: 'web_url',
-            url: course.url,
-            title: '📃 Sajt predmeta'
-          }])
+          type: 'postback',
+          title: 'Cilj predemeta ',
+          payload: `COURSE/GOALS/${course._id}`
+        },
+        {
+          type: 'postback',
+          title: 'Sadrzaj predmeta ',
+          payload: `COURSE/CONTENT/${course._id}`
+        },
+        ...((apply) ? [{
+          type: 'postback',
+          title: 'Prijavi predmet',
+          payload: `COURSE/APPLY/${course._id}`
+        }] : [{
+          type: 'web_url',
+          url: course.url,
+          title: '📃 Sajt predmeta'
+        }])
         ]
       });
     });
@@ -264,15 +209,15 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
       subtitle: `Email: ${professor.email}\nPhone: ${professor.phone}\nOffice:  ${professor.office}`,
       image_url: professor.image,
       buttons: [{
-          type: 'postback',
-          title: 'Kontakt',
-          payload: `PROFESSOR/CONTACT/${professor._id}`
-        },
-        {
-          type: 'postback',
-          title: 'Konsultacije',
-          payload: `PROFESSOR/CONSULTATION/${professor._id}`
-        }
+        type: 'postback',
+        title: 'Kontakt',
+        payload: `PROFESSOR/CONTACT/${professor._id}`
+      },
+      {
+        type: 'postback',
+        title: 'Konsultacije',
+        payload: `PROFESSOR/CONSULTATION/${professor._id}`
+      }
       ]
     });
   }));
@@ -318,27 +263,6 @@ const sendHelpButton = async (sender) => {
   };
   await sendRequest(messageData, sender);
 };
-
-const sendMessage = async (sender, message) => {
-  switch (message.type) {
-    case 'text':
-      await sendTextMessage(sender, message.text);
-      break;
-    case 'image':
-
-      break;
-    case 'quickreplies':
-
-      break;
-    case 'button':
-
-      break;
-
-    default:
-      break;
-  }
-};
-
 
 const typingOn = (sender) => {
   sendRequest('typing_on', sender, 'typing');
