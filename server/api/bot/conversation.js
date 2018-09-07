@@ -376,9 +376,11 @@ const consultation = async (sender, professorId) => {
 // courses('1898032266921906');
 
 const applyRoute = async (req, res) => {
-  applyFlag = req.body.apply;
+  applyFlag = req.body.apply === 'true';
   console.log('Apply flag:', applyFlag);
+  console.lo
 };
+
 module.exports = {
   conversation,
   colectingStudentDate,

@@ -238,8 +238,7 @@ const apiaiHandler = (sender, text) => {
           resolve('TODO poslati sve predmete za neku godinu');
           break;
         case 'course_apply':
-          // const applyResult = await ();
-          console.log('Apply flag', applyFlag);
+          console.log('Apply flag api ai:', applyFlag);
           if(!applyFlag){
             await messanger.sendTextMessage(sender, 'Prijava ispita nije u toku!');
           } else {
