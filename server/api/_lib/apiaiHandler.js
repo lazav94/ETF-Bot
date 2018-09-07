@@ -294,6 +294,7 @@ module.exports = apiaiHandler = (sender, text) => {
                 case 'etf_location':
                     await messanger.sendLocationButton(sender);
                     resolve('done');
+                    break;
                 case 'help':
                     await messanger.sendHelpButton(sender);
                     resolve('done');
@@ -324,7 +325,7 @@ module.exports = apiaiHandler = (sender, text) => {
 
 
 
-apiaiHandler('123', 'Predmeti II godine?');
+// apiaiHandler('123', 'Predmeti II godine?');
 
 // apiaiHandler('123', 'Gde mogu naci profesora Boska Nikolica?');
 // apiaiHandler('123', 'telefon profesora Boska Nikolica?');
