@@ -32,7 +32,7 @@ const studentSchema = mongoose.Schema({
   exams: [{
     status: {
       type: String,
-      enum: ['POLOZIO', 'PAO', '-']
+      enum: ['POLOZIO', 'PAO', '-', 'PRIJAVIO']
     },
     exam: {
       type: mongoose.Schema.Types.ObjectId,

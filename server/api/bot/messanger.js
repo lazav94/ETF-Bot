@@ -94,20 +94,20 @@ const prestantMenu = () => {
       'setting_type': 'call_to_actions',
       'thread_state': 'existing_thread',
       'call_to_actions': [{
-        'type': 'postback',
-        'title': 'Help',
-        'payload': 'DEVELOPER_DEFINED_PAYLOAD_FOR_HELP'
-      },
-      {
-        'type': 'postback',
-        'title': 'Latest Posts',
-        'payload': 'DEVELOPER_DEFINED_PAYLOAD_FOR_LATEST_POSTS'
-      },
-      {
-        'type': 'web_url',
-        'title': 'View Website',
-        'url': 'http://yoursite.com/'
-      }
+          'type': 'postback',
+          'title': 'Help',
+          'payload': 'DEVELOPER_DEFINED_PAYLOAD_FOR_HELP'
+        },
+        {
+          'type': 'postback',
+          'title': 'Latest Posts',
+          'payload': 'DEVELOPER_DEFINED_PAYLOAD_FOR_LATEST_POSTS'
+        },
+        {
+          'type': 'web_url',
+          'title': 'View Website',
+          'url': 'http://yoursite.com/'
+        }
       ]
     }
   };
@@ -191,60 +191,63 @@ const sendGenericTemplate = async (sender, type) => {
 
 const sendCourseGenericTemplate = async (sender, courses, apply) => {
   // TODO fix this
-  courses = courses.slice(0,10);
-  const messageData = {
-    attachment: {
-      type: 'template',
-      payload: {
-        image_aspect_ratio: 'square',
-        template_type: 'generic',
-        elements: []
+  if (courses || courses.length === 0) {
+    await sendTextMessage(sender, 'Nema ispita koje mozete prijaviti :D');
+    resolve();
+  } else {
+
+    courses = courses.slice(0, 10);
+    const messageData = {
+      attachment: {
+        type: 'template',
+        payload: {
+          image_aspect_ratio: 'square',
+          template_type: 'generic',
+          elements: []
+        }
       }
-    }
-  };
-  courses.forEach((course, index) => {
-    messageData.attachment.payload.elements.push({
-      title: `${course.name}`,
-      subtitle: `Sifra: ${course.code}\nESBP: ${course.esbp} \nStatus: ${course.status}\nYear: ${course.year}`,
-      // image_url:
-      default_action: {
-        type: 'web_url',
-        url: course.url,
-        messenger_extensions: false,
-        webview_height_ratio: 'tall'
-      },
-      buttons: [
-        {
-          type: 'postback',
-          title: 'Cilj predemeta ',
-          payload: `COURSE/GOALS/${course._id}`
+    };
+    courses.forEach((course, index) => {
+      messageData.attachment.payload.elements.push({
+        title: `${course.name}`,
+        subtitle: `Sifra: ${course.code}\nESBP: ${course.esbp} \nStatus: ${course.status}\nYear: ${course.year}`,
+        // image_url:
+        default_action: {
+          type: 'web_url',
+          url: course.url,
+          messenger_extensions: false,
+          webview_height_ratio: 'tall'
         },
-        {
-          type: 'postback',
-          title: 'Sadrzaj predmeta ',
-          payload: `COURSE/CONTENT/${course._id}`
-        },
-        ...((apply) ?
-          [{
+        buttons: [{
             type: 'postback',
-            title: 'Prijavi predmet',
-            payload: `COURSE/APPLY/${course._id}`
-          }]
-          :
-          [{
-            type: 'web_url',
-            url: course.url,
-            title: '📃 Sajt predmeta'
-          }]
-        )
-      ]
+            title: 'Cilj predemeta ',
+            payload: `COURSE/GOALS/${course._id}`
+          },
+          {
+            type: 'postback',
+            title: 'Sadrzaj predmeta ',
+            payload: `COURSE/CONTENT/${course._id}`
+          },
+          ...((apply) ? [{
+              type: 'postback',
+              title: 'Prijavi predmet',
+              payload: `COURSE/APPLY/${course._id}`
+            }] :
+            [{
+              type: 'web_url',
+              url: course.url,
+              title: '📃 Sajt predmeta'
+            }]
+          )
+        ]
+      });
     });
-  });
-  await sendRequest(messageData, sender);
+    await sendRequest(messageData, sender);
+  }
 };
 
 const sendProffesorGenericTemplate = async (sender, professors) => {
-  professors = professors.slice(0,10);
+  professors = professors.slice(0, 10);
   console.log(professors);
 
   const messageData = {
@@ -262,8 +265,7 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
       title: `${professor.title} ${professor.firstName} ${professor.lastName}`,
       subtitle: `Email: ${professor.email}\nPhone: ${professor.phone}\nOffice:  ${professor.office}`,
       image_url: professor.image,
-      buttons: [
-        {
+      buttons: [{
           type: 'postback',
           title: 'Kontakt',
           payload: `PROFESSOR/CONTACT/${professor._id}`
@@ -321,21 +323,21 @@ const sendHelpButton = async (sender) => {
 
 const sendMessage = async (sender, message) => {
   switch (message.type) {
-  case 'text':
-    await sendTextMessage(sender, message.text);
-    break;
-  case 'image':
+    case 'text':
+      await sendTextMessage(sender, message.text);
+      break;
+    case 'image':
 
-    break;
-  case 'quickreplies':
+      break;
+    case 'quickreplies':
 
-    break;
-  case 'button':
+      break;
+    case 'button':
 
-    break;
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 };
 

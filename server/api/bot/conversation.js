@@ -355,6 +355,23 @@ const content = async (sender, courseId) => {
   await sendTextMessage(sender, course.content);
 };
 
+const apply = async (sender, courseId) => {
+  const student = await getStudentById(sender).populate('exams.exam').exec();
+  const course = await getCourseById(courseId);
+
+  await Promise.all(student.exams.map(e => {
+    if(e.exam.course === courseId){
+      if(e.status === '-'){
+        e.status = 'PRIJAVIO';
+      }
+    }
+    student.save();
+
+  }))
+
+
+}
+
 
 const professors = async sender => {
   try {
