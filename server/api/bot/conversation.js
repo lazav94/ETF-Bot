@@ -96,6 +96,7 @@ const conversation = async (event) => {
             return;
           }
           if (text === 'asdfsadfasdfasdfasdf') {
+            console.log("ZAST OVO RADIS");
             return;
           }
 

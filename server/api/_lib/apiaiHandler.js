@@ -318,7 +318,7 @@ const apiaiHandler = (sender, text) => {
 
     request.on('error', error => {
       console.log('API AI error');
-      reject(error));
+      reject(error);
     }
     request.end();
   });
