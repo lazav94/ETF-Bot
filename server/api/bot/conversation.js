@@ -342,8 +342,6 @@ const professors = async sender => {
     console.error('Professors error:', error);
   }
 };
-
-
 // courses('1898032266921906');
 
 
