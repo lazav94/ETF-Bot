@@ -205,7 +205,7 @@ const sendCourseGenericTemplate = async (sender, courses) => {
   courses.forEach((course, index) => {
     messageData.attachment.payload.elements.push({
       title: `${course.name}`,
-      subtitle: `Sifra: ${course.code}\nESBP: ${course.esbp} \nStatus: ${course.status}\nYear: ${course.year}\nhaos`,
+      subtitle: `Sifra: ${course.code}\nESBP: ${course.esbp} \nStatus: ${course.status}\nYear: ${course.year}`,
       // image_url:
       buttons: [
         {

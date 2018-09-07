@@ -319,12 +319,12 @@ const courses = async sender => {
 };
 
 const goals = async (sender, courseId) => {
-    const course = await getCourseByID(courseId);
+    const course = await getCourseById(courseId);
     await sendTextMessage(sender, course.goals);
 };
 
 const content = async (sender, courseId) => {
-    const course = await getCourseByID(courseId);
+    const course = await getCourseById(courseId);
     await sendTextMessage(sender, course.content);
 };
 
