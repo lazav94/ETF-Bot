@@ -66,37 +66,30 @@ curl -X POST -H "Content-Type: application/json" -d '{
           }]
         },
         {
-          "title":"☃ TODO",
+          "title":"ℹ Informacije",
           "type":"nested",
           "call_to_actions" :[
-            {
-              "title":"🛍 My Account",
-              "type":"nested",
-              "call_to_actions" :[
                 {
-                  "title":"🎁 My Info",
+                  "title":"💁 My Info",
                   "type": "postback",
                   "payload": "INFO"
                 },
                 {
                     "title":"📚 Predmeti",
                     "type":"postback",
-                    "payload": "COURSES"
+                    "payload": "COURSE"
                 },
                 {
                     "title":"📚 Profesori",
                     "type":"postback",
-                    "payload": "PROFESSORS"
+                    "payload": "PROFESSOR"
                 }
-
-              ]
-            }
         ]
         },
         {
-              "title":"🎧 Pomoc",
-              "type":"postback",
-              "payload": "HELP"
+            "title":"🎧 Pomoc",
+            "type":"postback",
+            "payload": "HELP"
         }
     ]
     }

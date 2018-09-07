@@ -268,27 +268,32 @@ const payloadHandler = async (sender, payload) => {
   case 'HELP':
     await help(sender);
     break;
+  case 'INFO':
+    await sendGenericTemplate(sender, 'STUDENT_INFO');
+    break;
+  case 'COURSES':
+    await courses(sender);
+    break;
+  case 'PROFESSORS':
+    await professors(sender);
+    break;
   default:
-    if(payload.includes('COURSE')){
+    if(payload.includes('COURSE/')){
         const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
         const courseId = payload.slice(payload.lastIndexOf('/') + 1);
         console.log('ACTION', action);
         console.log(courseId);
-        if(action === ''){
-          await courses(sender);
-        } else if(action === 'GOALS') {
+        if(action === 'GOALS') {
           console.log("GOALS");
           await goals(sender, courseId);
         } else if(action === 'CONTENT') {
           console.log("CONTENT");
           await content(sender, courseId);
         }
-    } else if(payload.includes('PROFESSOR')) {
+    } else if(payload.includes('PROFESSOR/')) {
       const action = payload.slice(payload.indexOf('/') + 1, payload.lastIndexOf('/'));
       const professorId = payload.slice(payload.lastIndexOf('/') + 1);
-      if(action === ''){
-        await professors(sender);
-      } else if(action === 'CONTACT'){
+      if(action === 'CONTACT'){
         await contact(sender, professorId);
       } else if(action === 'CONSULTATION'){
         await consultation(sender, professorId);
