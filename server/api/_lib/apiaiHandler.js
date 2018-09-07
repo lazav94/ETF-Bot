@@ -239,6 +239,7 @@ const apiaiHandler = (sender, text) => {
           break;
         case 'course_apply':
           // const applyResult = await ();
+          console.log('Apply flag', applyFlag);
           if(!applyFlag){
             await messanger.sendTextMessage(sender, 'Prijava ispita nije u toku!');
           } else {
