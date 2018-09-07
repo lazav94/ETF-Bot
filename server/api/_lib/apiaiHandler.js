@@ -93,20 +93,20 @@ const getHowCourseIsScoring = async (scoring) => {
   const scoringResult = Object.keys(scoring).map(scoringType => {
     if (scoringType != '$init' && scoring[scoringType] != 0) {
       switch (scoringType) {
-      case 'activity':
-        return `Aktivnost ${scoring[scoringType]}%`;
-      case 'practicalWork':
-        return `Prakticna nastava ${scoring[scoringType]}%`;
-      case 'project':
-        return `Projekti ${scoring[scoringType]}%`;
-      case 'colloquium':
-        return `Kolokvijum ${scoring[scoringType]}%`;
-      case 'seminar':
-        return `Seminar ${scoring[scoringType]}`;
-      case 'writtenExam':
-        return `Pismeni ispit ${scoring[scoringType]}%`;
-      case 'oralExam':
-        return `Usmeni ispit ${scoring[scoringType]}%`;
+        case 'activity':
+          return `Aktivnost ${scoring[scoringType]}%`;
+        case 'practicalWork':
+          return `Prakticna nastava ${scoring[scoringType]}%`;
+        case 'project':
+          return `Projekti ${scoring[scoringType]}%`;
+        case 'colloquium':
+          return `Kolokvijum ${scoring[scoringType]}%`;
+        case 'seminar':
+          return `Seminar ${scoring[scoringType]}`;
+        case 'writtenExam':
+          return `Pismeni ispit ${scoring[scoringType]}%`;
+        case 'oralExam':
+          return `Usmeni ispit ${scoring[scoringType]}%`;
       }
       return scoringType;
     }
@@ -120,12 +120,12 @@ const getHoursOfCourse = async (hours) => {
   const hoursResult = Object.keys(hours).map(hoursType => {
     if (hoursType != '$init' && hours[hoursType] != 0) {
       switch (hoursType) {
-      case 'theory':
-        return `Predavanja ${hours[hoursType]}h`;
-      case 'exercise':
-        return `Vezbe ${hours[hoursType]}h`;
-      case 'other':
-        return `Ostale aktivnost ${hours[hoursType]}h`;
+        case 'theory':
+          return `Predavanja ${hours[hoursType]}h`;
+        case 'exercise':
+          return `Vezbe ${hours[hoursType]}h`;
+        case 'other':
+          return `Ostale aktivnost ${hours[hoursType]}h`;
       }
       return hoursType;
     }
@@ -199,134 +199,140 @@ const professorOffice = async (name) => {
 const apiaiHandler = (sender, text) => {
   return new Promise((resolve, reject) => {
 
-    const request = app.textRequest(text, {
-      sessionId: 'sender'
-    });
-
-    request.on('response', async response => {
-
-      // console.log('Resout APIAI', response.result);
-
-      const action = response.result.action;
-      // console.log('RESPONSE: ', response);
-      console.log('ACTION: ', action);
-
-      let course = '';
-      let professorName = '';
-      switch (action) {
-      case 'course_year':
-        const year = response.result.parameters.year;
-        console.log('year', year);
-        resolve('TODO poslati sve predmete za neku godinu');
-        break;
-      case 'course_apply':
-        // const applyResult = await ();
-        resolve('TODO mozete polagati sledce predmete!');
-        break;
-      case 'course_content':
-        course = response.result.parameters.course;
-        if (!course) resolve('Nije pronadjen predmet za akciju', action);
-        console.log('Course', course);
-        const contentResult = await content(course);
-        console.log('contentResult', contentResult);
-        resolve(contentResult);
-        break;
-      case 'course_espb':
-        course = response.result.parameters.course;
-        console.log('Course', course);
-        if (!course) resolve('Nije pronadjen predmet za akciju', action);
-        const espbResult = await espb(course);
-        console.log('espbResult', espbResult);
-        resolve(espbResult);
-        break;
-      case 'course_goal':
-        course = response.result.parameters.course;
-        console.log('Course', course);
-        if (!course) resolve('Nije pronadjen predmet za akciju', action);
-        const goalResult = await goal(course);
-        console.log('goalResult', goalResult);
-        resolve(goalResult);
-        break;
-      case 'course_info':
-        course = response.result.parameters.course;
-        console.log('Course', course);
-        if (!course) resolve('Nije pronadjen predmet za akciju', action);
-        const infoResult = await info(course);
-        console.log('infoResult', infoResult);
-        resolve(infoResult);
-        break;
-      case 'course_passing':
-        course = response.result.parameters.course;
-        console.log('Course', course);
-        if (!course) resolve('Nije pronadjen predmet za akciju', action);
-        const passingResult = await passing(course);
-        console.log('passingResult', passingResult);
-        resolve(passingResult);
-        break;
-      case 'professor_email':
-        professorName = response.result.parameters.professor_name;
-        console.log('Professor name:', professorName);
-        const professorEmailResult = await professorEmail(response.result.parameters.professor_name);
-        console.log('profesorEmailResult', professorEmailResult);
-        resolve(professorEmailResult);
-        break;
-      case 'professor_info':
-        professorName = response.result.parameters.professor_name;
-        console.log('Professor name:', professorName);
-        const professorInfoResult = await professorInfo(response.result.parameters.professor_name);
-        console.log('profesorInfoResult', professorInfoResult);
-        resolve(professorInfoResult);
-        break;
-      case 'professor_phone':
-        professorName = response.result.parameters.professor_name;
-        console.log('Professor name:', professorName);
-        const professorPhoneResult = await professorPhone(response.result.parameters.professor_name);
-        console.log('profesorPhoneResult', professorPhoneResult);
-        resolve(professorPhoneResult);
-        break;
-      case 'professor_office':
-        professorName = response.result.parameters.professor_name;
-        console.log('Professor name:', professorName);
-        const professorOfficeResult = await professorOffice(response.result.parameters.professor_name);
-        console.log('profesorOfficeResult', professorOfficeResult);
-        resolve(professorOfficeResult);
-        break;
-      case 'etf_location':
-        await messanger.sendLocationButton(sender);
-        resolve('done');
-        break;
-      case 'help':
-        await messanger.sendHelpButton(sender);
-        resolve('done');
-        break;
-      case 'thank_you':
-      case 'bye':
-      case 'input.welcome':
-        const responseText = response.result.fulfillment.speech;
-        console.log('responseText', responseText);
-        await messanger.sendTextMessage(sender, responseText);
-        resolve('done');
-        break;
-      case 'input.unknown':
-      default:
-        console.log('DEFAULT INTENT', action);
-        resolve('Preformulisite pitanje');
-        break;
-      }
-      // return resolve();
-    });
-
-    request.on('error', error => {
-      console.log('API AI error');
-      reject(error);
-    });
+    try {
 
 
-    request.end();
+      const request = app.textRequest(text, {
+        sessionId: 'sender'
+      });
+
+      request.on('response', async response => {
+
+        // console.log('Resout APIAI', response.result);
+
+        const action = response.result.action;
+        // console.log('RESPONSE: ', response);
+        console.log('ACTION: ', action);
+
+        let course = '';
+        let professorName = '';
+        switch (action) {
+          case 'course_year':
+            const year = response.result.parameters.year;
+            console.log('year', year);
+            resolve('TODO poslati sve predmete za neku godinu');
+            break;
+          case 'course_apply':
+            // const applyResult = await ();
+            resolve('TODO mozete polagati sledce predmete!');
+            break;
+          case 'course_content':
+            course = response.result.parameters.course;
+            if (!course) resolve('Nije pronadjen predmet za akciju', action);
+            console.log('Course', course);
+            const contentResult = await content(course);
+            console.log('contentResult', contentResult);
+            resolve(contentResult);
+            break;
+          case 'course_espb':
+            course = response.result.parameters.course;
+            console.log('Course', course);
+            if (!course) resolve('Nije pronadjen predmet za akciju', action);
+            const espbResult = await espb(course);
+            console.log('espbResult', espbResult);
+            resolve(espbResult);
+            break;
+          case 'course_goal':
+            course = response.result.parameters.course;
+            console.log('Course', course);
+            if (!course) resolve('Nije pronadjen predmet za akciju', action);
+            const goalResult = await goal(course);
+            console.log('goalResult', goalResult);
+            resolve(goalResult);
+            break;
+          case 'course_info':
+            course = response.result.parameters.course;
+            console.log('Course', course);
+            if (!course) resolve('Nije pronadjen predmet za akciju', action);
+            const infoResult = await info(course);
+            console.log('infoResult', infoResult);
+            resolve(infoResult);
+            break;
+          case 'course_passing':
+            course = response.result.parameters.course;
+            console.log('Course', course);
+            if (!course) resolve('Nije pronadjen predmet za akciju', action);
+            const passingResult = await passing(course);
+            console.log('passingResult', passingResult);
+            resolve(passingResult);
+            break;
+          case 'professor_email':
+            professorName = response.result.parameters.professor_name;
+            console.log('Professor name:', professorName);
+            const professorEmailResult = await professorEmail(response.result.parameters.professor_name);
+            console.log('profesorEmailResult', professorEmailResult);
+            resolve(professorEmailResult);
+            break;
+          case 'professor_info':
+            professorName = response.result.parameters.professor_name;
+            console.log('Professor name:', professorName);
+            const professorInfoResult = await professorInfo(response.result.parameters.professor_name);
+            console.log('profesorInfoResult', professorInfoResult);
+            resolve(professorInfoResult);
+            break;
+          case 'professor_phone':
+            professorName = response.result.parameters.professor_name;
+            console.log('Professor name:', professorName);
+            const professorPhoneResult = await professorPhone(response.result.parameters.professor_name);
+            console.log('profesorPhoneResult', professorPhoneResult);
+            resolve(professorPhoneResult);
+            break;
+          case 'professor_office':
+            professorName = response.result.parameters.professor_name;
+            console.log('Professor name:', professorName);
+            const professorOfficeResult = await professorOffice(response.result.parameters.professor_name);
+            console.log('profesorOfficeResult', professorOfficeResult);
+            resolve(professorOfficeResult);
+            break;
+          case 'etf_location':
+            await messanger.sendLocationButton(sender);
+            resolve('done');
+            break;
+          case 'help':
+            await messanger.sendHelpButton(sender);
+            resolve('done');
+            break;
+          case 'thank_you':
+          case 'bye':
+          case 'input.welcome':
+            const responseText = response.result.fulfillment.speech;
+            console.log('responseText', responseText);
+            await messanger.sendTextMessage(sender, responseText);
+            resolve('done');
+            break;
+          case 'input.unknown':
+          default:
+            console.log('DEFAULT INTENT', action);
+            resolve('Preformulisite pitanje');
+            break;
+        }
+        // return resolve();
+      });
+
+      request.on('error', error => {
+        console.log('API AI error');
+        reject(error);
+      });
+
+
+      request.end();
+    } catch (apiaiError) {
+      console.log('API.AI error: ', error);
+    }
   });
 };
 
-// apiaiHandler('1898032266921906', 'suncica');
+// apiaiHandler('1898032266921906', 'opis o  PSZ?');
 
 
 // apiaiHandler('123', 'Predmeti II godine?');

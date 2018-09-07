@@ -90,27 +90,24 @@ const conversation = async (event) => {
           } else if (text === 'cc') {
             await courses(sender);
             return;
-          }
-          if (text === 'pp') {
+          } else if (text === 'pp') {
             await professors(sender);
             return;
-          }
-          if (text === 'asdfsadfasdfasdfasdf') {
-            console.log("ZAST OVO RADIS");
-            return;
+          } else {
+            console.log('APIAI input:', text);
+            const response = await apiai(sender, text);
+            console.log('Api ai response', response);
+            if (response && response !== '') {
+              if (response !== 'done') {
+                await sendTextMessage(sender, response);
+              }
+            } else {
+              await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
+            }
           }
 
 
-          console.log('APIAI or something else!', text);
-          // const response = await apiai(sender, text);
-          // console.log('Api ai response', response);
-          // if (response && response !== '') {
-            // if (response !== 'done') {
-              // await sendTextMessage(sender, response);
-            // }
-          // } else {
-            await sendTextMessage(sender, 'NLP nije prepoznao pitanja!');
-          // }
+
         }
       }
     } else if (event.postback) {
