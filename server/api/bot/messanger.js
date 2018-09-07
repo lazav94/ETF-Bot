@@ -251,12 +251,12 @@ const sendProffesorGenericTemplate = async (sender, professors) => {
         {
           type: 'postback',
           title: 'Contact',
-          payload: `PROFESSOR_CONTACT/${professor._id}`
+          payload: `PROFESSOR/CONTACT/${professor._id}`
         },
         {
           type: 'postback',
           title: 'Konsultacije',
-          payload: `CONSULTATION/${professor._id}`
+          payload: `PROFESSOR/CONSULTATION/${professor._id}`
         }
       ]
     });
