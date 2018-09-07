@@ -193,7 +193,7 @@ const sendCourseGenericTemplate = async (sender, courses, apply) => {
   // TODO fix this
   if (courses || courses.length === 0) {
     await sendTextMessage(sender, 'Nema ispita koje mozete prijaviti :D');
-    resolve();
+    return;
   } else {
 
     courses = courses.slice(0, 10);
@@ -229,16 +229,14 @@ const sendCourseGenericTemplate = async (sender, courses, apply) => {
             payload: `COURSE/CONTENT/${course._id}`
           },
           ...((apply) ? [{
-              type: 'postback',
-              title: 'Prijavi predmet',
-              payload: `COURSE/APPLY/${course._id}`
-            }] :
-            [{
-              type: 'web_url',
-              url: course.url,
-              title: '📃 Sajt predmeta'
-            }]
-          )
+            type: 'postback',
+            title: 'Prijavi predmet',
+            payload: `COURSE/APPLY/${course._id}`
+          }] : [{
+            type: 'web_url',
+            url: course.url,
+            title: '📃 Sajt predmeta'
+          }])
         ]
       });
     });
