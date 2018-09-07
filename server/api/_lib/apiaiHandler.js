@@ -89,6 +89,14 @@ const info = async (course) => {
   // TODO ovde treba sve i slika i sve i sajt
   return subject.info;
 };
+
+const literature = async (course) => {
+  console.log(`[ACTION] course_literature -> param: ${course}`);
+  const subject = await getBestMatch(course);
+  if (!subject) return 'None';
+  return subject.literature;
+};
+
 const passing = async (course) => {
   console.log(`[ACTION] course_passing -> param: ${course}`);
   const subject = await getBestMatch(course);
@@ -288,6 +296,14 @@ const apiaiHandler = (sender, text) => {
           console.log('infoResult', infoResult);
           resolve(infoResult);
           break;
+        case 'course_literature':
+          course = response.result.parameters.course;
+          console.log('Course', course);
+          if (!course) resolve('Nije pronadjen predmet za akciju', action);
+          const literatureResult = await literature(course);
+          console.log('literatureResult', literatureResult);
+          resolve(literatureResult);
+          break;
         case 'course_passing':
           course = response.result.parameters.course;
           if (!course) resolve('Nije pronadjen predmet za akciju', action);
@@ -383,7 +399,7 @@ const apiaiHandler = (sender, text) => {
   });
 };
 
-apiaiHandler('1898032266921906', 'Predmeti na RTI');
+// apiaiHandler('1898032266921906', 'Predmeti na RTI');
 
 // apiaiHandler('1898032266921906', 'Kada pocinje januarski rok?');
 
