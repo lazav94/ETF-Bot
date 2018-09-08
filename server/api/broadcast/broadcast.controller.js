@@ -1,4 +1,4 @@
-const moment = require('moment');
+const { moment } = require('../_lib/services');
 var CronJob = require('cron').CronJob;
 const sendTextMessage = require('../bot/messanger').sendTextMessage;
 const {

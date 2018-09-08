@@ -370,6 +370,9 @@ const content = async (sender, courseId) => {
 
 const apply = async (sender, courseId) => {
   await applyExam(sender, courseId);
+  // Prikazi sve prijavljene ispite
+  const courses = await courseController.getAllAppliedCourses();
+  await sendCourseGenericTemplate(sender, courses);
 };
 
 

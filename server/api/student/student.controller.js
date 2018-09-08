@@ -97,6 +97,27 @@ const applyExam = async (id, courseId) => {
   }
 };
 
+const getAllAppliedCourses = async id => {
+  try {
+    const student = await Student.findOne({
+      id
+    }).populate('exams.exam').exec();
+
+    if (student) {
+      const exams = student.exams
+        .filter(e => e.status === 'PRIJAVIO')
+        .map(e => e.exam.course);
+
+      return await Promise.all(exams.map(async e => getCourseByID(e.course)));
+
+    }else {
+      throw new Error('Student is null');
+    }
+  } catch(error) {
+    console.error('Get all applied courses error', error);
+  }
+};
+
 const index = async (req, res) => {
   console.log('Render student page');
   // TODO add student
@@ -114,5 +135,6 @@ module.exports = {
   getAllStudents,
   getAllStudentsByField,
   getApplyExam,
-  applyExam
+  applyExam,
+  getAllAppliedCourses
 };
