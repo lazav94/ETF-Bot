@@ -13,9 +13,9 @@ $ git clone https://github.com/lazav94/ETF-Bot.git
 
 ### Prerequisites
 
-To run this code you need to have:
-[Node.js](https://nodejs.org/en/download/)
-[Visual Studio Code](https://code.visualstudio.com/) - or other
+#### To run this code you need to have:
+* [Node.js](https://nodejs.org/en/download/)
+* [Visual Studio Code](https://code.visualstudio.com/) - or other
 
 <img src="./server/public/images/demo1.jpg" width="400"/><img src="./server/public/images/demo2.jpg" width="400"/>
 
