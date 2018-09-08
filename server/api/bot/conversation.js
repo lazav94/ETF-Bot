@@ -2,8 +2,6 @@ const validator = require('validator');
 const uuidv4 = require('uuid/v4');
 
 const {
-  typingOn,
-  getUserInfo,
   sendTextMessage,
   sendQuickReply,
   sendImage,
@@ -15,7 +13,8 @@ const {
 const {
   getStudentById,
   getApplyExam,
-  applyExam
+  applyExam,
+  getAllAppliedCourses
 } = require('../student/student.controller');
 const getCourseById = require('../course/course.controller').getCourseByID;
 
@@ -371,7 +370,7 @@ const content = async (sender, courseId) => {
 const apply = async (sender, courseId) => {
   await applyExam(sender, courseId);
   // Prikazi sve prijavljene ispite
-  const courses = await courseController.getAllAppliedCourses();
+  const courses = await getAllAppliedCourses();
   await sendCourseGenericTemplate(sender, courses);
 };
 
