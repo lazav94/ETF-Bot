@@ -323,7 +323,7 @@ const apiaiHandler = (sender, text) => {
           professorName = response.result.parameters.professor_name;
           console.log('Professor name:', professorName);
           const professorInfoResult = await professorInfo(response.result.parameters.professor_name);
-          await messanger.sendProffesorGenericTemplate(sender, [professorInfo]);
+          await messanger.sendProffesorGenericTemplate(sender, [professorInfoResult]);
           // console.log('profesorInfoResult', professorInfoResult);
           resolve('done');
           break;

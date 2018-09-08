@@ -99,9 +99,9 @@ const sendGenericTemplate = async (sender, type) => {
 
   if (type === 'STUDENT_INFO') {
     const student = await getStudentById(sender);
-    title = `${student.firstName} (${student.parentName}) ${student.lastName} - ${student.field} - ${student.year}`;
+    title = `${student.firstName} (${student.parentName}) ${student.lastName} - ${student.field} `;
     image_url = student.image;
-    subtitle = `${student.gender} ${student.jmbg} ${student.address}`;
+    subtitle = `Pol: ${student.gender}\nJMBG: ${student.jmbg}\nAdresa: ${student.addressOfBirth}\nYear: ${student.year}`;
   }
   const messageData = {
     attachment: {
