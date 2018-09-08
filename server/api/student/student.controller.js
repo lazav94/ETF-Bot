@@ -109,7 +109,6 @@ const getAllAppliedCourses = async id => {
         .map(e => e.exam);
 
       const courses = await Promise.all(exams.map(async e => getCourseByID(e.course)));
-      const courses = await Promise.all(exams.map(async e => getCourseByID(e.course)));
       console.log('GET ALL APPLIED COURSES' courses);
       return courses;
     }else {
