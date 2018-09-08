@@ -52,7 +52,7 @@ $(document).ready(() => {
     const message = $('.message').val().trim();
     console.log('Message', message);
 
-    const reminderOn = !!$('.slider')[0].checked;
+    const reminderOn = !!$('.dateslider')[0].checked;
     console.log('Reminder', reminderOn);
 
     const date = $('#date').val().trim();

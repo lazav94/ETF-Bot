@@ -370,6 +370,7 @@ const content = async (sender, courseId) => {
 const apply = async (sender, courseId) => {
   await applyExam(sender, courseId);
   // Prikazi sve prijavljene ispite
+  await sendTextMessage(sender, 'Prijavljeni predmeti: ↙');
   const courses = await getAllAppliedCourses(sender);
   await sendCourseGenericTemplate(sender, courses);
 };
