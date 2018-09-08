@@ -198,7 +198,8 @@ const professorPhone = async (name) => {
 
 const professorInfo = async name => {
   let professor = await getProfessorBestMatch(name);
-  return `${professor.image} ${professor.title} ${professor.firstName} ${professor.lastName} ${professor.email} ${professor.phone} ${professor.office}`;
+  return professor;
+  // return `${professor.image} ${professor.title} ${professor.firstName} ${professor.lastName} ${professor.email} ${professor.phone} ${professor.office}`;
 };
 
 const professorOffice = async (name) => {
@@ -322,8 +323,9 @@ const apiaiHandler = (sender, text) => {
           professorName = response.result.parameters.professor_name;
           console.log('Professor name:', professorName);
           const professorInfoResult = await professorInfo(response.result.parameters.professor_name);
-          console.log('profesorInfoResult', professorInfoResult);
-          resolve(professorInfoResult);
+          await messanger.sendProffesorGenericTemplate(sender, [professorInfo]);
+          // console.log('profesorInfoResult', professorInfoResult);
+          resolve('done');
           break;
         case 'professor_phone':
           professorName = response.result.parameters.professor_name;

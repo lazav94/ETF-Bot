@@ -146,7 +146,7 @@ const colectingStudentDate = async (sender, text) => {
       await student.save();
       await colectingStudentDate(sender);
     } else {
-      await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime ? 👪', ['-']);
+      await sendQuickReply(sender, 'Molimo vas posaljite nam Vase srednje ime 👪', ['-']);
     }
   } else if (student.index === '') {
     console.log('Index');
@@ -157,10 +157,10 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendTextMessage(sender, 'Nepravilan format indexa ⛔.\nUnesite broj indexa u formatu GGGG/BBBB ');
+        await sendTextMessage(sender, 'Nepravilan format indeksa ⛔.\nUnesite broj indeksa u formatu GGGG/BBBB');
       }
     } else {
-      await sendTextMessage(sender, 'Vaš broj index? (GGGG/BBBB)');
+      await sendTextMessage(sender, 'Vaš broj indeksa? (GGGG/BBBB)');
     }
   } else if (!['muski', 'zenski', '-'].includes(student.gender)) {
     console.log('gender');
@@ -184,7 +184,7 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendTextMessage(sender, 'Unesite pravilan datum rođenja? 📆');
+        await sendTextMessage(sender, 'Unesite pravilan datum rođenja 📆');
       }
     } else {
       await sendTextMessage(sender, 'Datum rodjenja? 📅');
@@ -206,7 +206,7 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendTextMessage(sender, 'JMBG mora sadržati 13 ⏹ Molimo Vas da unesete tačan JMBG');
+        await sendTextMessage(sender, 'JMBG mora sadržati 13 cifara ⏹ Molimo Vas da unesete tačan JMBG');
       }
     } else {
       await sendTextMessage(sender, 'JMBG ? 🔢');
@@ -219,7 +219,7 @@ const colectingStudentDate = async (sender, text) => {
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendTextMessage(sender, 'Niste uneli validan telefon 📱 ? Unesite ponovo');
+        await sendTextMessage(sender, 'Niste uneli validan telefon. 📱 Unesite ponovo');
       }
     } else {
       await sendTextMessage(sender, 'Telefon ? ☎');
@@ -235,7 +235,7 @@ const colectingStudentDate = async (sender, text) => {
         await sendQuickReply(sender, 'Molimo izaberite broj od 1 do 6', ['1', '2', '3', '4', '5', '6']);
       }
     } else {
-      await sendQuickReply(sender, 'Trenutna godina studija  ⃣:\nmaster - 5\ndoktorske - 6) ', ['1', '2', '3', '4', '5', '6']);
+      await sendQuickReply(sender, 'Trenutna godina studija  ⃣:\nmaster - 5\ndoktorske - 6 ', ['1', '2', '3', '4', '5', '6']);
     }
   } else if (student.field === '') {
     console.log('Field');
@@ -320,11 +320,11 @@ const getStarted = async student => {
   if(student.verified && !needToCollectInfomation(student)){
     await sendTextMessage(sender, 'Dobrodošli nazad 🔙\nDrago nam je da Vas vidimo ponovo 👋\nDa li mogu da pomognem ⁉');
   } else {
-    await sendTextMessage(sender, `👋 Zdravo ${student.firstName}❗ \nDobrodošli 👐\nJa samvo je ETF Bot! 🤖`);
+    await sendTextMessage(sender, `👋 Zdravo ${student.firstName}❗ \nDobrodošli 👐\nJa sam je ETF Bot! 🤖`);
     await sendImage(sender, teslaPictureUrl);
-    await sendTextMessage(sender, 'Kako bi koristili bota prvo morate izvršiti inicijalizaciju, postavićemo Vam par pitanja o Vama');
-    await sendTextMessage(sender, 'U bilo kom trenutku možete da pošaljete Vašu sliku 🖼, samo poslednja slika bice sačuvana');
-    await sendTextMessage(sender, 'Za početak, kako bi Vas verifikovali pošaljite nam Vašu email adresu 📧');
+    await sendTextMessage(sender, 'Kako biste koristili bota prvo morate izvršiti inicijalizaciju, postavićemo Vam par pitanja o Vama');
+    await sendTextMessage(sender, 'U bilo kom trenutku možete da pošaljete Vašu sliku 🖼,a samo poslednja slika bice sačuvana');
+    await sendTextMessage(sender, 'Za početak, kako bismo Vas verifikovali pošaljite nam Vašu email adresu 📧');
   }
 
 };

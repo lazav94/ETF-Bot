@@ -52,7 +52,7 @@ npm run test
 * Backend: **Node.js**
 * Frontend:
   * **HTML (_Pug or Jade_)**
-  * **CSS (Bootstrap_)**
+  * **CSS (_Bootstrap_)**
   * **JavaScript (_JQuery_)**
 * Database:
   * **Mongo DB (_non relational database_)**
@@ -61,7 +61,7 @@ npm run test
 
 
 ### Links
-* [Bot](m.me/etfchatbo)
+* [Bot](m.me/etfchatbot)
 * [Dashboard](https://bot-etf.herokuapp.com)
 * [Demo video - bot](https://www.useloom.com/share/935c22b2d6ab498d8602cbd9258a0e03)
 * [Demo video - dashboard](https://www.useloom.com/share/5097c393a6cb48e1ad66499b74e4d1d9)
