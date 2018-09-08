@@ -106,10 +106,12 @@ const getAllAppliedCourses = async id => {
     if (student) {
       const exams = student.exams
         .filter(e => e.status === 'PRIJAVIO')
-        .map(e => e.exam.course);
+        .map(e => e.exam);
 
-      return await Promise.all(exams.map(async e => getCourseByID(e.course)));
-
+      const courses = await Promise.all(exams.map(async e => getCourseByID(e.course)));
+      const courses = await Promise.all(exams.map(async e => getCourseByID(e.course)));
+      console.log('GET ALL APPLIED COURSES' courses);
+      return courses;
     }else {
       throw new Error('Student is null');
     }
