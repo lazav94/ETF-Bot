@@ -40,7 +40,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "locale":"default",
     "call_to_actions":[
         {
-          "title":"👤 My Account",
+          "title":"👤 Moj nalog",
             "type":"nested",
             "call_to_actions" :[
           {
@@ -70,7 +70,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
           "type":"nested",
           "call_to_actions" :[
                 {
-                  "title":"💁 My Info",
+                  "title":"💁 Moje informacije",
                   "type": "postback",
                   "payload": "INFO"
                 },
@@ -80,7 +80,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
                     "payload": "COURSES"
                 },
                 {
-                    "title":"📚 Profesori",
+                    "title":"👨‍🏫 Profesori",
                     "type":"postback",
                     "payload": "PROFESSORS"
                 }

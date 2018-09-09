@@ -13,7 +13,7 @@ const studentSchema = mongoose.Schema({
   parentName: { type: String, default: '' },
   gender: {
     type: String,
-    enum: ['muski', 'zenski', '-']
+    enum: ['muški', 'ženski', '-']
   },
   dateOfBirth: { type: String, default: '' },
   addressOfBirth: { type: String, default: '' },

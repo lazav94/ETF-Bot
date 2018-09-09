@@ -127,7 +127,7 @@ const conversation = async (event) => {
 const needToCollectInfomation = student => (
   student.parentName === '' ||
   student.index === '' ||
-  !['muski', 'zenski', '-'].includes(student.gender) ||
+  !['muški', 'ženski', '-'].includes(student.gender) ||
   student.dateOfBirth === '' ||
   student.addressOfBirth === '' ||
   student.jmbg === '' ||
@@ -162,19 +162,19 @@ const colectingStudentDate = async (sender, text) => {
     } else {
       await sendTextMessage(sender, 'Vaš broj indeksa? (GGGG/BBBB)');
     }
-  } else if (!['muski', 'zenski', '-'].includes(student.gender)) {
+  } else if (!['muški', 'ženski', '-'].includes(student.gender)) {
     console.log('gender');
 
     if (text && text !== '') {
-      if (['muski', 'zenski', '-'].includes(text)) {
+      if (['muški', 'ženski', '-'].includes(text)) {
         student.gender = text;
         await student.save();
         await colectingStudentDate(sender);
       } else {
-        await sendQuickReply(sender, 'Molimo Vas, izaberite jednu od ponuđenih opicija ⚥...', ['muski', 'zenski', '-']);
+        await sendQuickReply(sender, 'Molimo Vas, izaberite jednu od ponuđenih opicija ⚥...', ['muški', 'ženski', '-']);
       }
     } else {
-      await sendQuickReply(sender, 'Pol ⚥ ?', ['muski', 'zenski', '-']);
+      await sendQuickReply(sender, 'Pol ⚥ ?', ['muški', 'ženski', '-']);
     }
   } else if (student.dateOfBirth === '') {
     console.log('Date of birth');
